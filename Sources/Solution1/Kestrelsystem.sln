@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kestrel.01实体模型", "Kestrel.01实体模型", "{CB169083-C1D1-4020-A21D-451278E0D4C9}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityModel", "EntityModel\EntityModel.csproj", "{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kestrel.02对象关系映射", "Kestrel.02对象关系映射", "{A86BE3A2-BEB9-4340-8E84-A2CBD1D195A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kestrel.03DataAccess", "Kestrel.03DataAccess", "{7D4769DA-3E5D-47FD-8C64-B1E774A39081}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kestrel05.01..实体远程数据模型", "Kestrel05.01..实体远程数据模型", "{FB3DAE9B-49D7-4C88-A4A0-033B96AFFA72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{4438E11E-8D14-4F8D-A87C-56AFC7862CF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kestrel05.02.实体模型与远程数据模型映射服务", "Kestrel05.02.实体模型与远程数据模型映射服务", "{19A1F1EA-8E69-4973-B049-321B99FC7353}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kestrel.ViewModelServices", "Kestrel.ViewModelServices\Kestrel.ViewModelServices.csproj", "{91F5F882-37F9-418B-99C2-FE2333992A12}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kestrel.ORM", "Kestrel.ORM\Kestrel.ORM.csproj", "{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapidemo", "webapidemo\webapidemo.csproj", "{1C7DB84B-4043-46B7-A6F7-909FC07A9F10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4438E11E-8D14-4F8D-A87C-56AFC7862CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4438E11E-8D14-4F8D-A87C-56AFC7862CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4438E11E-8D14-4F8D-A87C-56AFC7862CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4438E11E-8D14-4F8D-A87C-56AFC7862CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F5F882-37F9-418B-99C2-FE2333992A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F5F882-37F9-418B-99C2-FE2333992A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F5F882-37F9-418B-99C2-FE2333992A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F5F882-37F9-418B-99C2-FE2333992A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C7DB84B-4043-46B7-A6F7-909FC07A9F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7DB84B-4043-46B7-A6F7-909FC07A9F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7DB84B-4043-46B7-A6F7-909FC07A9F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7DB84B-4043-46B7-A6F7-909FC07A9F10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7072CF7F-EBD8-41FA-B42F-DAB6612AC78C} = {CB169083-C1D1-4020-A21D-451278E0D4C9}
+		{DA192A8C-BE7F-4D9D-BFBB-882E188FAA9C} = {7D4769DA-3E5D-47FD-8C64-B1E774A39081}
+		{4438E11E-8D14-4F8D-A87C-56AFC7862CF0} = {FB3DAE9B-49D7-4C88-A4A0-033B96AFFA72}
+		{91F5F882-37F9-418B-99C2-FE2333992A12} = {19A1F1EA-8E69-4973-B049-321B99FC7353}
+		{E0C1AFC6-9733-4F3F-AD3A-0EEB46EFE3DF} = {A86BE3A2-BEB9-4340-8E84-A2CBD1D195A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA00FB56-8DB1-4A5E-954D-74A7A4C98EBE}
+	EndGlobalSection
+EndGlobal

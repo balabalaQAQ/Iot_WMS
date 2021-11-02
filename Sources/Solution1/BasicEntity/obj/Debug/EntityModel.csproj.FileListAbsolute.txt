@@ -1,0 +1,6 @@
+D:\Program\bs\Solution1\BasicEntity\bin\Debug\BasicEntity.dll
+D:\Program\bs\Solution1\BasicEntity\bin\Debug\BasicEntity.pdb
+D:\Program\bs\Solution1\BasicEntity\obj\Debug\EntityModel.csproj.AssemblyReference.cache
+D:\Program\bs\Solution1\BasicEntity\obj\Debug\EntityModel.csproj.CoreCompileInputs.cache
+D:\Program\bs\Solution1\BasicEntity\obj\Debug\BasicEntity.dll
+D:\Program\bs\Solution1\BasicEntity\obj\Debug\BasicEntity.pdb
