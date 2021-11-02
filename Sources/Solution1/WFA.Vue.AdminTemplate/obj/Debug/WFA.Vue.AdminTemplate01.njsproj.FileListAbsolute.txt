@@ -1,0 +1,14 @@
+D:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsproj.CoreCompileInputs.cache
+D:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll
+C:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsprojAssemblyReference.cache
+C:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsproj.CoreCompileInputs.cache
+C:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll
+D:\L05.WFA01\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsprojAssemblyReference.cache
+D:\L05.WFA01\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsproj.CoreCompileInputs.cache
+D:\L05.WFA01\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Team04\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsprojAssemblyReference.cache
+C:\Team04\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsproj.CoreCompileInputs.cache
+C:\Team04\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Team04\GIT\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsprojAssemblyReference.cache
+C:\Team04\GIT\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate01.njsproj.CoreCompileInputs.cache
+C:\Team04\GIT\SE201701Team04\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll

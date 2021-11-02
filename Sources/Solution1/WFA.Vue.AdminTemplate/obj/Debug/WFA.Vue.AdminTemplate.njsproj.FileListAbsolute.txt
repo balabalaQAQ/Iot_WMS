@@ -1,0 +1,3 @@
+D:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate.njsprojAssemblyReference.cache
+D:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\obj\Debug\WFA.Vue.AdminTemplate.njsproj.CoreCompileInputs.cache
+D:\L05.WFA\Sources\WebFrontApplication\WFA.Vue.AdminTemplate\bin\Microsoft.NodejsTools.WebRole.dll
