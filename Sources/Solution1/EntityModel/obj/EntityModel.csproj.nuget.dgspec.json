@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {}
+    "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {}
   },
   "projects": {
-    "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
+    "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj",
+        "projectUniqueName": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj",
         "projectName": "EntityModel",
-        "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj",
+        "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\obj\\",
+        "outputPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -57,6 +57,7 @@ namespace webapidemo.Controllers
         public async Task<ActionResult<OrderVM>> PostOrder(OrderVM OrderVM)
         {
             var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            OrderVM.SetTime = DateTime.Now.ToString();
             await _service.SaveBoAsyn(OrderVM);
             return CreatedAtAction(nameof(GetOrder), new { id = OrderVM.Id }, OrderVM);
         }

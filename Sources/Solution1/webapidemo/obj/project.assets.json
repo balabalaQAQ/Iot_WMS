@@ -9875,11 +9875,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program\\bs\\Sources\\Solution1\\webapidemo\\webapidemo.csproj",
+      "projectUniqueName": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\webapidemo\\webapidemo.csproj",
       "projectName": "webapidemo",
-      "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\webapidemo\\webapidemo.csproj",
+      "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\webapidemo\\webapidemo.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Program\\bs\\Sources\\Solution1\\webapidemo\\obj\\",
+      "outputPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\webapidemo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9899,11 +9899,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj": {
-              "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj"
+            "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj": {
+              "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj"
             },
-            "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj": {
-              "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj"
+            "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj": {
+              "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj"
             }
           }
         }

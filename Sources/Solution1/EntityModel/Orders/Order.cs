@@ -21,9 +21,9 @@ namespace EntityModel.Orders
         public string SetTime { get; set; }//操作时间
 
         public Status Status { get; set; } = 0;//订单状态
-        public double Price { get; set; } = 0;//单价
+        public float Price { get; set; } = 0;//单价
 
-        public double TotalPrice { get; set; }//总价
+        public float TotalPrice { get; set; }//总价
 
         public virtual User Director { get; set; }//负责人
         public virtual User Reviewer { get; set; }//审核人
@@ -33,7 +33,7 @@ namespace EntityModel.Orders
         public Order()
         {
             this.Id = Guid.NewGuid();
-            this.SortCode = "Order_"+EntityHelper.SortCodeByDefaultDateTime<String>();
+         //   this.SortCode ;
             this.SetTime = DateTime.Now.ToString();
         }
 

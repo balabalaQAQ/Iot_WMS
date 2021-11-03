@@ -52,7 +52,7 @@ export default {
         },
         {
           name: '个人购卡',
-          url: '/orders/OrderIns',
+          url: '/base/carousels',
           icon: 'icon-puzzle'
         },
         {
@@ -249,7 +249,7 @@ export default {
         variant: 'secondary',
         text: 'NEW'
       },
-      attributes: { disabled: true },
+      attributes: {  disabled: true  },
     },
     {
       divider: true

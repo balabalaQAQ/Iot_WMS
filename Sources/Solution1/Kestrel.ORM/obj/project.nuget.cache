@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sNxAlDDoLq9dSa+kT7DarGT3h6oCL+l4QRS6q04PzUwPuhlHaKfgeQjTYQG9Ac5D4w9ojodhVfg2dIPHbjXwmQ==",
+  "dgSpecHash": "eRm/hwZIPTqGrPvYonzGzav+9UMGDzVSN8XhAzu7VODlkjBi5Q9tt5cq0rPyBCUxTjz54J7aiIFQdlajjgvMuQ==",
   "success": true,
-  "projectFilePath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
+  "projectFilePath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

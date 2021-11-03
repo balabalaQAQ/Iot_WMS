@@ -9408,11 +9408,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program\\bs\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
+      "projectUniqueName": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
       "projectName": "ViewModels",
-      "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
+      "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Program\\bs\\Sources\\Solution1\\ViewModels\\obj\\",
+      "outputPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\ViewModels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9432,11 +9432,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Program\\bs\\Sources\\Solution1\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\DataAccess\\DataAccess.csproj"
+            "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\DataAccess\\DataAccess.csproj"
             },
-            "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
-              "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj"
+            "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
+              "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj"
             }
           }
         }

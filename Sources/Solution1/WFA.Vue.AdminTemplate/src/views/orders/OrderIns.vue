@@ -6,6 +6,13 @@
           <b-card>
             <div slot="header">
               <span style="font-size:20px">{{caption}}</span>
+              <div class="card-header-actions">
+                <b-input-group>
+                  <b-button variant="primary" squared size="sm" @click="closeEdit()">
+                    <i class="fa fa-close"></i>
+                  </b-button>
+                </b-input-group>
+              </div>
             </div>
 
             <b-form @submit="checkForm" @reset="onReset" v-if="show" id="data">
@@ -28,13 +35,37 @@
               <b-form-group validated
                             description="请输入订单编号"
                             label="订单编号："
-                            label-for="name">
-                            <b-form-input id="name"
-                              v-model="Orderform.name"
+                            label-for="ordernum">
+                            <b-form-input id="ordernum"
+                              v-model="Orderform.ordernum"
                               type="text"
-                              autocomplete="name"
+                              autocomplete="ordernum"
                               required
                               placeholder="请输入订单名称"></b-form-input>
+              </b-form-group>
+
+              <b-form-group validated
+                            description="请输入单价"
+                            label="单价："
+                            label-for="price">
+                            <b-form-input id="price"
+                              v-model="Orderform.price"
+                              type="text"
+                              autocomplete="price"
+                              required
+                              placeholder="请输入单价"></b-form-input>
+              </b-form-group>
+
+              <b-form-group validated
+                            description="请输入总价"
+                            label="总价："
+                            label-for="totalprice">
+                            <b-form-input id="totalprice"
+                              v-model="Orderform.totalprice"
+                              type="text"
+                              autocomplete="totalprice"
+                              required
+                              placeholder="请输入总价"></b-form-input>
               </b-form-group>
  
  
@@ -78,8 +109,10 @@
       return {
        Orderform: {
           errors: [],
-          orderNum:"",
+          ordernum:"",
           name: "",
+          price:0.0,
+          totalprice:0.0,
           description: ""
         },
         directoritem: [],
@@ -101,21 +134,15 @@
        
         this.Orderform.errors = [];
         const item = {
-        //  Id: this.Orderform.Id,
-          OrderNum:this.Orderform.orderNum,
+          OrderNum:this.Orderform.ordernum,
           Name: this.Orderform.name,
           Description: this.Orderform.description,
-          SetTime: "2000-06-09"
-        //  Status:0,
-        //  IsPseudoDelete:false
+          Price: this.Orderform.price,
+          TotalPrice:this.Orderform.totalprice,
         };
-       const uri = 'https://localhost:5001/api/Order';  // Web API 的访问服务地址
-      console.log(item);
-      //  const uri ='api/WeatherForecast'
+       const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)
-
         this.$router.go(-1);
-
         evt.preventDefault();
       },
 
@@ -145,7 +172,7 @@
         
       this.directoritem = this.$route.params.director;
    
-       console.log(this.$route)
+       //console.log(this.$route)
       this.Orderform.Id = newGuid();
      // this.Orderform.orderNumber = 1000; // 需要获取最大值后重新赋值
     

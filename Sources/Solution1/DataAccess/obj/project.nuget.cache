@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q53Jswo9K/ODAac1grqqOevhUR3xKtwcBW9Xjg8KLsOsNCDAJ68EOXM0su8YLEs2asS+bAPt5iF8fgIW2B0hBA==",
+  "dgSpecHash": "DWC/4e8cK3TlSXDVo46UcboirPm8bGkiQ4dt5WPgjr5i5y2/djz8Qnq6rZ0VS++Q2PrjR3XbjACdqGWe6/wlIw==",
   "success": true,
-  "projectFilePath": "D:\\Program\\bs\\Sources\\Solution1\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

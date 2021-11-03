@@ -9,9 +9,9 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="elementsAppendButton" type="text"></b-form-input>
+                  <b-form-input id="searchText" type="text"></b-form-input>
                   <b-input-group-append>
-                    <b-button variant="primary" size="sm">查询</b-button>
+                    <b-button variant="primary" size="sm"  @click="searchData()">查询</b-button>
                   </b-input-group-append>&nbsp;
                   <b-button method="POST" variant="primary" squared size="sm" @click="createData()">
                     <i class="fa fa-lightbulb-o"></i>&nbsp;新建数据
@@ -32,12 +32,27 @@
                      :per-page="perPage">
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
-                <b-button variant="primary" size="sm" @click="editData(data.item.id)">编辑</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="editData(data.item.id)">审核</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
 
             <!-- 分页导航 -->
+
+             <nav>
+              <b-pagination
+                size="sm"
+                :total-rows="getRowCount(mumitems)"
+                :per-page="perPage"
+                v-model="currentPage"
+                prev-text="前一页"
+                next-text="下一页"
+                hide-goto-end-buttons
+                align="right"
+              
+              />
+            </nav>
+              <!--
             <nav>
               <b-pagination size="sm"
                             :per-page="perPage"
@@ -48,6 +63,7 @@
                             align="right"
                             @input="gotoPage(currentPage)" />
             </nav>
+            -->
           </b-card>
         </transition>
       </b-col>
@@ -59,6 +75,9 @@
 <script>
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
 const uri ='https://localhost:5001/api/Order/';
+
+
+  import { shuffleArray } from "@/shared/utils";
 import { get } from 'http';
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
@@ -100,16 +119,18 @@ import { get } from 'http';
         //  items: demoData.filter((test) => test.orderNumber < 1200),  // 提取 id < 42 的全部数据
 
         mumitems: [],
-     
+    
         fields: [
        //   { key: "orderNumber", label: "序号" },
           { key: "orderNum", label: "订单号" },
-          { key: "name", label: "姓名" },
+          { key: "name", label: "订单名称" },
           { key: "description", label: "订单描述" },
-          { key: "settime", label: "操作时间" },
+          { key: "setTime", label: "申请时间" },
           { key: "status", label: "订单状态" },
           { key: "director", label: "负责人" },
           { key: "reviewer", label: "审核人" },
+          { key: "price", label: "单价" },
+          { key: "totalPrice", label: "总价" },
           { key: "operation", label: "操作" }
         ],
      
@@ -121,24 +142,31 @@ import { get } from 'http';
  
 
     computed: {
-      totaPages: function () {
-        return Math.ceil(this.totalRows / this.perPage);
-      },
-     
-
+      
       getmumitems: function () {
+   
        var item=this
        this.$axios.get(uri).then(function(res){
-       item.mumitems = res.data})
+       var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
+        for( var i=0;i< res.data.length;i++){
+           res.data[i].status=statusitem[res.data[i].status];
+        }
+       item.mumitems = res.data
+       })
        return this.mumitems
       },
     },
     methods: {
-        
-      gotoPage(page) {
-        this.loadPage(page);
+    
+      // 提取总行数
+     getRowCount(mumitems) {
+      return mumitems.length;
+    },
+   
+      searchData(){
+
       },
- 
+
       createData() {
         this.$router.push({
            name: "OrderIns",
@@ -149,7 +177,7 @@ import { get } from 'http';
       editData(id) {
         this.$router.push({
           name: "OrderEdit",
-          params: { id: id  , level:this.mumitems[0].levelList}
+          params: { id: id}
         })
       },
       deleteData(id) {
@@ -168,8 +196,7 @@ import { get } from 'http';
     },
   };
             // 待办事宜的数据集合
-
-
+ 
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EtvXIiGVLyOwwDohjowC4zWc71zOL6yp0Ca/Ye6I/ZKPTPpFS86AIoHZZPZLnhnbStRl/KWyZJ4LUJ3qN2tTKw==",
+  "dgSpecHash": "DqPVjK/gAiNG72nvX4+iyTTScK8Pc12qSwP9trjdvD4nn3rl69WD2orLtNdaHGU/uNQmE1bwiR9meiSjeJK6HQ==",
   "success": true,
-  "projectFilePath": "D:\\Program\\bs\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
+  "projectFilePath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\ViewModels\\ViewModels.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

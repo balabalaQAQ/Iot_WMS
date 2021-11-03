@@ -9368,11 +9368,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
+      "projectUniqueName": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
       "projectName": "Kestrel.ORM",
-      "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
+      "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\Kestrel.ORM.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ORM\\obj\\",
+      "outputPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ORM\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9392,8 +9392,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
-              "projectPath": "D:\\Program\\bs\\Sources\\Solution1\\EntityModel\\EntityModel.csproj"
+            "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj": {
+              "projectPath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\EntityModel\\EntityModel.csproj"
             }
           }
         }

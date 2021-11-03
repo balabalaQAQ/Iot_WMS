@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AD9wVmUZyli4EqIu8JKm44frMHZ5+WF/qaxyFG9oWR1NXCPF4nuEVL4zq4cSRyZDOZAcW9RlmopfAlzNX6O1zg==",
+  "dgSpecHash": "BdwjfmwVDdjp9c7HSzzvko1twAQvOc/xNF3w8iPYN7rpLnGxHIksR9n7uWZtCaKwkHF01/3mWrURp/zN7tvumA==",
   "success": true,
-  "projectFilePath": "D:\\Program\\bs\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj",
+  "projectFilePath": "D:\\Program\\bs\\Iot_WMS\\Sources\\Solution1\\Kestrel.ViewModelServices\\Kestrel.ViewModelServices.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

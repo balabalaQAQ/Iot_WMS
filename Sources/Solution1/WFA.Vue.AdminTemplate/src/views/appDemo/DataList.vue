@@ -138,6 +138,7 @@ export default {
     },
     // 提取总行数
     getRowCount(items) {
+             console.log(110);
       return items.UsersData.length;
     },
     // 用户详细数据链接

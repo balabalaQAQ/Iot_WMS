@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = EntityModel
-build_property.ProjectDir = D:\Program\bs\Sources\Solution1\EntityModel\
+build_property.ProjectDir = D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\

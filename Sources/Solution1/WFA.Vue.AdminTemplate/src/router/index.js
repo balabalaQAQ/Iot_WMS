@@ -21,7 +21,7 @@ const Widgets = () => import('@/views/Widgets')
 //订单管理
 const OrderIndex = () => import('@/views/orders/OrderIndex')
 const OrderIns = () => import('@/views/orders/OrderIns')
- 
+const OrderEdit = () => import('@/views/orders/OrderEdit')
 
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')
@@ -163,9 +163,9 @@ export default new Router({
               component: OrderIns
             },
             {
-              path: 'switches',
-              name: 'Switches',
-              component: Switches
+              path: 'OrderEdit',
+              name: 'OrderEdit',
+              component: OrderEdit
             },
             {
               path: 'tables',

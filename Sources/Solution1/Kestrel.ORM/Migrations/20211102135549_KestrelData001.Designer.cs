@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kestrel.ORM.Migrations
 {
     [DbContext(typeof(Dbcontext))]
-    [Migration("20211102103509_KestrelData001")]
+    [Migration("20211102135549_KestrelData001")]
     partial class KestrelData001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,8 +42,8 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("OrderNum")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<Guid?>("ReviewerId")
                         .HasColumnType("uniqueidentifier");
@@ -57,8 +57,8 @@ namespace Kestrel.ORM.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

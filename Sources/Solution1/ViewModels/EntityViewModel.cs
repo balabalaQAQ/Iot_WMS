@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityModel.Tools;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ViewModels
@@ -25,6 +26,6 @@ namespace ViewModels
         //[Required(ErrorMessage = "业务编码不能为空值。")]
         //[Display(Name = "业务编码")]
         //[StringLength(150, ErrorMessage = "你输入的数据超出限制150个字符的长度。")]
-        public virtual string SortCode { get; set; }
+        public virtual string SortCode { get; set; } = "SortCode_" + EntityHelper.SortCodeByDefaultDateTime<String>();
     }
 }

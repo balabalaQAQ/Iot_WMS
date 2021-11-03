@@ -17,33 +17,53 @@
 
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <b-form-group validated description=" " label="订单名称：" label-for="name" :label-cols="1">
-                <b-form-input id="name" v-model="CardForm.name" type="text" autocomplete="name" required placeholder="请输入订单名称"></b-form-input>
-              </b-form-group>
+                <b-form-input id="name" v-model="OrderForm.name"v-bind:disabled="true" type="text" autocomplete="name" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
 
-              <b-form-group description=" " label="请输入订单编号" label-for="identityCard" :label-cols="1">
-                <b-form-input id="identityCard" v-model="CardForm.identityCard" type="text" autocomplete="identityCard" required placeholder="请输入订单编号"></b-form-input>
-              </b-form-group>
-              <b-form-group description=" " label="订单说明" label-for="initialIntegral" :label-cols="1">
-                <b-form-input id="initialIntegral" v-model="CardForm.initialIntegral" type="text" autocomplete="initialIntegral" required placeholder="请输入订单说明"></b-form-input>
-              </b-form-group>
-              <b-form-group description label="会员等级" label-for="level">
+              <b-form-group description=" " label="订单编号" label-for="orderNum" :label-cols="1">
+                <b-form-input id="orderNum" v-model="OrderForm.orderNum" v-bind:disabled="true" type="text" autocomplete="orderNum" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+
+              <b-form-group description=" " label="申请时间" label-for="setTime" :label-cols="1">
+                <b-form-input id="setTime" v-model="OrderForm.setTime" v-bind:disabled="true" type="text" autocomplete="setTime" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+              
+              <b-form-group description=" " label="单价" label-for="price" :label-cols="1">
+              <b-form-input id="price" v-model="OrderForm.price" v-bind:disabled="true" type="text" autocomplete="price" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+
+              <b-form-group description=" " label="总价" label-for="totalPrice" :label-cols="1">
+                <b-form-input id="totalPrice" v-model="OrderForm.totalPrice" v-bind:disabled="true" type="text" autocomplete="totalPrice" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+
+              <b-form-group description=" " label="订单说明" label-for="description" :label-cols="1">
+                <b-form-input id="description" v-model="OrderForm.description" v-bind:disabled="true" type="text" autocomplete="description" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+
+
+              <b-form-group description=" " label="负责人" label-for="director" :label-cols="1">
+                <b-form-input id="director" v-model="OrderForm.director" type="text" v-bind:disabled="true" autocomplete="director" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
+
+              <b-form-group description label="当前状态" label-for="status">
                 <b-form-select id="input-3"
-                               v-model="CardForm.level"
-                               :options = this.levelitem 
+                               v-model="OrderForm.status"
+                               :options = this.statusitem 
                                value-field= id
-                               text-field= level
+                               text-field= status
                                required>
 
                 </b-form-select>
 
               </b-form-group>
-          
-              <b-form-group description="" label="说明" label-for="description" :label-cols="1">
-                <b-form-input id="description" v-model="CardForm.description" type="text" autocomplete="description" required placeholder=""></b-form-input>
-              </b-form-group>
-
-                   <b-button type="submit" variant="primary">提交数据</b-button>
+        
+              </br>
+              </br>
+              </br>
+             <b-row class="justify-content-center">
+              <b-button type="submit" variant="primary">提交数据</b-button>&nbsp;&nbsp;&nbsp;
               <b-button type="reset" variant="danger">重置表单</b-button>
+            </b-row>
             </b-form>
 
             <!-- 调试期间的数据呈现 -->
@@ -62,16 +82,15 @@
 
 <script>
   // 导入数据源
-  const uri = 'api/MembershipCard/';
-
+  const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
   export default {
-    name: 'MembershipEdit',
+    name: 'OrderEdit',
 
     // 一般参数定义
     props: {
       caption: {
         type: String,
-        default: '编辑商品信息'
+        default: '审核订单信息'
       },
     },
 
@@ -80,17 +99,19 @@
       return {
         // 表单数据模型，用于绑定到 b-form 的变量
        
-        CardForm: {
-          id: '',
+        OrderForm: {
+          id:"",
+          orderNum:"",
           name: "",
-          identityCard: "",
-          level: [],
-          initialIntegral:0,
+          setTime:"",
+          price:0.0,
+          totalPrice:0.0,
           description: "",
-          orderNumber: ""
+          status:0,
+          director:""
         },
-      
-        levelitem:[],
+        statusitem:[],
+        
         show: true
       }
     },
@@ -104,38 +125,35 @@
      
       // 提交数据
       onSubmit(evt) {
-         for(var i in this.levelitem)
+         for(var i in this.statusitem)
         {  
-          if(this.levelitem[i].id==this.CardForm.level)
+          if(this.statusitem[i]==this.OrderForm.status)
           {
-        
-           this.CardForm.level=this.levelitem[i]
-       
+           this.OrderForm.status=i
           } 
         }
-        this.CardForm.errors = [];
+        this.OrderForm.errors = [];
        
         const item = {
-          Id: this.CardForm.id,
-          Name: this.CardForm.name,
-          IdentityCard:this.CardForm.identityCard,
-          MembershipLevel: this.CardForm.level,
-          Description: this.CardForm.description,
-          InitialIntegral: parseInt( this.CardForm.initialIntegral)
+         Id:this.OrderForm.id,
+         Status:Number(this.OrderForm.status),
+         OrderNum:this.OrderForm.orderNum,
+         Name:this.OrderForm.name,
+         Description: this.OrderForm.description,
+         SetTime: this.OrderForm.setTime,
+         Price: this.OrderForm.price,
+         TotalPrice:this.OrderForm.totalPrice,
         };
          this.$axios.put(uri+this.$route.params.id,item)
         // 返回列表页
          this.$router.go(-1)
-
+         evt.preventDefault();
        
       },
       // 重置表单
       onReset(evt) {
         evt.preventDefault()
-        this.CardForm.name = ''
-        this.CardForm.identityCard = ''
-        this.CardForm.initialIntegral = ''
-        this.CardForm.description = ''
+        this.OrderForm.status = '待审核'
       },
       // 关闭编辑
       closeEdit() {
@@ -145,28 +163,19 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-
-     
-        this.levelitem = this.$route.params.level;
+        var status=['待审核', '审核成功','审核失败', '已取消','已完成'];
+        this.statusitem = status;
+        var item = this;
+        if(this.$route.params.id==null)//如果数据已经丢失退出编辑
+            this.$router.go(-1)
+        else{
+          this.$axios.get(uri+this.$route.params.id).then(function(res){
+          res.data.status=status[res.data.status];
+          item.OrderForm=res.data   })   
+        }
        
-
-       var item = this
-       this.$axios.get(uri+this.$route.params.id).then(function(res){
-       
-      
-        item.CardForm=res.data
-       //item.CardForm = res.data
-           item.CardForm.level=  res.data.membershipLevel.id
-         
-           })   
-     
-        
- 
-       
-   
-    },
-
-
+     },  
+  
   }
 </script>
 
