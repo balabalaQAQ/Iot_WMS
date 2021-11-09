@@ -48,9 +48,11 @@ namespace webapidemo
 
             services.AddControllers();
             services.AddMvcCore().AddAuthorization();
+
+          
             //×¢ÒâSQLÊµÀýÃû
             services.AddDbContext<Dbcontext>(opt => opt.UseSqlServer("Server=localhost\\ADMIN;Initial Catalog=KestrelSystemData; uid=sa;pwd=123456;MultipleActiveResultSets=True"));
-          
+
             services.AddIdentity<User, Role>()
             .AddEntityFrameworkStores<Dbcontext>()
              .AddDefaultTokenProviders();
@@ -77,6 +79,7 @@ namespace webapidemo
                         .AllowAnyMethod();
                 });
             });
+            
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

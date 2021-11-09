@@ -33,13 +33,12 @@
               </b-form-group>   </br>
 
               <b-form-group description=" " label="总价" label-for="totalPrice" :label-cols="1">
-                <b-form-input id="totalPrice" v-model="OrderForm.totalPrice" v-bind:disabled="true" type="text" autocomplete="totalPrice" required placeholder=" "></b-form-input>
+                <b-form-input id="totalPrice" class="form-control" v-model="OrderForm.totalPrice"  v-bind:disabled="true"  type="text" autocomplete="totalPrice" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
 
               <b-form-group description=" " label="订单说明" label-for="description" :label-cols="1">
                 <b-form-input id="description" v-model="OrderForm.description" v-bind:disabled="true" type="text" autocomplete="description" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
-
 
               <b-form-group description=" " label="负责人" label-for="director" :label-cols="1">
                 <b-form-input id="director" v-model="OrderForm.director" type="text" v-bind:disabled="true" autocomplete="director" required placeholder=" "></b-form-input>

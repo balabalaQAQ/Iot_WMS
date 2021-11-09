@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ViewModels.Product
 {
-   public class ProductInfoVM : EntityViewModel
+ 
+   public class ProductInfoVM : EntityViewModel   //产品信息
     {
         [Display(Name = "产品类别")]
         [Required(ErrorMessage = "产品类别是必须的")]

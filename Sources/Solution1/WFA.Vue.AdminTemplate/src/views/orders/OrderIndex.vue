@@ -9,9 +9,9 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="按订单名称、订单号"></b-form-input>
                   <b-input-group-append>
-                    <b-button variant="primary" size="sm"  @click="searchData()">查询</b-button>
+                    <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
                   <b-button method="POST" variant="primary" squared size="sm" @click="createData()">
                     <i class="fa fa-lightbulb-o"></i>&nbsp;新建数据
@@ -26,7 +26,7 @@
                      :small="small" 
                      :fixed="fixed"
                      responsive="sm"
-                     :items="getmumitems "
+                     :items="getmumitems"
                      :fields="fields"
                      :current-page="currentPage"
                      :per-page="perPage">
@@ -73,12 +73,22 @@
 <script src="./site.js" asp-append-version="true"></script>
 
 <script>
+
+function displayData(mumitems){//对显示的数据进行预处理
+    var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
+    for( var i=0;i< mumitems.length;i++){
+      mumitems[i].status=statusitem[mumitems[i].status];
+      //避免一些数据太长的影响
+      if(mumitems[i].description.length>=10)
+          mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
+      if(mumitems[i].name.length>=10)
+          mumitems[i].name=mumitems[i].name.substr(0,10)+"..."
+    }
+    return mumitems;
+  }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
 const uri ='https://localhost:5001/api/Order/';
-
-
-  import { shuffleArray } from "@/shared/utils";
-import { get } from 'http';
+var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
 
@@ -118,10 +128,11 @@ import { get } from 'http';
         // 绑定数据
         //  items: demoData.filter((test) => test.orderNumber < 1200),  // 提取 id < 42 的全部数据
 
-        mumitems: [],
-    
+        mumitems: [],//初始数据集，用于显示
+        saveitems:[],//用于保存原数据集
+        searchitems:[],//查询后的数据集
         fields: [
-       //   { key: "orderNumber", label: "序号" },
+          { key: "orderNumber", label: "序号" },
           { key: "orderNum", label: "订单号" },
           { key: "name", label: "订单名称" },
           { key: "description", label: "订单描述" },
@@ -142,31 +153,44 @@ import { get } from 'http';
  
 
     computed: {
-      
       getmumitems: function () {
-   
        var item=this
        this.$axios.get(uri).then(function(res){
-       var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
-        for( var i=0;i< res.data.length;i++){
-           res.data[i].status=statusitem[res.data[i].status];
-        }
-       item.mumitems = res.data
+              if(flag==0)
+                item.mumitems=res.data;
+              else//进入查询
+                item.mumitems=[...item.saveitems];//数组数据类型转化
        })
-       return this.mumitems
+       return (item.mumitems)
       },
     },
-    methods: {
+    methods: {    
+      getRowCount(mumitems) {
+        return mumitems.length;
+      },
+      searchData(mumitems){
+        flag=1;
+        var item=this;
+        item.mumitems.splice(0,item.mumitems.length);
+        item.saveitems.splice(0,item.saveitems.length);
+        const searchTextbox = document.getElementById('searchText').value.trim();//获取输入文本框的内容
+        this.$axios.get(uri).then(function(res){
+        if(searchTextbox==''||searchTextbox==undefined||searchTextbox==null){//判读是否为空
+              item.mumitems=item.saveitems = displayData(res.data)
+              flag=0;
+         }
+        else{
+           var count=0;
+           for(var i=0;i<res.data.length;i++){        
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
+            item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
+            count++;
+           }
+             item.saveitems=item.searchitems; //为每一个数据集都赋值
+           }
+         }})
+      },
     
-      // 提取总行数
-     getRowCount(mumitems) {
-      return mumitems.length;
-    },
-   
-      searchData(){
-
-      },
-
       createData() {
         this.$router.push({
            name: "OrderIns",
@@ -186,16 +210,14 @@ import { get } from 'http';
      
     },
     created() {
-
        var item=this
-       
+       flag=0;
        this.$axios.get(uri).then(function(res){
-       
-       item.mumitems = res.data})
+       item.mumitems = displayData(res.data)
+       })
        
     },
   };
-            // 待办事宜的数据集合
  
 </script>
 
