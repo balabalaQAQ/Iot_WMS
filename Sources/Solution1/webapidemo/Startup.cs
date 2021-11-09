@@ -33,13 +33,10 @@ namespace webapidemo
 {
     public class Startup
     {
- 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -91,8 +88,8 @@ namespace webapidemo
                     //是否验证发行人
                     ValidateIssuer = true,
                     ValidIssuer = Issurer,//发行人
-                                          //是否验证受众人
-                    ValidateAudience = true,
+                                         
+                    ValidateAudience = true, //是否验证受众人
                     ValidAudience = Audience,//受众人
                                              //是否验证密钥
                     ValidateIssuerSigningKey = true,
@@ -100,7 +97,6 @@ namespace webapidemo
 
                     ValidateLifetime = true, //验证生命周期
                     RequireExpirationTime = true, //过期时间
-
                 };
             });
             //   添加 DI 配置

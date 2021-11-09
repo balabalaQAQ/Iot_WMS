@@ -22,6 +22,18 @@ const Widgets = () => import('@/views/Widgets')
 const OrderIndex = () => import('@/views/orders/OrderIndex')
 const OrderIns = () => import('@/views/orders/OrderIns')
 const OrderEdit = () => import('@/views/orders/OrderEdit')
+//产品管理
+const ProductIndex = () => import('@/views/products/ProductIndex')
+const ProductIns = () => import('@/views/products/ProductIns')
+const ProductEdit = () => import('@/views/products/ProductEdit')
+//产品记录管理
+const PRecordIndex = () => import('@/views/precords/PRecordIndex')
+const PRecordtIns = () => import('@/views/precords/PRecordIns')
+const PRecordEdit = () => import('@/views/precords/PRecordEdit')
+//产品类型管理
+const PCategoryIndex = () => import('@/views/precords/PRecordIndex')
+const PCategoryIns = () => import('@/views/precords/PRecordIns')
+const PCategoryEdit = () => import('@/views/precords/PRecordEdit')
 
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')

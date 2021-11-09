@@ -73,35 +73,25 @@ export default {
       ]
     },
     {
-      name: '售票管理',
-      url: '/buttons',
+      name: '产品管理',
+      url: '/products',
       icon: 'icon-cursor',
       children: [
         {
-          name: '票种设置',
-          url: '/buttons/standard-buttons',
+          name: '产品信息',
+          url: '/products/ProductIndex',
           icon: 'icon-cursor'
         },
         {
-          name: '个人售票',
-          url: '/buttons/dropdowns',
+          name: '产品记录',
+          url: '/precords/PRecordIndex',
           icon: 'icon-cursor'
         },
         {
-          name: '团队售票',
-          url: '/buttons/button-groups',
+          name: '产品类型',
+          url: '/pcategorys/PCategoryIndex',
           icon: 'icon-cursor'
         },
-        {
-          name: '个人查看',
-          url: '/buttons/brand-buttons',
-          icon: 'icon-cursor'
-        },
-        {
-          name: '团队查看',
-          url: '/buttons/brand-buttons',
-          icon: 'icon-cursor'
-        }
       ]
     },
     {
