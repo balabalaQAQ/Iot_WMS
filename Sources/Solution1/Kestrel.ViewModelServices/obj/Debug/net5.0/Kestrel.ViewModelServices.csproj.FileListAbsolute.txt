@@ -57,7 +57,7 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.AssemblyInfoInputs.cache
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.AssemblyInfo.cs
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.csproj.CoreCompileInputs.cache
-D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.csproj.CopyComplete
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\ref\Kestrel.ViewModelServices.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.csproj.CopyComplete

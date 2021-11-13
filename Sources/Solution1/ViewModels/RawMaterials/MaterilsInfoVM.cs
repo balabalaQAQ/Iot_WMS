@@ -1,4 +1,4 @@
-﻿using EntityModel.Orders;
+﻿using EntityModel.Order;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

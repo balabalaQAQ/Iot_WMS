@@ -1,7 +1,7 @@
 ﻿
 using EntityModel.Foundation;
 using EntityModel.Tools;
-using EntityModel.Orders;
+using EntityModel.Order;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,13 +17,13 @@ namespace EntityModel.Product
         public string Name { get; set; } // 产品名
         public string ProductID { get; set; } // 产品编号
 
-        public string PCategory { get; set; } //产品类别
+        public virtual PCategory PCategory { get; set; } //产品类别
 
         public string Description { get; set; }//产品描述
 
         public int Inventory { get; set; }//库存量
 
-        public virtual Order Order { get;set;}//所属订单
+        public virtual Order.Order Order { get;set;}//所属订单
 
  
         [StringLength(200)]

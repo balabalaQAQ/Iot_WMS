@@ -18,68 +18,83 @@
             <b-form @submit="checkForm" @reset="onReset" v-if="show" id="data">
 
               <b-card class="mt-3" header="数据校验">
-                <pre class="m-0">{{Orderform.errors}}</pre>
+                <pre class="m-0">{{ProductForm.errors}}</pre>
               </b-card>
               <b-form-group validated
-                            description="请输入订单名称"
-                            label="订单名称："
+                            description="请输入产品名称"
+                            label="产品名称："
                             label-for="name">
                 <b-form-input id="name"
-                              v-model="Orderform.name"
+                              v-model="ProductForm.name"
                               type="text"
                               autocomplete="name"
                               required
-                              placeholder="请输入订单名称"></b-form-input>
+                              placeholder="请输入产品名称"></b-form-input>
               </b-form-group>
 
               <b-form-group validated
-                            description="请输入订单编号"
-                            label="订单编号："
-                            label-for="ordernum">
-                            <b-form-input id="ordernum"
-                              v-model="Orderform.ordernum"
+                            description="请输入产品编号"
+                            label="产品编号："
+                            label-for="productID">
+                            <b-form-input id="productID"
+                              v-model="ProductForm.productID"
                               type="text"
-                              autocomplete="ordernum"
+                              autocomplete="productID"
                               required
-                              placeholder="请输入订单名称"></b-form-input>
+                              placeholder="请输入产品名称"></b-form-input>
               </b-form-group>
 
-              <b-form-group validated
-                            description="请输入单价"
-                            label="单价："
-                            label-for="price">
-                            <b-form-input id="price"
-                              v-model="Orderform.price"
-                              type="text"
-                              autocomplete="price"
-                              required
-                              placeholder="请输入单价"></b-form-input>
-              </b-form-group>
 
+
+
+              <b-form-group description label="产品类别" label-for="pCategory">
+                <b-form-select id="input-3"
+                               v-model="ProductForm.pCategory"
+                               :options = this.pCategoryitem 
+                               value-field= id
+                               text-field= name
+                               required>
+
+                </b-form-select>
+
+              </b-form-group>
+              
+
+               <b-form-group description label="所属订单号" label-for="order">
+                <b-form-select id="input-3"
+                               v-model="ProductForm.order"
+                               :options = this.orderitem 
+                               value-field= id
+                               text-field= orderNum
+                               required>
+
+                </b-form-select>
+
+              </b-form-group>
               <b-form-group validated
-                            description="请输入总价"
-                            label="总价："
-                            label-for="totalprice">
-                            <b-form-input id="totalprice"
-                              v-model="Orderform.totalprice"
+                            description="请输入库存量"
+                            label="库存量："
+                            label-for="inventory">
+                            <b-form-input id="inventory"
+                              v-model="ProductForm.inventory"
                               type="text"
-                              autocomplete="totalprice"
+                              autocomplete="inventory"
                               required
-                              placeholder="请输入总价"></b-form-input>
+                              placeholder="请输入库存量"></b-form-input>
               </b-form-group>
  
  
  
-              <b-form-group description label="订单说明" label-for="description">
+              <b-form-group description label="产品说明" label-for="description">
                 <b-form-input id="description"
-                              v-model="Orderform.description"
+                              v-model="ProductForm.description"
                               type="text"
                               autocomplete="description"
                               required
                               placeholder></b-form-input>
               </b-form-group>
 
-              <b-button type="submit" variant="primary">添加订单</b-button>
+              <b-button type="submit" variant="primary">添加产品</b-button>
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
 
@@ -102,21 +117,25 @@
     props: {
       caption: {
         type: String,
-        default: "新建订单信息"
+        default: "新建产品信息"
       }
     },
     data() {
       return {
-       Orderform: {
+       ProductForm: {
           errors: [],
-          ordernum:"",
+          productID:"",
           name: "",
-          price:0.0,
-          totalprice:0.0,
+          pCategory:"",
+          inventory:0,
+          orderNum:"",
+          order:"",
           description: ""
         },
-        directoritem: [],
-        revieweritem: [],
+
+        pCategoryitem :[],
+        orderitem: [],
+     
         show: true
       };
     },
@@ -130,32 +149,47 @@
       },
       // 提交数据
       checkForm(evt) {
-        this.Orderform.errors = [];
+       for(var i in this.pCategoryitem)
+        {  
+          if(this.pCategoryitem[i].id==this.ProductForm.pCategory)
+          {
+        
+           this.ProductForm.pCategory=this.pCategoryitem[i]
+       
+          } 
+        }
+       for(var i in this.orderitem)
+        {  
+          if(this.orderitem[i].id==this.ProductForm.order)
+          {
+        
+           this.ProductForm.order=this.orderitem[i]
+       
+          } 
+        }
+        this.ProductForm.errors = [];
         const item = {
-          OrderNum:this.Orderform.ordernum,
-          Name: this.Orderform.name,
-          Description: this.Orderform.description,
-          Price: this.Orderform.price,
-          TotalPrice:this.Orderform.totalprice,
+          ProductID:this.ProductForm.productID,
+          Name: this.ProductForm.name,
+          Description: this.ProductForm.description,
+          Order:this.ProductForm.order,
+          PCategory:this.ProductForm.pCategory
+          
         };
-       const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
+        console.log(item);
+        const uri = 'https://localhost:5001/api/ProductInfo/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)
-        this.$router.go(-1);
+       // this.$router.go(-1);
         evt.preventDefault();
       },
 
       onSubmit(evt) {
-
         evt.preventDefault();
-
-
-
-
       },
       // 重置表单
       onReset(evt) {
         evt.preventDefault();
-        this.Orderform.name = "";
+        this.ProductForm.name = "";
  
       },
       // 关闭编辑
@@ -168,11 +202,11 @@
     created: function () {
 
         
-      this.directoritem = this.$route.params.director;
-   
-       //console.log(this.$route)
-      this.Orderform.Id = newGuid();
-     // this.Orderform.orderNumber = 1000; // 需要获取最大值后重新赋值
+      this.pCategoryitem = this.$route.params.pcategory;
+      this.orderitem = this.$route.params.order;
+       console.log(this.$route)
+      this.ProductForm.Id = newGuid();
+     // this.ProductForm.orderNumber = 1000; // 需要获取最大值后重新赋值
     
        
       // 生成 guid

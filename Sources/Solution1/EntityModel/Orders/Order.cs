@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityModel.Orders
+namespace EntityModel.Order
 {
     public class Order : IEntity//订单
     {

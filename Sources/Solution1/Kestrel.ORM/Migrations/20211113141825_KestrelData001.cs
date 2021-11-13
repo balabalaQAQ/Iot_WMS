@@ -313,7 +313,7 @@ namespace Kestrel.ORM.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PCategory = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Inventory = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -327,6 +327,12 @@ namespace Kestrel.ORM.Migrations
                         name: "FK_ProductInfo_Order_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductInfo_PCategory_PCategoryId",
+                        column: x => x.PCategoryId,
+                        principalTable: "PCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -372,9 +378,10 @@ namespace Kestrel.ORM.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SetTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SerUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     setType = table.Column<int>(type: "int", nullable: false),
                     SetNum = table.Column<int>(type: "int", nullable: false),
-                    MaterialsInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProductInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     IsPseudoDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -388,8 +395,8 @@ namespace Kestrel.ORM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PRecord_ProductInfo_MaterialsInfoId",
-                        column: x => x.MaterialsInfoId,
+                        name: "FK_PRecord_ProductInfo_ProductInfoId",
+                        column: x => x.ProductInfoId,
                         principalTable: "ProductInfo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -460,9 +467,9 @@ namespace Kestrel.ORM.Migrations
                 column: "ReviewerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PRecord_MaterialsInfoId",
+                name: "IX_PRecord_ProductInfoId",
                 table: "PRecord",
-                column: "MaterialsInfoId");
+                column: "ProductInfoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PRecord_UserId",
@@ -473,6 +480,11 @@ namespace Kestrel.ORM.Migrations
                 name: "IX_ProductInfo_OrderId",
                 table: "ProductInfo",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductInfo_PCategoryId",
+                table: "ProductInfo",
+                column: "PCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RMRecord_MaterialsInfoId",
@@ -509,9 +521,6 @@ namespace Kestrel.ORM.Migrations
                 name: "MCategory");
 
             migrationBuilder.DropTable(
-                name: "PCategory");
-
-            migrationBuilder.DropTable(
                 name: "PRecord");
 
             migrationBuilder.DropTable(
@@ -525,6 +534,9 @@ namespace Kestrel.ORM.Migrations
 
             migrationBuilder.DropTable(
                 name: "MaterialsInfo");
+
+            migrationBuilder.DropTable(
+                name: "PCategory");
 
             migrationBuilder.DropTable(
                 name: "Order");

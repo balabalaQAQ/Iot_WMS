@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按订单名称、订单号"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="按产品名称、产品编号"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -75,9 +75,7 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
-    var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
     for( var i=0;i< mumitems.length;i++){
-      mumitems[i].status=statusitem[mumitems[i].status];
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
@@ -87,7 +85,7 @@ function displayData(mumitems){//对显示的数据进行预处理
     return mumitems;
   }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
-const uri ='https://localhost:5001/api/Order/';
+const uri ='https://localhost:5001/api/ProductInfo/';
 var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
@@ -98,7 +96,7 @@ var flag=0; //查询状态
       // 列表的表格标题
       caption: {
         type: String,
-        default: "订单记录"
+        default: "产品列表"
       },
       hover: {
         type: Boolean,
@@ -133,15 +131,12 @@ var flag=0; //查询状态
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "orderNum", label: "订单号" },
-          { key: "name", label: "订单名称" },
-          { key: "description", label: "订单描述" },
-          { key: "setTime", label: "申请时间" },
-          { key: "status", label: "订单状态" },
-          { key: "director", label: "负责人" },
-          { key: "reviewer", label: "审核人" },
-          { key: "price", label: "单价" },
-          { key: "totalPrice", label: "总价" },
+          { key: "productID", label: "产品编号" },
+          { key: "name", label: "产品名" },
+          { key: "pCategory.name", label: "类别" },
+          { key: "inventory", label: "库存量" },
+          { key: "order.orderNum", label: "所属订单号" },
+          { key: "description", label: "产品描述" },
           { key: "operation", label: "操作" }
         ],
      
@@ -191,16 +186,16 @@ var flag=0; //查询状态
          }})
       },
     
-      createData() {
+      createData() {       console.log(this.mumitems[0]);
         this.$router.push({
-           name: "OrderIns",
-          // params: { director:this.mumitems[0].director}
+           name: "ProductIns",
+           params: { order:this.mumitems[0].orderList,pcategory:this.mumitems[0].pCategoryList}
          });
         
       },
       editData(id) {
         this.$router.push({
-          name: "OrderEdit",
+          name: "ProductEdit",
           params: { id: id}
         })
       },

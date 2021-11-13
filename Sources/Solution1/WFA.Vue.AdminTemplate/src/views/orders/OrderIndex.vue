@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按订单名称、订单号"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="订单名称、订单号"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -146,7 +146,7 @@ var flag=0; //查询状态
         ],
      
         currentPage: 1, // 当前页
-        perPage: 10, // 每页数据数量
+        perPage: 15, // 每页数据数量
         totalRows: 0 // 总的行数
       };
     },
@@ -161,7 +161,7 @@ var flag=0; //查询状态
               else//进入查询
                 item.mumitems=[...item.saveitems];//数组数据类型转化
        })
-       return (item.mumitems)
+       return displayData(item.mumitems)
       },
     },
     methods: {    

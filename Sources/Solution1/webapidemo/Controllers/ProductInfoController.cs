@@ -1,6 +1,8 @@
-﻿using EntityModel.Product;
+﻿using EntityModel.Order;
+using EntityModel.Product;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
+using Kestrel.ViewModelServices;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,10 +37,19 @@ namespace webapidemo.Controllers
         /// </summary>
         /// <returns>以 json 集合方式返回集合元素数据</returns>
         [HttpGet]
-        public Task<List<ProductInfoVM>> GetProductInfos()
+        public async Task<List<ProductInfoVM>> GetProductInfos()
         {
-            var VM = _service.GetBoVMCollectionAsyn();
+            var VM = await _service.GetBoVMCollectionAsyn(x=>x.PCategory,y=>y.Order);
+            var PCategory = new List<PCategory>();
+            PCategory = _service.EntityRepository.EntitiesContext.PCategory.ToList();
 
+            var Order = new List<Order>();
+            Order = _service.EntityRepository.EntitiesContext.Order.ToList();
+            foreach (var l in VM)
+            {
+                l.OrderList = Order;
+                l.PCategoryList = PCategory;
+            }
             return VM;
         }
 
@@ -51,8 +62,7 @@ namespace webapidemo.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductInfoVM>> PostProductInfo(ProductInfoVM ProductInfoVM)
         {
-            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
-            await _service.SaveBoAsyn(ProductInfoVM);
+            var item = await SubdataWithViewModelService.SaveProductInfoWithOrderAndPCategory(_service, ProductInfoVM);
             return CreatedAtAction(nameof(GetProductInfo), new { id = ProductInfoVM.Id }, ProductInfoVM);
         }
 

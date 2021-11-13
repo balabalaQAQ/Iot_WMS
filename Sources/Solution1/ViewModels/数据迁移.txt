@@ -1,3 +1,3 @@
-Add-Migration -Name "DikaleData001" -Project "Kestrel.ORM" -context "Dbcontext" -StartupProject "webapidemo"
+Add-Migration -Name "KestrelData001" -Project "Kestrel.ORM" -context "Dbcontext" -StartupProject "webapidemo"
 
-Update-Database -Migration "DikaleData001"  -Project "Kestrel.ORM"  -context "Dbcontext"   -StartupProject "webapidemo"
+Update-Database -Migration "KestrelData001"  -Project "Kestrel.ORM"  -context "Dbcontext"   -StartupProject "webapidemo"

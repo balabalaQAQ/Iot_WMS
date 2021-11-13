@@ -84,12 +84,12 @@ export default {
         },
         {
           name: '产品记录',
-          url: '/precords/PRecordIndex',
+          url: '/products/PRecordIndex',
           icon: 'icon-cursor'
         },
         {
           name: '产品类型',
-          url: '/pcategorys/PCategoryIndex',
+          url: '/products/PCategoryIndex',
           icon: 'icon-cursor'
         },
       ]

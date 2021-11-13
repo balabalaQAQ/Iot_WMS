@@ -27,30 +27,14 @@ const ProductIndex = () => import('@/views/products/ProductIndex')
 const ProductIns = () => import('@/views/products/ProductIns')
 const ProductEdit = () => import('@/views/products/ProductEdit')
 //产品记录管理
-const PRecordIndex = () => import('@/views/precords/PRecordIndex')
-const PRecordtIns = () => import('@/views/precords/PRecordIns')
-const PRecordEdit = () => import('@/views/precords/PRecordEdit')
+const PRecordIndex = () => import('@/views/products/PRecordIndex')
+const PRecordIns = () => import('@/views/products/PRecordIns')
+const PRecordEdit = () => import('@/views/products/PRecordEdit')
 //产品类型管理
-const PCategoryIndex = () => import('@/views/precords/PRecordIndex')
-const PCategoryIns = () => import('@/views/precords/PRecordIns')
-const PCategoryEdit = () => import('@/views/precords/PRecordEdit')
+const PCategoryIndex = () => import('@/views/products/PCategoryIndex')
+const PCategoryIns = () => import('@/views/products/PCategoryIns')
+const PCategoryEdit = () => import('@/views/products/PCategoryEdit')
 
-const Cards = () => import('@/views/base/Cards')
-const Forms = () => import('@/views/base/Forms')
-const Switches = () => import('@/views/base/Switches')
-const Tables = () => import('@/views/base/Tables')
-const Tabs = () => import('@/views/base/Tabs')
-const Breadcrumbs = () => import('@/views/base/Breadcrumbs')
-const Carousels = () => import('@/views/base/Carousels')
-const Collapses = () => import('@/views/base/Collapses')
-const Jumbotrons = () => import('@/views/base/Jumbotrons')
-const ListGroups = () => import('@/views/base/ListGroups')
-const Navs = () => import('@/views/base/Navs')
-const Navbars = () => import('@/views/base/Navbars')
-const Paginations = () => import('@/views/base/Paginations')
-const Popovers = () => import('@/views/base/Popovers')
-const ProgressBars = () => import('@/views/base/ProgressBars')
-const Tooltips = () => import('@/views/base/Tooltips')
 
 // Views - Buttons
 const StandardButtons = () => import('@/views/buttons/StandardButtons')
@@ -179,101 +163,62 @@ export default new Router({
               name: 'OrderEdit',
               component: OrderEdit
             },
-            {
-              path: 'tables',
-              name: 'Tables',
-              component: Tables
-            },
-            {
-              path: 'tabs',
-              name: 'Tabs',
-              component: Tabs
-            },
-            {
-              path: 'breadcrumbs',
-              name: 'Breadcrumbs',
-              component: Breadcrumbs
-            },
-            {
-              path: 'carousels',
-              name: 'Carousels',
-              component: Carousels
-            },
-            {
-              path: 'collapses',
-              name: 'Collapses',
-              component: Collapses
-            },
-            {
-              path: 'jumbotrons',
-              name: 'Jumbotrons',
-              component: Jumbotrons
-            },
-            {
-              path: 'list-groups',
-              name: 'List Groups',
-              component: ListGroups
-            },
-            {
-              path: 'navs',
-              name: 'Navs',
-              component: Navs
-            },
-            {
-              path: 'navbars',
-              name: 'Navbars',
-              component: Navbars
-            },
-            {
-              path: 'paginations',
-              name: 'Paginations',
-              component: Paginations
-            },
-            {
-              path: 'popovers',
-              name: 'Popovers',
-              component: Popovers
-            },
-            {
-              path: 'progress-bars',
-              name: 'Progress Bars',
-              component: ProgressBars
-            },
-            {
-              path: 'tooltips',
-              name: 'Tooltips',
-              component: Tooltips
-            }
+
           ]
         },
         {
-          path: 'buttons',
-          redirect: '/buttons/standard-buttons',
-          name: 'Buttons',
+          path: 'products',
+          redirect: '/products/ProductIndex',
+          name: 'products',
           component: {
             render (c) { return c('router-view') }
           },
           children: [
             {
-              path: 'standard-buttons',
-              name: 'Standard Buttons',
-              component: StandardButtons
+              path: 'ProductIndex',
+              name: 'ProductIndex',
+              component: ProductIndex
             },
             {
-              path: 'button-groups',
-              name: 'Button Groups',
-              component: ButtonGroups
+              path: 'ProductIns',
+              name: 'ProductIns',
+              component: ProductIns
             },
             {
-              path: 'dropdowns',
-              name: 'Dropdowns',
-              component: Dropdowns
+              path: 'ProductEdit',
+              name: 'ProductEdit',
+              component: ProductEdit
             },
             {
-              path: 'brand-buttons',
-              name: 'Brand Buttons',
-              component: BrandButtons
-            }
+              path: 'PRecordIndex',
+              name: 'PRecordIndex',
+              component: PRecordIndex
+            },
+            {
+              path: 'PRecordIns',
+              name: 'PRecordIns',
+              component: PRecordIns
+            },
+            {
+              path: 'PRecordEdit',
+              name: 'PRecordEdit',
+              component: PRecordEdit
+            },
+            {
+              path: 'PCategoryIndex',
+              name: 'PCategoryIndex',
+              component: PCategoryIndex
+            },
+            {
+              path: 'PCategoryIns',
+              name: 'PCategoryIns',
+              component: PCategoryIns
+            },
+            {
+              path: 'PCategoryEdit',
+              name: 'PCategoryEdit',
+              component: PCategoryEdit
+            },
           ]
         },
         {

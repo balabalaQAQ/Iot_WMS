@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按订单名称、订单号"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="产品类型名、简称"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -22,7 +22,7 @@
             <!-- 使用 bootstrapVue table 控件处理列表 -->
             <b-table :hover="hover"
                      :striped="striped"
-                     :bordered="bordered"
+                     :bPCategoryed="bPCategoryed"
                      :small="small" 
                      :fixed="fixed"
                      responsive="sm"
@@ -32,7 +32,7 @@
                      :per-page="perPage">
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
-                <b-button variant="primary" size="sm" @click="editData(data.item.id)">审核</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="editData(data.item.id)">编辑</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
@@ -75,19 +75,15 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
-    var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
     for( var i=0;i< mumitems.length;i++){
-      mumitems[i].status=statusitem[mumitems[i].status];
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
-      if(mumitems[i].name.length>=10)
-          mumitems[i].name=mumitems[i].name.substr(0,10)+"..."
     }
     return mumitems;
   }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
-const uri ='https://localhost:5001/api/Order/';
+const uri ='https://localhost:5001/api/PCategory/';
 var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
@@ -98,7 +94,7 @@ var flag=0; //查询状态
       // 列表的表格标题
       caption: {
         type: String,
-        default: "订单记录"
+        default: "产品类型"
       },
       hover: {
         type: Boolean,
@@ -108,7 +104,7 @@ var flag=0; //查询状态
         type: Boolean,
         default: false
       },
-      bordered: {
+      bPCategoryed: {
         type: Boolean,
         default: true
       },
@@ -126,22 +122,17 @@ var flag=0; //查询状态
        
       return {
         // 绑定数据
-        //  items: demoData.filter((test) => test.orderNumber < 1200),  // 提取 id < 42 的全部数据
+        //  items: demoData.filter((test) => test.PCategoryNumber < 1200),  // 提取 id < 42 的全部数据
 
         mumitems: [],//初始数据集，用于显示
         saveitems:[],//用于保存原数据集
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "orderNum", label: "订单号" },
+          { key: "displayName", label: "产品简称" },
           { key: "name", label: "订单名称" },
           { key: "description", label: "订单描述" },
-          { key: "setTime", label: "申请时间" },
-          { key: "status", label: "订单状态" },
-          { key: "director", label: "负责人" },
-          { key: "reviewer", label: "审核人" },
-          { key: "price", label: "单价" },
-          { key: "totalPrice", label: "总价" },
+          { key: "categoryNum", label: "类型编号" },
           { key: "operation", label: "操作" }
         ],
      
@@ -182,7 +173,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].displayName.indexOf(searchTextbox) != -1) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }
@@ -193,14 +184,14 @@ var flag=0; //查询状态
     
       createData() {
         this.$router.push({
-           name: "OrderIns",
+           name: "PCategoryIns",
           // params: { director:this.mumitems[0].director}
          });
         
       },
       editData(id) {
         this.$router.push({
-          name: "OrderEdit",
+          name: "PCategoryEdit",
           params: { id: id}
         })
       },

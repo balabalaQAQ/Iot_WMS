@@ -468,3 +468,4 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\webapidemo\obj\Debug\net5.0\webapidemo.d
 D:\Program\bs\Iot_WMS\Sources\Solution1\webapidemo\obj\Debug\net5.0\ref\webapidemo.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\webapidemo\obj\Debug\net5.0\webapidemo.pdb
 D:\Program\bs\Iot_WMS\Sources\Solution1\webapidemo\obj\Debug\net5.0\webapidemo.genruntimeconfig.cache
+D:\Program\bs\Iot_WMS\Sources\Solution1\webapidemo\obj\Debug\net5.0\webapidemo.csproj.CopyComplete

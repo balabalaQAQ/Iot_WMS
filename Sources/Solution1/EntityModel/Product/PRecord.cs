@@ -23,11 +23,13 @@ namespace EntityModel.Product
 
         public virtual User User { get; set; }//操作人
 
+        public string SerUserName { get; set; }//操作人名称
+
         public SetType setType { get; set; }//操作类型
 
         public int SetNum { get; set; }//操作数量
 
-        public virtual ProductInfo MaterialsInfo { get; set; } //原料信息
+        public virtual ProductInfo ProductInfo { get; set; } //操作对象  产品信息
         [StringLength(200)]
         public string SortCode { get; set; }
         public bool IsPseudoDelete { get; set; } = false;//无需删除

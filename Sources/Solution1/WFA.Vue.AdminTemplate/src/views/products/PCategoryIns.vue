@@ -18,68 +18,56 @@
             <b-form @submit="checkForm" @reset="onReset" v-if="show" id="data">
 
               <b-card class="mt-3" header="数据校验">
-                <pre class="m-0">{{Orderform.errors}}</pre>
+                <pre class="m-0">{{PCategoryform.errors}}</pre>
               </b-card>
               <b-form-group validated
-                            description="请输入订单名称"
-                            label="订单名称："
+                            description="请输入产品类型名称"
+                            label="产品类型名称："
                             label-for="name">
                 <b-form-input id="name"
-                              v-model="Orderform.name"
+                              v-model="PCategoryform.name"
                               type="text"
                               autocomplete="name"
                               required
-                              placeholder="请输入订单名称"></b-form-input>
+                              placeholder="请输入产品类型名称"></b-form-input>
               </b-form-group>
 
               <b-form-group validated
-                            description="请输入订单编号"
-                            label="订单编号："
-                            label-for="ordernum">
-                            <b-form-input id="ordernum"
-                              v-model="Orderform.ordernum"
+                            description="请输入产品类型简称"
+                            label="产品类型简称："
+                            label-for="displayName">
+                            <b-form-input id="displayName"
+                              v-model="PCategoryform.displayName"
                               type="text"
-                              autocomplete="ordernum"
+                              autocomplete="displayName"
                               required
-                              placeholder="请输入订单名称"></b-form-input>
+                              placeholder="请输入产品类型简称"></b-form-input>
               </b-form-group>
 
               <b-form-group validated
-                            description="请输入单价"
-                            label="单价："
-                            label-for="price">
-                            <b-form-input id="price"
-                              v-model="Orderform.price"
+                            description="请输入类型编号"
+                            label="类型编号："
+                            label-for="categoryNum">
+                            <b-form-input id="categoryNum"
+                              v-model="PCategoryform.categoryNum"
                               type="text"
-                              autocomplete="price"
+                              autocomplete="categoryNum"
                               required
-                              placeholder="请输入单价"></b-form-input>
+                              placeholder="请输入类型编号"></b-form-input>
               </b-form-group>
 
               <b-form-group validated
-                            description="请输入总价"
-                            label="总价："
-                            label-for="totalprice">
-                            <b-form-input id="totalprice"
-                              v-model="Orderform.totalprice"
-                              type="text"
-                              autocomplete="totalprice"
-                              required
-                              placeholder="请输入总价"></b-form-input>
-              </b-form-group>
- 
- 
- 
-              <b-form-group description label="订单说明" label-for="description">
-                <b-form-input id="description"
-                              v-model="Orderform.description"
+                            description="请输入产品类型说明"
+                            label="产品类型说明："
+                            label-for="description">
+                            <b-form-input id="description"
+                              v-model="PCategoryform.description"
                               type="text"
                               autocomplete="description"
                               required
-                              placeholder></b-form-input>
+                              placeholder="请输入产品类型说明"></b-form-input>
               </b-form-group>
-
-              <b-button type="submit" variant="primary">添加订单</b-button>
+              <b-button type="submit" variant="primary">添加产品类型</b-button>
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
 
@@ -98,22 +86,21 @@
 <script>
 
   export default {
-    name: "PcategoryIns",
+    name: "PCategoryIns",
     props: {
       caption: {
         type: String,
-        default: "新建订单信息"
+        default: "新增产品类型"
       }
     },
     data() {
       return {
-       Orderform: {
+       PCategoryform: {
           errors: [],
-          ordernum:"",
           name: "",
-          price:0.0,
-          totalprice:0.0,
-          description: ""
+          description: "",
+          categoryNum:"",
+          displayName:""
         },
         directoritem: [],
         revieweritem: [],
@@ -130,15 +117,14 @@
       },
       // 提交数据
       checkForm(evt) {
-        this.Orderform.errors = [];
+        this.PCategoryform.errors = [];
         const item = {
-          OrderNum:this.Orderform.ordernum,
-          Name: this.Orderform.name,
-          Description: this.Orderform.description,
-          Price: this.Orderform.price,
-          TotalPrice:this.Orderform.totalprice,
+          DisplayName:this.PCategoryform.displayName,
+          Name: this.PCategoryform.name,
+          Description: this.PCategoryform.description,
+          CategoryNum: this.PCategoryform.categoryNum,
         };
-       const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
+       const uri = 'https://localhost:5001/api/PCategory/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)
         this.$router.go(-1);
         evt.preventDefault();
@@ -155,8 +141,10 @@
       // 重置表单
       onReset(evt) {
         evt.preventDefault();
-        this.Orderform.name = "";
- 
+        this.PCategoryform.displayName = "";
+        this.PCategoryform.name = "";
+        this.PCategoryform.description = "";
+        this.PCategoryform.categoryNum = "";
       },
       // 关闭编辑
       closeEdit() {
@@ -171,8 +159,8 @@
       this.directoritem = this.$route.params.director;
    
        //console.log(this.$route)
-      this.Orderform.Id = newGuid();
-     // this.Orderform.orderNumber = 1000; // 需要获取最大值后重新赋值
+      this.PCategoryform.Id = newGuid();
+     // this.PCategoryform.PCategoryNumber = 1000; // 需要获取最大值后重新赋值
     
        
       // 生成 guid

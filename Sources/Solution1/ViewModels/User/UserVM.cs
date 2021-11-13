@@ -1,4 +1,4 @@
-﻿using EntityModel.Orders;
+﻿using EntityModel.Order;
 using EntityModel.Users;
 using System;
 using System.Collections.Generic;

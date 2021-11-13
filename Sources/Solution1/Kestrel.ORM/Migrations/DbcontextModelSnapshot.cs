@@ -19,7 +19,7 @@ namespace Kestrel.ORM.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EntityModel.Orders.Order", b =>
+            modelBuilder.Entity("EntityModel.Order.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,10 +108,13 @@ namespace Kestrel.ORM.Migrations
                     b.Property<bool>("IsPseudoDelete")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("MaterialsInfoId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ProductInfoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("SerUserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SetNum")
@@ -132,7 +135,7 @@ namespace Kestrel.ORM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaterialsInfoId");
+                    b.HasIndex("ProductInfoId");
 
                     b.HasIndex("UserId");
 
@@ -160,8 +163,8 @@ namespace Kestrel.ORM.Migrations
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PCategory")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("PCategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductID")
                         .HasColumnType("nvarchar(max)");
@@ -173,6 +176,8 @@ namespace Kestrel.ORM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("PCategoryId");
 
                     b.ToTable("ProductInfo");
                 });
@@ -623,7 +628,7 @@ namespace Kestrel.ORM.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("EntityModel.Orders.Order", b =>
+            modelBuilder.Entity("EntityModel.Order.Order", b =>
                 {
                     b.HasOne("EntityModel.Users.User", "Director")
                         .WithMany()
@@ -640,31 +645,37 @@ namespace Kestrel.ORM.Migrations
 
             modelBuilder.Entity("EntityModel.Product.PRecord", b =>
                 {
-                    b.HasOne("EntityModel.Product.ProductInfo", "MaterialsInfo")
+                    b.HasOne("EntityModel.Product.ProductInfo", "ProductInfo")
                         .WithMany()
-                        .HasForeignKey("MaterialsInfoId");
+                        .HasForeignKey("ProductInfoId");
 
                     b.HasOne("EntityModel.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.Navigation("MaterialsInfo");
+                    b.Navigation("ProductInfo");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityModel.Product.ProductInfo", b =>
                 {
-                    b.HasOne("EntityModel.Orders.Order", "Order")
+                    b.HasOne("EntityModel.Order.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId");
 
+                    b.HasOne("EntityModel.Product.PCategory", "PCategory")
+                        .WithMany()
+                        .HasForeignKey("PCategoryId");
+
                     b.Navigation("Order");
+
+                    b.Navigation("PCategory");
                 });
 
             modelBuilder.Entity("EntityModel.RawMaterials.MaterialsInfo", b =>
                 {
-                    b.HasOne("EntityModel.Orders.Order", "Order")
+                    b.HasOne("EntityModel.Order.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId");
 

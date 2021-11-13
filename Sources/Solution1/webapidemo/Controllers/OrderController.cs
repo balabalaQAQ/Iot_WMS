@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityModel.Orders;
+using EntityModel.Order;
 using Kestrel.ORM;
  
 using ViewModels.Orders;
@@ -41,16 +41,16 @@ namespace webapidemo.Controllers
         /// </summary>
         /// <returns>以 json 集合方式返回集合元素数据</returns>
         [HttpGet]
-        public Task<List<OrderVM>> GetOrders()
+        public async Task<List<OrderVM>> GetOrders()
         {
-            var VM = _service.GetBoVMCollectionAsyn();
+            var VM = await _service.GetBoVMCollectionAsyn();
 
-            return VM;
+            return  VM;
         }
 
-        public Task<List<OrderVM>> GetOrders(String Token)
+        public async Task<List<OrderVM>> GetOrders(String Token)
         {
-            var VM = _service.GetBoVMCollectionAsyn();
+            var VM = await _service.GetBoVMCollectionAsyn();
 
             return VM;
         }

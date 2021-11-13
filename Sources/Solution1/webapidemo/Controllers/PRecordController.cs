@@ -1,4 +1,5 @@
 ﻿using EntityModel.Product;
+using EntityModel.Users;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
 using Microsoft.AspNetCore.Cors;
@@ -35,10 +36,20 @@ namespace webapidemo.Controllers
         /// </summary>
         /// <returns>以 json 集合方式返回集合元素数据</returns>
         [HttpGet]
-        public Task<List<PRecordVM>> GetPRecords()
-        {
-            var VM = _service.GetBoVMCollectionAsyn();
+        public async Task<List<PRecordVM>> GetPRecords()
+        { 
+            var VM = await _service.GetBoVMCollectionAsyn(x => x.User, y => y.ProductInfo);
+            var ProductInfo = new List<ProductInfo>();
+            ProductInfo = _service.EntityRepository.EntitiesContext.ProductInfo.ToList();
 
+            var User = new List<User>();
+            User = _service.EntityRepository.EntitiesContext.User.ToList();
+            foreach (var l in VM)
+            {
+            //    var PCategoryitem = await service.EntityRepository.GetOtherBoAsyn<PCategory>(PCategoryid);
+           //     l.SerUserName = ;
+           //     l.PCategoryList = PCategory;
+            }
             return VM;
         }
 

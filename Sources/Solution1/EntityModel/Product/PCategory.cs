@@ -12,7 +12,7 @@ namespace EntityModel.Product
         public Guid Id { get; set; }
         public string Name { get; set; }  //产品类型名
 
-        public string DisplayName { get; set; }  //产品简称
+        public string DisplayName { get; set; }  //产品类型简称
         public string CategoryNum { get; set; } //类型编号
         public string Description { get; set; }//产品类型说明
         public string SortCode { get; set; } 
