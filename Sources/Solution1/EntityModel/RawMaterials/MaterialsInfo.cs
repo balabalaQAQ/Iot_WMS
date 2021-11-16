@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityModel.Order;
+using EntityModel.Orders;
 
 namespace EntityModel.RawMaterials
 {
@@ -23,7 +23,7 @@ namespace EntityModel.RawMaterials
 
         public int Inventory { get; set; }//库存量
 
-        public virtual Order.Order Order { get;set;}//所属订单
+        public virtual Orders.Order Order { get;set;}//所属订单
 
  
         [StringLength(200)]

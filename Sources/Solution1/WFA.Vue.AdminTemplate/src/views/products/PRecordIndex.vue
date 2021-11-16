@@ -87,7 +87,7 @@ function displayData(mumitems){//对显示的数据进行预处理
     return mumitems;
   }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
-const uri ='https://localhost:5001/api/Order/';
+const uri ='https://localhost:5001/api/PRecord/';
 var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;

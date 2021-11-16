@@ -17,69 +17,79 @@
 
             <b-form @submit="checkForm" @reset="onReset" v-if="show" id="data">
 
-              <b-card class="mt-3" header="数据校验">
-                <pre class="m-0">{{Orderform.errors}}</pre>
-              </b-card>
+
               <b-form-group validated
-                            description="请输入订单名称"
-                            label="订单名称："
+                            description="请输入记录名称"
+                            label="记录名称："
                             label-for="name">
                 <b-form-input id="name"
-                              v-model="Orderform.name"
+                              v-model=" PRecordForm.name"
                               type="text"
                               autocomplete="name"
                               required
-                              placeholder="请输入订单名称"></b-form-input>
+                              placeholder="请输入记录名称"></b-form-input>
               </b-form-group>
 
-              <b-form-group validated
-                            description="请输入订单编号"
-                            label="订单编号："
-                            label-for="ordernum">
-                            <b-form-input id="ordernum"
-                              v-model="Orderform.ordernum"
-                              type="text"
-                              autocomplete="ordernum"
-                              required
-                              placeholder="请输入订单名称"></b-form-input>
-              </b-form-group>
+
 
               <b-form-group validated
-                            description="请输入单价"
-                            label="单价："
-                            label-for="price">
-                            <b-form-input id="price"
-                              v-model="Orderform.price"
+                            description="请输入操作数量"
+                            label="操作数量："
+                            label-for="setNum">
+                            <b-form-input id="setNum"
+                              v-model=" PRecordForm.setNum"
                               type="text"
-                              autocomplete="price"
+                              autocomplete="setNum"
                               required
-                              placeholder="请输入单价"></b-form-input>
+                              placeholder="请输入操作数量"></b-form-input>
               </b-form-group>
 
+    
+              <b-form-group description label="操作类型" label-for="setType">
+                  <b-form-select id="input-3"
+                                v-model=" PRecordForm.setType"
+                                :options = this.setTypeitem 
+                                value-field= id
+                                text-field= setType
+                                required>
+
+                  </b-form-select>
+
+                </b-form-group>
+                
               <b-form-group validated
-                            description="请输入总价"
-                            label="总价："
-                            label-for="totalprice">
-                            <b-form-input id="totalprice"
-                              v-model="Orderform.totalprice"
+                         
+                            label="产品名称："
+                            label-for="pname">
+                            <b-form-input id="pname"
+                              v-model=" PRecordForm.pname"
                               type="text"
-                              autocomplete="totalprice"
+                              autocomplete="pname"
                               required
-                              placeholder="请输入总价"></b-form-input>
+                              v-bind:disabled="true"  ></b-form-input>
+              </b-form-group>
+               <b-form-group validated
+                         
+                            label="产品当前："
+                            label-for="inventory">
+                            <b-form-input id="inventory"
+                              v-model=" PRecordForm.inventory"
+                              type="text"
+                              autocomplete="inventory"
+                              required
+                              v-bind:disabled="true"  ></b-form-input>
               </b-form-group>
  
- 
- 
-              <b-form-group description label="订单说明" label-for="description">
+              <b-form-group description label="操作说明" label-for="description">
                 <b-form-input id="description"
-                              v-model="Orderform.description"
+                              v-model=" PRecordForm.description"
                               type="text"
                               autocomplete="description"
                               required
                               placeholder></b-form-input>
               </b-form-group>
 
-              <b-button type="submit" variant="primary">添加订单</b-button>
+              <b-button type="submit" variant="primary">完成操作</b-button>
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
 
@@ -107,16 +117,19 @@
     },
     data() {
       return {
-       Orderform: {
+        PRecordForm: {
           errors: [],
+          pid:"",
+          inventory:0,
           ordernum:"",
           name: "",
-          price:0.0,
-          totalprice:0.0,
+          pname:"",
+          setNum:0,
+          setType:0,
           description: ""
         },
-        directoritem: [],
-        revieweritem: [],
+        setTypeitem:[],
+    
         show: true
       };
     },
@@ -130,17 +143,37 @@
       },
       // 提交数据
       checkForm(evt) {
-        this.Orderform.errors = [];
+        for(var i in this.setTypeitem)
+        {  
+          if(this.setTypeitem[i]==this. PRecordForm.setType)
+          {
+           this. PRecordForm.setType=i
+          } 
+        }
+        if(this.PRecordForm.setType==1&&this.PRecordForm.setNum>this.PRecordForm.inventory){//出库量大于入库量
+             this.PRecordForm.setNum==this.PRecordForm.inventory;
+        }
+        if(this. PRecordForm.setType==0){//入库
+            this.PRecordForm.inventory+=Number(setNum)
+        }
+        else{//入库
+            this.PRecordForm.inventory-=setNum
+        }
+       
+        this. PRecordForm.errors = [];
         const item = {
-          OrderNum:this.Orderform.ordernum,
-          Name: this.Orderform.name,
-          Description: this.Orderform.description,
-          Price: this.Orderform.price,
-          TotalPrice:this.Orderform.totalprice,
+          Name: this. PRecordForm.name,
+          Description: this. PRecordForm.description,
+          setType:this.PRecordForm.setType,
+          SetNum:Number(this.PRecordForm.setNum),
+          ProductInfo:this. PRecordForm.pid
         };
-       const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
-        this.$axios.post(uri,item)
-        this.$router.go(-1);
+       const uri = 'https://localhost:5001/api/PRecord/';
+       const uri2 = 'https://localhost:5001/api/ProductInfo/';   // Web API 的访问服务地址
+       console.log(item);
+         this.$axios.post(uri,item);
+      // this.$axios.put(uri2+this.$route.params.id,"111");
+      //  this.$router.go(-1);
         evt.preventDefault();
       },
 
@@ -155,7 +188,7 @@
       // 重置表单
       onReset(evt) {
         evt.preventDefault();
-        this.Orderform.name = "";
+        this. PRecordForm.name = "";
  
       },
       // 关闭编辑
@@ -166,13 +199,16 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-
-        
-      this.directoritem = this.$route.params.director;
-   
-       //console.log(this.$route)
-      this.Orderform.Id = newGuid();
-     // this.Orderform.orderNumber = 1000; // 需要获取最大值后重新赋值
+      var setType=['入库',"出库"];
+      this.setTypeitem=setType;
+      this. PRecordForm.pname = this.$route.params.name;
+      this. PRecordForm.pid = this.$route.params.id;
+      this. PRecordForm.inventory = this.$route.params.inventory;
+      
+      this. PRecordForm.setType=setType[0];
+       
+      this. PRecordForm.Id = newGuid();
+     // this. PRecordForm.orderNumber = 1000; // 需要获取最大值后重新赋值
     
        
       // 生成 guid

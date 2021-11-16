@@ -1,4 +1,4 @@
-﻿using EntityModel.Order;
+﻿using EntityModel.Orders;
 using EntityModel.Product;
 using EntityModel.RawMaterials;
 using EntityModel.Users;
@@ -19,7 +19,10 @@ namespace Kestrel.ViewModelServices
     //所有子数据添加函数都通过这里添加
     public static class SubdataWithViewModelService
     {
-        //原料信息，子数据：订单
+        /// <summary>
+        ///    原料信息，子数据：订单
+        /// </summary>
+
         public static async Task<SaveStatusModel> SaveMaterialsWithOrder(this IWebAPIModelService<MaterialsInfo, MaterilsInfoVM> service, MaterilsInfoVM boVM)
         {
 
@@ -37,7 +40,10 @@ namespace Kestrel.ViewModelServices
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }
-        //产品信息，子数据：订单 、产品类型
+        /// <summary>
+        ///  产品信息，子数据：订单 、产品类型
+        /// </summary>
+
         public static async Task<SaveStatusModel> SaveProductInfoWithOrderAndPCategory(this IWebAPIModelService<ProductInfo, ProductInfoVM> service, ProductInfoVM boVM)
         {
 
@@ -58,7 +64,10 @@ namespace Kestrel.ViewModelServices
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }
-        //产品操作记录，子数据：用户 、所属产品信息
+        /// <summary>
+        ///  产品操作记录，子数据：用户 、所属产品信息
+        /// </summary>
+
         public static async Task<SaveStatusModel> SavePRecordWithUserandProductInfo(this IWebAPIModelService<PRecord, PRecordVM> service, PRecordVM boVM)
         {
 
@@ -69,12 +78,12 @@ namespace Kestrel.ViewModelServices
             boVM.MapToEntityModel(bo);
             if (boVM.Id.ToString() != null)
             {
-                var Userid = boVM.Userid;
-                var Useritem = await service.EntityRepository.GetOtherBoAsyn<User>(Userid);
-                bo.User = Useritem;
-                var ProductInfoid = boVM.ProductInfo.Id;
-                var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
-                bo.ProductInfo = ProductInfoitem;
+               // var Userid = boVM.Userid;
+              //  var Useritem = await service.EntityRepository.GetOtherBoAsyn<User>(Userid);
+              //  bo.User = Useritem;
+       //         var ProductInfoid = boVM.ProductInfo.Id;
+       //         var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
+       //         bo.ProductInfo = ProductInfoitem;
             }
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;

@@ -1,4 +1,4 @@
-﻿using EntityModel.Order;
+﻿using EntityModel.Orders;
 using EntityModel.Product;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
@@ -62,6 +62,7 @@ namespace webapidemo.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductInfoVM>> PostProductInfo(ProductInfoVM ProductInfoVM)
         {
+            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
             var item = await SubdataWithViewModelService.SaveProductInfoWithOrderAndPCategory(_service, ProductInfoVM);
             return CreatedAtAction(nameof(GetProductInfo), new { id = ProductInfoVM.Id }, ProductInfoVM);
         }
@@ -70,11 +71,11 @@ namespace webapidemo.Controllers
         /// 根据指定的 id 获取对应的 ProductInfo 对象，前端访问定义  GET: api/ProductInfos/id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>指定 id 对应的 User 对象</returns>
+        /// <returns>指定 id 对应的 ProductInfo 对象</returns>
         [HttpGet("{id}")]  // 这里直接将方法的路由再做一次定义 api/ProductInfo/id
         public async Task<ActionResult<ProductInfoVM>> GetProductInfo(Guid id)
         {
-            var VM = _service.GetBoVMAsyn(id);
+            var VM = _service.GetBoVMAsyn(id, x => x.PCategory, y => y.Order);
 
 
             if (VM == null)
@@ -89,7 +90,7 @@ namespace webapidemo.Controllers
         public async Task<IActionResult> GetProductInfo(Guid id, ProductInfoVM ProductInfoVM)
         {
 
-            var ProductInfo = await _service.GetBoVMAsyn(id);
+            var ProductInfo = await _service.GetBoVMAsyn(id, x => x.PCategory, y => y.Order);
             if (ProductInfo != null)
             {
                 await _service.SaveBoAsyn(ProductInfoVM);
@@ -97,7 +98,7 @@ namespace webapidemo.Controllers
             }
             return NoContent(); // 返回 204
         }
-
+       
 
 
         /// <summary>

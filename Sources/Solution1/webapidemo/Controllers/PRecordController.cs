@@ -2,6 +2,7 @@
 using EntityModel.Users;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
+using Kestrel.ViewModelServices;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,17 +40,6 @@ namespace webapidemo.Controllers
         public async Task<List<PRecordVM>> GetPRecords()
         { 
             var VM = await _service.GetBoVMCollectionAsyn(x => x.User, y => y.ProductInfo);
-            var ProductInfo = new List<ProductInfo>();
-            ProductInfo = _service.EntityRepository.EntitiesContext.ProductInfo.ToList();
-
-            var User = new List<User>();
-            User = _service.EntityRepository.EntitiesContext.User.ToList();
-            foreach (var l in VM)
-            {
-            //    var PCategoryitem = await service.EntityRepository.GetOtherBoAsyn<PCategory>(PCategoryid);
-           //     l.SerUserName = ;
-           //     l.PCategoryList = PCategory;
-            }
             return VM;
         }
 
@@ -63,8 +53,8 @@ namespace webapidemo.Controllers
         public async Task<ActionResult<PRecordVM>> PostPRecord(PRecordVM PRecordVM)
         {
             var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
-            PRecordVM.SetTime = DateTime.Now.ToString();
-            await _service.SaveBoAsyn(PRecordVM);
+            await SubdataWithViewModelService.SavePRecordWithUserandProductInfo(_service, PRecordVM);
+         //   PRecordVM.SetTime = DateTime.Now.ToString();
             return CreatedAtAction(nameof(GetPRecord), new { id = PRecordVM.Id }, PRecordVM);
         }
 
@@ -91,7 +81,8 @@ namespace webapidemo.Controllers
         public async Task<IActionResult> GetPRecord(Guid id, PRecordVM PRecordVM)
         {
 
-            var PRecord = await _service.GetBoVMAsyn(id);
+            var PRecord = await _service.GetBoVMAsyn(id,x=>x.ProductInfo);
+            var VM = await _service.GetBoVMAsyn(id, x => x.User.Id);
             if (PRecord != null)
             {
                 await _service.SaveBoAsyn(PRecordVM);

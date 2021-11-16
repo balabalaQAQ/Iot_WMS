@@ -1,7 +1,8 @@
 ﻿
 using EntityModel.Foundation;
+using EntityModel.Orders;
 using EntityModel.Tools;
-using EntityModel.Order;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,7 @@ namespace EntityModel.Product
 
         public int Inventory { get; set; }//库存量
 
-        public virtual Order.Order Order { get;set;}//所属订单
+        public virtual Order Order { get;set;}//所属订单
 
  
         [StringLength(200)]

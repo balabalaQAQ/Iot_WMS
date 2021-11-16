@@ -16,46 +16,56 @@
             </div>
 
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-              <b-form-group validated description=" " label="订单名称：" label-for="name" :label-cols="1">
-                <b-form-input id="name" v-model="OrderForm.name"v-bind:disabled="true" type="text" autocomplete="name" required placeholder=" "></b-form-input>
+              <b-form-group validated description=" " label="产品名称：" label-for="name" :label-cols="1">
+                <b-form-input id="name" v-model="ProductForm.name"  type="text" autocomplete="name" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
 
-              <b-form-group description=" " label="订单编号" label-for="orderNum" :label-cols="1">
-                <b-form-input id="orderNum" v-model="OrderForm.orderNum" v-bind:disabled="true" type="text" autocomplete="orderNum" required placeholder=" "></b-form-input>
+              <b-form-group description=" " label="产品编号" label-for="productID" :label-cols="1">
+                <b-form-input id="productID" v-model="ProductForm.productID"   type="text" autocomplete="productID" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
+ 
 
-              <b-form-group description=" " label="申请时间" label-for="setTime" :label-cols="1">
-                <b-form-input id="setTime" v-model="OrderForm.setTime" v-bind:disabled="true" type="text" autocomplete="setTime" required placeholder=" "></b-form-input>
+              <b-form-group description=" " label="库存量" label-for="inventory" :label-cols="1">
+                <b-form-input id="inventory" v-model="ProductForm.inventory"   type="text" autocomplete="inventory" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
               
-              <b-form-group description=" " label="单价" label-for="price" :label-cols="1">
-              <b-form-input id="price" v-model="OrderForm.price" v-bind:disabled="true" type="text" autocomplete="price" required placeholder=" "></b-form-input>
-              </b-form-group>   </br>
+ 
+ 
 
-              <b-form-group description=" " label="总价" label-for="totalPrice" :label-cols="1">
-                <b-form-input id="totalPrice" class="form-control" v-model="OrderForm.totalPrice"  v-bind:disabled="true"  type="text" autocomplete="totalPrice" required placeholder=" "></b-form-input>
-              </b-form-group>   </br>
-
-              <b-form-group description=" " label="订单说明" label-for="description" :label-cols="1">
-                <b-form-input id="description" v-model="OrderForm.description" v-bind:disabled="true" type="text" autocomplete="description" required placeholder=" "></b-form-input>
-              </b-form-group>   </br>
-
-              <b-form-group description=" " label="负责人" label-for="director" :label-cols="1">
-                <b-form-input id="director" v-model="OrderForm.director" type="text" v-bind:disabled="true" autocomplete="director" required placeholder=" "></b-form-input>
-              </b-form-group>   </br>
-
-              <b-form-group description label="当前状态" label-for="status">
+              <b-form-group description label="产品类别" label-for="pCategory">
                 <b-form-select id="input-3"
-                               v-model="OrderForm.status"
-                               :options = this.statusitem 
+                               v-model="ProductForm.pCategory"
+                               :options = this.pCategoryitem 
                                value-field= id
-                               text-field= status
+                               text-field= name
+                               required>
+
+                </b-form-select>
+
+              </b-form-group>
+              
+
+               <b-form-group description label="所属订单号" label-for="order">
+                <b-form-select id="input-3"
+                               v-model="ProductForm.order"
+                               :options = this.orderitem 
+                               value-field= id
+                               text-field= orderNum
                                required>
 
                 </b-form-select>
 
               </b-form-group>
         
+              <b-form-group description label="产品说明" label-for="description">
+                <b-form-input id="description"
+                              v-model="ProductForm.description"
+                              type="text"
+                              autocomplete="description"
+                              required
+                              placeholder></b-form-input>
+              </b-form-group>
+
               </br>
               </br>
               </br>
@@ -81,7 +91,7 @@
 
 <script>
   // 导入数据源
-  const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
+  const uri = 'https://localhost:5001/api/ProductInfo/';  // Web API 的访问服务地址
   export default {
     name: 'ProductEdit',
 
@@ -98,18 +108,19 @@
       return {
         // 表单数据模型，用于绑定到 b-form 的变量
        
-        OrderForm: {
+      ProductForm: {
           id:"",
-          orderNum:"",
+          errors: [],
+          productID:"",
           name: "",
-          setTime:"",
-          price:0.0,
-          totalPrice:0.0,
-          description: "",
-          status:0,
-          director:""
+          pCategory:"",
+          inventory:0,
+          orderNumber:"",
+          order:"",
+          description: ""
         },
-        statusitem:[],
+        pCategoryitem :[],
+        orderitem: [],
         
         show: true
       }
@@ -124,24 +135,34 @@
      
       // 提交数据
       onSubmit(evt) {
-         for(var i in this.statusitem)
+         
+        this.ProductForm.errors = [];
+         for(var i in this.pCategoryitem)
         {  
-          if(this.statusitem[i]==this.OrderForm.status)
+          if(this.pCategoryitem[i].id==this.ProductForm.pCategory)
           {
-           this.OrderForm.status=i
+        
+           this.ProductForm.pCategory=this.pCategoryitem[i]
+       
           } 
         }
-        this.OrderForm.errors = [];
+       for(var i in this.orderitem)
+        {  
+          if(this.orderitem[i].id==this.ProductForm.order)
+          {
+        
+           this.ProductForm.order=this.orderitem[i]
        
+          } 
+        }
         const item = {
-         Id:this.OrderForm.id,
-         Status:Number(this.OrderForm.status),
-         OrderNum:this.OrderForm.orderNum,
-         Name:this.OrderForm.name,
-         Description: this.OrderForm.description,
-         SetTime: this.OrderForm.setTime,
-         Price: this.OrderForm.price,
-         TotalPrice:this.OrderForm.totalPrice,
+          Id:this.ProductForm.id,
+          ProductID:this.ProductForm.productID,
+          Name: this.ProductForm.name,
+          Description: this.ProductForm.description,
+          Order:this.ProductForm.order,
+          PCategory:this.ProductForm.pCategory,
+          Inventory:this.ProductForm.inventory
         };
          this.$axios.put(uri+this.$route.params.id,item)
         // 返回列表页
@@ -152,7 +173,6 @@
       // 重置表单
       onReset(evt) {
         evt.preventDefault()
-        this.OrderForm.status = '待审核'
       },
       // 关闭编辑
       closeEdit() {
@@ -162,15 +182,25 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-        var status=['待审核', '审核成功','审核失败', '已取消','已完成'];
-        this.statusitem = status;
+           
+        this.pCategoryitem = this.$route.params.pcategory;
+        this.orderitem = this.$route.params.order;
+   
+ 
         var item = this;
         if(this.$route.params.id==null)//如果数据已经丢失退出编辑
             this.$router.go(-1)
         else{
           this.$axios.get(uri+this.$route.params.id).then(function(res){
-          res.data.status=status[res.data.status];
-          item.OrderForm=res.data   })   
+  
+          item.ProductForm=res.data
+              
+          item.ProductForm.pCategory=res.data.pCategory.id;
+          item.ProductForm.order=res.data.order.id;
+           console.log(item.ProductForm);
+         // console.log(item);
+          })   
+  
         }
        
      },  

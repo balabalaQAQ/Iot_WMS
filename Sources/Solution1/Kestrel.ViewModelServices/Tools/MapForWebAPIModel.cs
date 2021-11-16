@@ -1,5 +1,5 @@
 ﻿
-using EntityModel.Order;
+using EntityModel.Orders;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
 using System;

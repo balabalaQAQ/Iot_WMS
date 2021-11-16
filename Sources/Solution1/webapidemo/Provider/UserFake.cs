@@ -1,5 +1,5 @@
 ﻿
-using EntityModel.Order;
+using EntityModel.Orders;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityModel.Order;
+using EntityModel.Orders;
 using Kestrel.ORM;
  
 using ViewModels.Orders;

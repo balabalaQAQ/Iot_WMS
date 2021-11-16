@@ -172,7 +172,7 @@
         
       this.directoritem = this.$route.params.director;
    
-       //console.log(this.$route)
+        console.log(newGuid());
       this.Orderform.Id = newGuid();
      // this.Orderform.orderNumber = 1000; // 需要获取最大值后重新赋值
     

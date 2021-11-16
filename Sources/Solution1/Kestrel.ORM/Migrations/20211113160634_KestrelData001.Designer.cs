@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kestrel.ORM.Migrations
 {
     [DbContext(typeof(Dbcontext))]
-    [Migration("20211113141825_KestrelData001")]
+    [Migration("20211113160634_KestrelData001")]
     partial class KestrelData001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Kestrel.ORM.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EntityModel.Order.Order", b =>
+            modelBuilder.Entity("EntityModel.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -630,7 +630,7 @@ namespace Kestrel.ORM.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("EntityModel.Order.Order", b =>
+            modelBuilder.Entity("EntityModel.Orders.Order", b =>
                 {
                     b.HasOne("EntityModel.Users.User", "Director")
                         .WithMany()
@@ -662,7 +662,7 @@ namespace Kestrel.ORM.Migrations
 
             modelBuilder.Entity("EntityModel.Product.ProductInfo", b =>
                 {
-                    b.HasOne("EntityModel.Order.Order", "Order")
+                    b.HasOne("EntityModel.Orders.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId");
 
@@ -677,7 +677,7 @@ namespace Kestrel.ORM.Migrations
 
             modelBuilder.Entity("EntityModel.RawMaterials.MaterialsInfo", b =>
                 {
-                    b.HasOne("EntityModel.Order.Order", "Order")
+                    b.HasOne("EntityModel.Orders.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId");
 

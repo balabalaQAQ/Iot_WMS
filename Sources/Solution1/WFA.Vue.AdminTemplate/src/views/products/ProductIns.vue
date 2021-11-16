@@ -173,13 +173,13 @@
           Name: this.ProductForm.name,
           Description: this.ProductForm.description,
           Order:this.ProductForm.order,
-          PCategory:this.ProductForm.pCategory
-          
+          PCategory:this.ProductForm.pCategory,
+          Inventory:this.ProductForm.inventory
         };
         console.log(item);
         const uri = 'https://localhost:5001/api/ProductInfo/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)
-       // this.$router.go(-1);
+        this.$router.go(-1);
         evt.preventDefault();
       },
 

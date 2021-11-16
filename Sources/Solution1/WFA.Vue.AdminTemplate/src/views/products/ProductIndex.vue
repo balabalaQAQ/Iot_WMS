@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按产品名称、产品编号"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="按产品名称、订单号"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -32,7 +32,8 @@
                      :per-page="perPage">
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
-                <b-button variant="primary" size="sm" @click="editData(data.item.id)">审核</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="editData(data.item.id)">编辑</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="insPRecordData(data.item.id,data.item.name,data.item.inventory)">(出)入库</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
@@ -177,7 +178,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].order.orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }
@@ -196,18 +197,25 @@ var flag=0; //查询状态
       editData(id) {
         this.$router.push({
           name: "ProductEdit",
-          params: { id: id}
+          params: { id: id,order:this.mumitems[0].orderList,pcategory:this.mumitems[0].pCategoryList}
         })
       },
       deleteData(id) {
         this.$axios.delete(uri+id)
-        }
-     
+        },
+      insPRecordData(id,name,inventory)  {
+         this.$router.push({
+          name: "PRecordIns",
+          params: { id: id,name:name, inventory:inventory}
+        })
+      
+     }
     },
     created() {
        var item=this
        flag=0;
        this.$axios.get(uri).then(function(res){
+          console.log(res.data[0]);
        item.mumitems = displayData(res.data)
        })
        
