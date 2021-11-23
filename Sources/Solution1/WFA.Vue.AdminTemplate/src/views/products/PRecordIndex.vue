@@ -75,7 +75,7 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
-    var statusitem=['待审核', '审核成功','审核失败', '已取消','已完成'];
+ 
     for( var i=0;i< mumitems.length;i++){
       mumitems[i].status=statusitem[mumitems[i].status];
       //避免一些数据太长的影响
@@ -98,7 +98,7 @@ var flag=0; //查询状态
       // 列表的表格标题
       caption: {
         type: String,
-        default: "订单记录"
+        default: "产品操作记录"
       },
       hover: {
         type: Boolean,
@@ -133,14 +133,14 @@ var flag=0; //查询状态
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "orderNum", label: "订单号" },
-          { key: "name", label: "订单名称" },
-          { key: "description", label: "订单描述" },
-          { key: "setTime", label: "申请时间" },
-          { key: "status", label: "订单状态" },
-          { key: "director", label: "负责人" },
-          { key: "reviewer", label: "审核人" },
-          { key: "price", label: "单价" },
+      
+          { key: "name", label: "记录名称" },
+          { key: "description", label: "记录描述" },
+          { key: "setTime", label: "操作时间" },
+          { key: "status", label: "操作类型" },
+       //   { key: "director", label: "操作人" },
+          { key: "status", label: "数量" },
+          { key: "status", label: "产品名" },
           { key: "totalPrice", label: "总价" },
           { key: "operation", label: "操作" }
         ],
@@ -213,6 +213,7 @@ var flag=0; //查询状态
        var item=this
        flag=0;
        this.$axios.get(uri).then(function(res){
+                 console.log(res.data[0]);
        item.mumitems = displayData(res.data)
        })
        

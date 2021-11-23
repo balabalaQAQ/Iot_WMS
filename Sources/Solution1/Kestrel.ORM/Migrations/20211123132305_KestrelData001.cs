@@ -316,6 +316,7 @@ namespace Kestrel.ORM.Migrations
                     PCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Inventory = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     IsPseudoDelete = table.Column<bool>(type: "bit", nullable: false)
@@ -380,6 +381,7 @@ namespace Kestrel.ORM.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SerUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     setType = table.Column<int>(type: "int", nullable: false),
+                    TotalPrice = table.Column<double>(type: "float", nullable: false),
                     SetNum = table.Column<int>(type: "int", nullable: false),
                     ProductInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),

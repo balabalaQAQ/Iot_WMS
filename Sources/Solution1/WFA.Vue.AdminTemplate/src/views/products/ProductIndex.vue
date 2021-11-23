@@ -33,7 +33,7 @@
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
                 <b-button variant="primary" size="sm" @click="editData(data.item.id)">编辑</b-button>&nbsp;&nbsp;&nbsp;
-                <b-button variant="primary" size="sm" @click="insPRecordData(data.item.id,data.item.name,data.item.inventory)">(出)入库</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="insPRecordData(data.item,data.item.name,data.item.inventory)">(出)入库</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
@@ -203,10 +203,10 @@ var flag=0; //查询状态
       deleteData(id) {
         this.$axios.delete(uri+id)
         },
-      insPRecordData(id,name,inventory)  {
+      insPRecordData(item,name,inventory)  {
          this.$router.push({
           name: "PRecordIns",
-          params: { id: id,name:name, inventory:inventory}
+          params: { item: item,name:name, inventory:inventory}
         })
       
      }
@@ -215,7 +215,7 @@ var flag=0; //查询状态
        var item=this
        flag=0;
        this.$axios.get(uri).then(function(res){
-          console.log(res.data[0]);
+  
        item.mumitems = displayData(res.data)
        })
        

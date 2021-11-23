@@ -26,7 +26,6 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\bin\Debug\net5.0\EntityModel
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\bin\Debug\net5.0\EntityModel.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\bin\Debug\net5.0\ref\EntityModel.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\bin\Debug\net5.0\EntityModel.pdb
-D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\obj\Debug\net5.0\EntityModel.csproj.AssemblyReference.cache
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\obj\Debug\net5.0\EntityModel.GeneratedMSBuildEditorConfig.editorconfig
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\obj\Debug\net5.0\EntityModel.AssemblyInfoInputs.cache
 D:\Program\bs\Iot_WMS\Sources\Solution1\EntityModel\obj\Debug\net5.0\EntityModel.AssemblyInfo.cs

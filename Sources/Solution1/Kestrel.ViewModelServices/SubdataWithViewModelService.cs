@@ -81,9 +81,9 @@ namespace Kestrel.ViewModelServices
                // var Userid = boVM.Userid;
               //  var Useritem = await service.EntityRepository.GetOtherBoAsyn<User>(Userid);
               //  bo.User = Useritem;
-       //         var ProductInfoid = boVM.ProductInfo.Id;
-       //         var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
-       //         bo.ProductInfo = ProductInfoitem;
+              var ProductInfoid = boVM.ProductInfo.Id;
+              var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
+              bo.ProductInfo = ProductInfoitem;
             }
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;

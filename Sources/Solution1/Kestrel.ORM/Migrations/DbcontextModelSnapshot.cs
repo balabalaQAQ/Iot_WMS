@@ -127,6 +127,9 @@ namespace Kestrel.ORM.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -165,6 +168,9 @@ namespace Kestrel.ORM.Migrations
 
                     b.Property<Guid?>("PCategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("ProductID")
                         .HasColumnType("nvarchar(max)");

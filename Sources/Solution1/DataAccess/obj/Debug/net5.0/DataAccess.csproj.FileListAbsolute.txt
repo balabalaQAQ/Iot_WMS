@@ -45,7 +45,7 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.G
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfoInputs.cache
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfo.cs
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CoreCompileInputs.cache
-D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CopyComplete
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CopyComplete

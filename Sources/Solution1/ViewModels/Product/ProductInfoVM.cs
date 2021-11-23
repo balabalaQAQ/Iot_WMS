@@ -24,6 +24,7 @@ namespace ViewModels.Product
         public List<Order> OrderList { get; set; }
 
 
+        public double Price { get; set; }//单价
         public virtual PCategory PCategory { get; set; } //产品类别
 
         public List<PCategory> PCategoryList { get; set; }

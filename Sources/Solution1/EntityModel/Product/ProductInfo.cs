@@ -24,6 +24,8 @@ namespace EntityModel.Product
 
         public int Inventory { get; set; }//库存量
 
+        public double Price { get; set; }//单价
+
         public virtual Order Order { get;set;}//所属订单
 
  

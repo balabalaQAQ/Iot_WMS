@@ -129,7 +129,7 @@
           description: ""
         },
         setTypeitem:[],
-    
+        pitem:[],
         show: true
       };
     },
@@ -164,16 +164,16 @@
         const item = {
           Name: this. PRecordForm.name,
           Description: this. PRecordForm.description,
-          setType:this.PRecordForm.setType,
+          setType:Number(this.PRecordForm.setType),
           SetNum:Number(this.PRecordForm.setNum),
-          ProductInfo:this. PRecordForm.pid
+          ProductInfo: this.pitem
         };
        const uri = 'https://localhost:5001/api/PRecord/';
        const uri2 = 'https://localhost:5001/api/ProductInfo/';   // Web API 的访问服务地址
        console.log(item);
          this.$axios.post(uri,item);
       // this.$axios.put(uri2+this.$route.params.id,"111");
-      //  this.$router.go(-1);
+        this.$router.go(-1);
         evt.preventDefault();
       },
 
@@ -202,11 +202,11 @@
       var setType=['入库',"出库"];
       this.setTypeitem=setType;
       this. PRecordForm.pname = this.$route.params.name;
-      this. PRecordForm.pid = this.$route.params.id;
+   
       this. PRecordForm.inventory = this.$route.params.inventory;
-      
+      this.pitem= this.$route.params.item;
       this. PRecordForm.setType=setType[0];
-       
+      console.log(this.$route.params.item);
       this. PRecordForm.Id = newGuid();
      // this. PRecordForm.orderNumber = 1000; // 需要获取最大值后重新赋值
     

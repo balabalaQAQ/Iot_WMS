@@ -27,6 +27,9 @@ namespace EntityModel.Product
 
         public SetType setType { get; set; }//操作类型
 
+        
+        public double TotalPrice { get; set; }//总价
+
         public int SetNum { get; set; }//操作数量
 
         public virtual ProductInfo ProductInfo { get; set; } //操作对象  产品信息
@@ -36,6 +39,7 @@ namespace EntityModel.Product
         public PRecord()
         {
             this.Id = Guid.NewGuid();
+            this.SetTime = DateTime.Now.ToString();
             this.SortCode = EntityHelper.SortCodeByDefaultDateTime<String>();
         }
     }
