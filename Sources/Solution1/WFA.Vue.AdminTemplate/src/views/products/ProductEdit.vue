@@ -77,7 +77,7 @@
 
             <!-- 调试期间的数据呈现 -->
             <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MallForm }}</pre>
+              <pre class="m-0">{{ MalloFrm }}</pre>
             </b-card>
           </b-card>
           -->

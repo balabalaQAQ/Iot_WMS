@@ -52,11 +52,8 @@
                                 value-field= id
                                 text-field= setType
                                 required>
-
                   </b-form-select>
-
                 </b-form-group>
-                
               <b-form-group validated
                          
                             label="产品名称："
@@ -70,7 +67,7 @@
               </b-form-group>
                <b-form-group validated
                          
-                            label="产品当前："
+                            label="产品当前库存："
                             label-for="inventory">
                             <b-form-input id="inventory"
                               v-model=" PRecordForm.inventory"
@@ -80,6 +77,21 @@
                               v-bind:disabled="true"  ></b-form-input>
               </b-form-group>
  
+              <b-form-group validated
+                            label="总价："
+                            label-for="totalPrice">
+                           <b-alert show  variant="dark">  {{totalPrice}}</b-alert>
+              </b-form-group>
+               <b-form-group validated
+                            label="单价："
+                            label-for="price">
+                            <b-form-input id="price"
+                              v-model=" PRecordForm.price"
+                              type="text"
+                              autocomplete="price"
+                              required
+                              v-bind:disabled="true"  ></b-form-input>
+              </b-form-group>
               <b-form-group description label="操作说明" label-for="description">
                 <b-form-input id="description"
                               v-model=" PRecordForm.description"
@@ -112,7 +124,7 @@
     props: {
       caption: {
         type: String,
-        default: "新建订单信息"
+        default: "新建产品操作记录"
       }
     },
     data() {
@@ -124,6 +136,8 @@
           ordernum:"",
           name: "",
           pname:"",
+          totalPrice:0,
+          price:0,
           setNum:0,
           setType:0,
           description: ""
@@ -133,7 +147,20 @@
         show: true
       };
     },
-
+    computed: {
+        totalPrice: function () {
+        var item=this;
+        var totalPrice=0.0;
+        if(Number(item.PRecordForm.setNum)>0){
+         totalPrice=item.PRecordForm.setNum*item.PRecordForm.price;
+        }
+        else{
+         totalPrice=0.0;
+        }
+        console.log(totalPrice);
+        return totalPrice;
+        },
+      },
     methods: {
         getCookie(name) {
          if (name != null) {
@@ -166,6 +193,8 @@
           Description: this. PRecordForm.description,
           setType:Number(this.PRecordForm.setType),
           SetNum:Number(this.PRecordForm.setNum),
+          totalPrice:Number(this.PRecordForm.totalPrice),
+          Price:Number(this.PRecordForm.price),
           ProductInfo: this.pitem
         };
        const uri = 'https://localhost:5001/api/PRecord/';
@@ -178,12 +207,7 @@
       },
 
       onSubmit(evt) {
-
         evt.preventDefault();
-
-
-
-
       },
       // 重置表单
       onReset(evt) {
@@ -200,12 +224,12 @@
     // 代码加载后直接执行的方法
     created: function () {
       var setType=['入库',"出库"];
+      this. PRecordForm=this.$route.params.item;
       this.setTypeitem=setType;
-      this. PRecordForm.pname = this.$route.params.name;
-   
-      this. PRecordForm.inventory = this.$route.params.inventory;
+
       this.pitem= this.$route.params.item;
       this. PRecordForm.setType=setType[0];
+      
       console.log(this.$route.params.item);
       this. PRecordForm.Id = newGuid();
      // this. PRecordForm.orderNumber = 1000; // 需要获取最大值后重新赋值

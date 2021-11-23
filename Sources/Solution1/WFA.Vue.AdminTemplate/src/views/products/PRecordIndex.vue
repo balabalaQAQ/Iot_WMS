@@ -52,18 +52,6 @@
               
               />
             </nav>
-              <!--
-            <nav>
-              <b-pagination size="sm"
-                            :per-page="perPage"
-                            v-model="currentPage"
-                            prev-text="前一页"
-                            next-text="下一页"
-                            hide-goto-end-buttons
-                            align="right"
-                            @input="gotoPage(currentPage)" />
-            </nav>
-            -->
           </b-card>
         </transition>
       </b-col>
@@ -75,9 +63,9 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
- 
+      var setTypeitem=['入库',"出库"];
     for( var i=0;i< mumitems.length;i++){
-      mumitems[i].status=statusitem[mumitems[i].status];
+      mumitems[i].setType=setTypeitem[mumitems[i].setType];
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
@@ -137,10 +125,10 @@ var flag=0; //查询状态
           { key: "name", label: "记录名称" },
           { key: "description", label: "记录描述" },
           { key: "setTime", label: "操作时间" },
-          { key: "status", label: "操作类型" },
+          { key: "setType", label: "操作类型" },
        //   { key: "director", label: "操作人" },
-          { key: "status", label: "数量" },
-          { key: "status", label: "产品名" },
+          { key: "setNum", label: "数量" },
+          { key: "productInfo.name", label: "产品名" },
           { key: "totalPrice", label: "总价" },
           { key: "operation", label: "操作" }
         ],
@@ -161,7 +149,7 @@ var flag=0; //查询状态
               else//进入查询
                 item.mumitems=[...item.saveitems];//数组数据类型转化
        })
-       return (item.mumitems)
+       return displayData(item.mumitems)
       },
     },
     methods: {    
@@ -210,10 +198,9 @@ var flag=0; //查询状态
      
     },
     created() {
-       var item=this
-       flag=0;
-       this.$axios.get(uri).then(function(res){
-                 console.log(res.data[0]);
+       var item=this;
+       item.$axios.get(uri).then(function(res){
+       console.log(res.data[0]);
        item.mumitems = displayData(res.data)
        })
        
