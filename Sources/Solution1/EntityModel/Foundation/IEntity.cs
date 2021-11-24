@@ -31,5 +31,7 @@ namespace EntityModel.Foundation
         /// 删除操作时是否应用伪删除，一般情况下，使用伪删除，意味着应用中有一个垃圾箱的功能，可以应用恢复和清空操作。
         /// </summary>
         bool IsPseudoDelete { get; set; }
+
+    
     }
 }

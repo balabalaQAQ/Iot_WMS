@@ -28,6 +28,6 @@ namespace EntityModel.Users
         public IUser() : base()
         {
             this.Id = Guid.NewGuid();
-        }
+        } 
     }
 }
