@@ -32,7 +32,7 @@
                      :per-page="perPage">
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
-                <b-button variant="primary" size="sm" @click="editData(data.item.id)">审核</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="editData(data.item.id)">详情</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
@@ -181,14 +181,14 @@ var flag=0; //查询状态
     
       createData() {
         this.$router.push({
-           name: "OrderIns",
+           name: "PRecordIns",
           // params: { director:this.mumitems[0].director}
          });
         
       },
       editData(id) {
         this.$router.push({
-          name: "OrderEdit",
+          name: "PRecordEdit",
           params: { id: id}
         })
       },

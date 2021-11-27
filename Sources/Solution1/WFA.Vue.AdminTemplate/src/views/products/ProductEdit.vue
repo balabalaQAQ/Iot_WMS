@@ -17,25 +17,26 @@
 
             <b-form @submit="onSubmit" @reset="onReset" v-if="show">
               <b-form-group validated description=" " label="产品名称：" label-for="name" :label-cols="1">
-                <b-form-input id="name" v-model="ProductForm.name"  type="text" autocomplete="name" required placeholder=" "></b-form-input>
+                <b-form-input id="name" v-model="ProductForm.name"  type="text" autocomplete="name" required placeholder=" " maxlength="30"></b-form-input>
               </b-form-group>   </br>
 
               <b-form-group description=" " label="产品编号" label-for="productID" :label-cols="1">
-                <b-form-input id="productID" v-model="ProductForm.productID"   type="text" autocomplete="productID" required placeholder=" "></b-form-input>
+                <b-form-input id="productID" v-model="ProductForm.productID"   type="text" autocomplete="productID" required placeholder=" " maxlength="30"></b-form-input>
               </b-form-group>   </br>
  
 
               <b-form-group description=" " label="库存量" label-for="inventory" :label-cols="1">
-                <b-form-input id="inventory" v-model="ProductForm.inventory"   type="text" autocomplete="inventory" required placeholder=" "></b-form-input>
+                <b-form-input id="inventory" v-model="ProductForm.inventory"    maxlength="5"
+                  onkeyup="value=value.replace(/[^\d]/g,'')"   type="text" autocomplete="inventory" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
               
  
  
 
-              <b-form-group description label="产品类别" label-for="pCategory">
+              <b-form-group description=" " label="产品类别" label-for="pCategory":label-cols="1">
                 <b-form-select id="input-3"
                                v-model="ProductForm.pCategory"
-                               :options = this.pCategoryitem 
+                               :options = "this.pCategoryitem "
                                value-field= id
                                text-field= name
                                required>
@@ -44,11 +45,10 @@
 
               </b-form-group>
               
-
-               <b-form-group description label="所属订单号" label-for="order">
+               <b-form-group description=" " label="所属订单号" label-for="order" :label-cols="1"> 
                 <b-form-select id="input-3"
                                v-model="ProductForm.order"
-                               :options = this.orderitem 
+                               :options =" this.orderitem "
                                value-field= id
                                text-field= orderNum
                                required>
@@ -57,13 +57,13 @@
 
               </b-form-group>
         
-              <b-form-group description label="产品说明" label-for="description">
+              <b-form-group description=" " label="产品说明" label-for="description" :label-cols="1">
                 <b-form-input id="description"
                               v-model="ProductForm.description"
                               type="text"
                               autocomplete="description"
                               required
-                              placeholder></b-form-input>
+                              placeholder maxlength="150"></b-form-input>
               </b-form-group>
 
               </br>

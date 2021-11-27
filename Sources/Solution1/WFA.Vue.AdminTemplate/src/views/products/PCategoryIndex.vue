@@ -129,8 +129,8 @@ var flag=0; //查询状态
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "displayName", label: "产品简称" },
-          { key: "name", label: "订单名称" },
+          { key: "displayName", label: "类型简称" },
+          { key: "name", label: "类型名称" },
           { key: "description", label: "订单描述" },
           { key: "categoryNum", label: "类型编号" },
           { key: "operation", label: "操作" }

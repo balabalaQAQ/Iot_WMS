@@ -50,7 +50,7 @@
               <b-form-group description label="产品类别" label-for="pCategory">
                 <b-form-select id="input-3"
                                v-model="ProductForm.pCategory"
-                               :options = this.pCategoryitem 
+                               :options = "this.pCategoryitem "
                                value-field= id
                                text-field= name
                                required>
@@ -63,7 +63,7 @@
                <b-form-group description label="所属订单号" label-for="order">
                 <b-form-select id="input-3"
                                v-model="ProductForm.order"
-                               :options = this.orderitem 
+                               :options =" this.orderitem "
                                value-field= id
                                text-field= orderNum
                                required>
@@ -74,6 +74,8 @@
               <b-form-group validated
                             description="请输入库存量"
                             label="库存量："
+                           
+                            onkeyup="value=value.replace(/[^\d]/g,'')" 
                             label-for="inventory">
                             <b-form-input id="inventory"
                               v-model="ProductForm.inventory"

@@ -52,9 +52,8 @@ namespace webapidemo.Controllers
         [HttpPost]
         public async Task<ActionResult<PRecordVM>> PostPRecord(PRecordVM PRecordVM)
         {
-            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "OK,This a new Data" };
             await SubdataWithViewModelService.SavePRecordWithUserandProductInfo(_service, PRecordVM);
-         //   PRecordVM.SetTime = DateTime.Now.ToString();
             return CreatedAtAction(nameof(GetPRecord), new { id = PRecordVM.Id }, PRecordVM);
         }
 

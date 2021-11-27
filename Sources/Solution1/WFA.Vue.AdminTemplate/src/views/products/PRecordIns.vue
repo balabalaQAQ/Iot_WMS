@@ -21,11 +21,11 @@
               <b-form-group validated
                             description="请输入记录名称"
                             label="记录名称："
-                            label-for="name">
-                <b-form-input id="name"
-                              v-model=" PRecordForm.name"
+                            label-for="rname">
+                <b-form-input id="rname"
+                              v-model=" PRecordForm.rname"
                               type="text"
-                              autocomplete="name"
+                              autocomplete="rname"
                               required
                               placeholder="请输入记录名称"></b-form-input>
               </b-form-group>
@@ -39,9 +39,10 @@
                             <b-form-input
                               @input="anysetNum" 
                               id="setNum"
-                              maxlength="5"
-                              v-model="PRecordForm.setNum"
+                            
                               onkeyup="value=value.replace(/[^\d]/g,'')" 
+                              v-model="PRecordForm.setNum"
+
                               type="text"
                               autocomplete="setNum"
                               required
@@ -53,7 +54,7 @@
                   <b-form-select id="input-3"
                                 @input="anysetType" 
                                 v-model=" PRecordForm.setType"
-                                :options = this.setTypeitem 
+                                :options =" this.setTypeitem "
                                 value-field= id
                                 text-field= setType
                                 required>
@@ -62,11 +63,11 @@
               <b-form-group validated
                          
                             label="产品名称："
-                            label-for="pname">
-                            <b-form-input id="pname"
-                              v-model=" PRecordForm.pname"
+                            label-for="name">
+                            <b-form-input id="name"
+                              v-model=" PRecordForm.name"
                               type="text"
-                              autocomplete="pname"
+                              autocomplete="name"
                               required
                               v-bind:disabled="true"  ></b-form-input>
               </b-form-group>
@@ -144,15 +145,15 @@
           inventory:0,
           ordernum:"",
           name: "",
-          pname:"",
+          rname:"",
           totalPrice:0,
           price:0,
           setNum:1,
           setType:0,
           description: ""
         },
-        setTypeitem:[],
         pitem:[],
+        setTypeitem:[],
         show: true
       };
     },
@@ -174,12 +175,9 @@
       anysetType(e){//监听出入库操作 对相关影响参数进行修改
         if(e=="入库"){//入库不需要计算销售总价
           this.PRecordForm.totalPrice=0;
-           console.log(this.PRecordForm.setNum,0 );
           this.PRecordForm.setNum ++;
-           console.log(this.PRecordForm.setNum ,1);
           this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
           this.PRecordForm.setNum -= 1;
-            console.log(this.PRecordForm.setNum,3 );
            });
           this.PRecordForm.totalPrice=0;
         }
@@ -187,11 +185,9 @@
             this.PRecordForm.setNum ++;
             this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
             this.PRecordForm.setNum -= 1;
-            if(this.PRecordForm.setNum>this.PRecordForm.inventory){
+            if(this.PRecordForm.setNum>this.PRecordForm.inventory)
                 this.PRecordForm.setNum = this.PRecordForm.inventory//更新操作数量
-             }
             this.PRecordForm.totalPrice=this.PRecordForm.setNum*this.PRecordForm.price;//更新总价
-          
             });
         }
       },
@@ -208,27 +204,26 @@
              this.PRecordForm.setNum==this.PRecordForm.inventory;
         }
         if(this. PRecordForm.setType==0){//入库
-            this.PRecordForm.inventory+=Number(setNum)
+            this.pitem.inventory+=Number( this.PRecordForm.setNum);
+            this.PRecordForm.totalPrice=0;
         }
-        else{//入库
-            this.PRecordForm.inventory-=setNum
+        else{
+            this.pitem.inventory-=Number( this.PRecordForm.setNum);
         }
-       
-        this. PRecordForm.errors = [];
+        console.log(this.pitem)
         const item = {
-          Name: this. PRecordForm.name,
+          Id: this. PRecordForm.Id ,
+          Name: this. PRecordForm.rname,
           Description: this. PRecordForm.description,
           setType:Number(this.PRecordForm.setType),
           SetNum:Number(this.PRecordForm.setNum),
-          totalPrice:Number(this.PRecordForm.totalPrice),
-          Price:Number(this.PRecordForm.price),
+          TotalPrice:Number(this.PRecordForm.totalPrice),
           ProductInfo: this.pitem
         };
-       const uri = 'https://localhost:5001/api/PRecord/';
-       const uri2 = 'https://localhost:5001/api/ProductInfo/';   // Web API 的访问服务地址
+       const uri = 'https://localhost:5001/api/PRecord/'; 
+        // Web API 的访问服务地址
        console.log(item);
-         this.$axios.post(uri,item);
-      // this.$axios.put(uri2+this.$route.params.id,"111");
+        this.$axios.post(uri,item);
         this.$router.go(-1);
         evt.preventDefault();
       },
@@ -250,22 +245,28 @@
 
     // 代码加载后直接执行的方法
     created: function () {
+      const uri2 ='https://localhost:5001/api/ProductInfo/';
+       var item = this;
+        if(this.$route.params.id==null)//如果数据已经丢失退出编辑
+            this.$router.go(-1)
+        else{
+          this.$axios.get(uri2+this.$route.params.id).then(function(res){
+          
+          item.pitem=res.data;
+         
+          })   
+        }
 
-      this.PRecordForm=this.$route.params.item;
-      var setType=['入库',"出库"];
-      this.setTypeitem=setType;
-      this.pitem= this.$route.params.item;
-
-      this.PRecordForm.setType=setType[0];
-      this.PRecordForm.pname=this.$route.params.name;
-      console.log(this.$route.params.item);
-      if(this.$route.params.name==null){
-          this.$router.go(-1);
-      }
-      this. PRecordForm.Id = newGuid();
-     // this. PRecordForm.orderNumber = 1000; // 需要获取最大值后重新赋值
+     
+          var setType=['入库',"出库"];
+          item.setTypeitem=setType;
+          item.PRecordForm=this.$route.params.item;
+ 
+          item.PRecordForm.setType=setType[0];
+ 
     
-       
+      
+      this. PRecordForm.Id = newGuid();
       // 生成 guid
       function newGuid() {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (

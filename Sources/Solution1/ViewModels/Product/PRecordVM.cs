@@ -28,6 +28,6 @@ namespace ViewModels.Product
         public double TotalPrice { get; set; }//总价
         public virtual ProductInfo ProductInfo { get; set; } //原料信息
 
-        public bool IsPseudoDelete { get; set; } = false;//无需删除
+        
     }
 }

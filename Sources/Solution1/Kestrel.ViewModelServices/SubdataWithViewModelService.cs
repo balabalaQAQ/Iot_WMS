@@ -19,6 +19,7 @@ namespace Kestrel.ViewModelServices
     //所有子数据添加函数都通过这里添加
     public static class SubdataWithViewModelService
     {
+        private static readonly IWebAPIModelService<ProductInfo, ProductInfoVM> _service;
         /// <summary>
         ///    原料信息，子数据：订单
         /// </summary>
@@ -64,18 +65,24 @@ namespace Kestrel.ViewModelServices
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }
+
         /// <summary>
-        ///  产品操作记录，子数据：用户 、所属产品信息
+        ///  产品操作记录，子数据：用户 、所属产品信息,其中需更新产品的库存属性
         /// </summary>
 
         public static async Task<SaveStatusModel> SavePRecordWithUserandProductInfo(this IWebAPIModelService<PRecord, PRecordVM> service, PRecordVM boVM)
         {
 
-            SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+             SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
             var bo = await service.EntityRepository.GetBoAsyn(boVM.Id);
+       
             if (bo == null) { bo = new PRecord(); }
-
+ 
             boVM.MapToEntityModel(bo);
+
+            var p = await _service.GetBoVMAsyn(boVM.ProductInfo.Id, x => x.PCategory, y => y.Order);
+            p.Inventory = bo.ProductInfo.Inventory;
+            await _service.SaveBoAsyn(p);
             if (boVM.Id.ToString() != null)
             {
                // var Userid = boVM.Userid;
@@ -83,8 +90,11 @@ namespace Kestrel.ViewModelServices
               //  bo.User = Useritem;
               var ProductInfoid = boVM.ProductInfo.Id;
               var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
+               
+
               bo.ProductInfo = ProductInfoitem;
             }
+          
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }

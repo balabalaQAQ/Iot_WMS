@@ -47,7 +47,7 @@
               <b-form-group description label="当前状态" label-for="status">
                 <b-form-select id="input-3"
                                v-model="OrderForm.status"
-                               :options = this.statusitem 
+                               :options = "this.statusitem "
                                value-field= id
                                text-field= status
                                required>
@@ -81,7 +81,7 @@
 
 <script>
   // 导入数据源
-  const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
+  const uri = 'https://localhost:5001/api/PRecord/';  // Web API 的访问服务地址
   export default {
     name: 'PRecordEdit',
 
@@ -89,7 +89,7 @@
     props: {
       caption: {
         type: String,
-        default: '审核订单信息'
+        default: '审核操作记录'
       },
     },
 
