@@ -2,6 +2,7 @@
 using EntityModel.Product;
 using EntityModel.RawMaterials;
 using EntityModel.Users;
+using Kestrel.DataAccess;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
 using Kestrel.ViewModelServices.Tools;
@@ -15,11 +16,12 @@ using ViewModels.RawMaterials;
 
 namespace Kestrel.ViewModelServices
 {
- 
+
+
     //所有子数据添加函数都通过这里添加
     public static class SubdataWithViewModelService
     {
-        private static readonly IWebAPIModelService<ProductInfo, ProductInfoVM> _service;
+        static IEntityRepository<ProductInfo> EntityRepository { get; set; }
         /// <summary>
         ///    原料信息，子数据：订单
         /// </summary>
@@ -73,16 +75,14 @@ namespace Kestrel.ViewModelServices
         public static async Task<SaveStatusModel> SavePRecordWithUserandProductInfo(this IWebAPIModelService<PRecord, PRecordVM> service, PRecordVM boVM)
         {
 
-             SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
             var bo = await service.EntityRepository.GetBoAsyn(boVM.Id);
        
             if (bo == null) { bo = new PRecord(); }
  
             boVM.MapToEntityModel(bo);
 
-            var p = await _service.GetBoVMAsyn(boVM.ProductInfo.Id, x => x.PCategory, y => y.Order);
-            p.Inventory = bo.ProductInfo.Inventory;
-            await _service.SaveBoAsyn(p);
+        
             if (boVM.Id.ToString() != null)
             {
                // var Userid = boVM.Userid;
@@ -90,9 +90,9 @@ namespace Kestrel.ViewModelServices
               //  bo.User = Useritem;
               var ProductInfoid = boVM.ProductInfo.Id;
               var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
-               
-
+           
               bo.ProductInfo = ProductInfoitem;
+               
             }
           
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);

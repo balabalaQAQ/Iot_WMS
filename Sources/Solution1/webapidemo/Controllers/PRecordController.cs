@@ -1,5 +1,6 @@
 ﻿using EntityModel.Product;
 using EntityModel.Users;
+using Kestrel.DataAccess;
 using Kestrel.DataAccess.Tools;
 using Kestrel.IWebAPIModelService;
 using Kestrel.ViewModelServices;
@@ -21,15 +22,18 @@ namespace webapidemo.Controllers
     ////产品操作记录
     public class PRecordController : BaseTemplateController<PRecord, PRecordVM>
     {
-        private readonly IWebAPIModelService<PRecord, PRecordVM> _service;
+        private readonly IWebAPIModelService<PRecord, PRecordVM> _servicePR;
+        
 
         /// <summary>
         /// 构造函数,一般负责通过注入相关变量初始化控制器的标量
         /// </summary>
         /// <param name="context">控制器使用的 DbContext</param>
-        public PRecordController(IWebAPIModelService<PRecord, PRecordVM> service )
+        public PRecordController(IWebAPIModelService<PRecord, PRecordVM> service)  
         {
-            this._service = service;
+            var demo = base.ViewModelService;
+           
+            this._servicePR = service;   
         }
 
         /// <summary>
@@ -39,21 +43,21 @@ namespace webapidemo.Controllers
         [HttpGet]
         public async Task<List<PRecordVM>> GetPRecords()
         { 
-            var VM = await _service.GetBoVMCollectionAsyn(x => x.User, y => y.ProductInfo);
+            var VM = await _servicePR.GetBoVMCollectionAsyn(x => x.User, y => y.ProductInfo);
             return VM;
         }
 
         public Task<List<PRecordVM>> GetPRecords(String Token)
         {
-            var VM = _service.GetBoVMCollectionAsyn();
+            var VM = _servicePR.GetBoVMCollectionAsyn();
 
             return VM;
         }
         [HttpPost]
         public async Task<ActionResult<PRecordVM>> PostPRecord(PRecordVM PRecordVM)
         {
-            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "OK,This a new Data" };
-            await SubdataWithViewModelService.SavePRecordWithUserandProductInfo(_service, PRecordVM);
+            var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            await SubdataWithViewModelService.SavePRecordWithUserandProductInfo(_servicePR, PRecordVM);
             return CreatedAtAction(nameof(GetPRecord), new { id = PRecordVM.Id }, PRecordVM);
         }
 
@@ -65,7 +69,7 @@ namespace webapidemo.Controllers
         [HttpGet("{id}")]  // 这里直接将方法的路由再做一次定义 api/PRecord/id
         public async Task<ActionResult<PRecordVM>> GetPRecord(Guid id)
         {
-            var VM = _service.GetBoVMAsyn(id,x=>x.User.Id);
+            var VM = _servicePR.GetBoVMAsyn(id,x=>x.User.Id);
 
 
             if (VM == null)
@@ -80,11 +84,11 @@ namespace webapidemo.Controllers
         public async Task<IActionResult> GetPRecord(Guid id, PRecordVM PRecordVM)
         {
 
-            var PRecord = await _service.GetBoVMAsyn(id,x=>x.ProductInfo);
-            var VM = await _service.GetBoVMAsyn(id, x => x.User.Id);
+            var PRecord = await _servicePR.GetBoVMAsyn(id,x=>x.ProductInfo);
+            var VM = await _servicePR.GetBoVMAsyn(id, x => x.User.Id);
             if (PRecord != null)
             {
-                await _service.SaveBoAsyn(PRecordVM);
+                await _servicePR.SaveBoAsyn(PRecordVM);
 
             }
             return NoContent(); // 返回 204
@@ -101,12 +105,12 @@ namespace webapidemo.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<PRecordVM>> DelPRecord(Guid id)
         {
-            var PRecordVM = await _service.GetBoVMAsyn(id);
+            var PRecordVM = await _servicePR.GetBoVMAsyn(id);
             if (PRecordVM == null)
             {
                 return NotFound(); // 返回 404
             }
-            await _service.DeleteBoAsyn(id);
+            await _servicePR.DeleteBoAsyn(id);
 
             return PRecordVM;
         }

@@ -27,7 +27,7 @@ namespace webapidemo.BaseControllers
         // 实体模型和视图数据服务访问处理服务
         private readonly IWebAPIModelService<TEntity, TViewModel> _viewModelService;
         // 公开的实体模型和视图数据服务访问处理服务，便于继承于这个控制器的派生控制器使用
-        public IWebAPIModelService<TEntity, TViewModel> ViewModelService { get { return _viewModelService; } }
+        public IWebAPIModelService<TEntity, TViewModel> ViewModelService { get { return _viewModelService; }  }
 
 
          

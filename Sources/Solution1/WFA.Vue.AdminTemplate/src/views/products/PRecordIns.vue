@@ -213,18 +213,24 @@
         console.log(this.pitem)
         const item = {
           Id: this. PRecordForm.Id ,
-          Name: this. PRecordForm.rname,
+          Name: this.PRecordForm.rname,
           Description: this. PRecordForm.description,
           setType:Number(this.PRecordForm.setType),
           SetNum:Number(this.PRecordForm.setNum),
           TotalPrice:Number(this.PRecordForm.totalPrice),
           ProductInfo: this.pitem
         };
+       const uri2 = 'https://localhost:5001/api/ProductInfo/'; 
        const uri = 'https://localhost:5001/api/PRecord/'; 
+     
         // Web API 的访问服务地址
        console.log(item);
-        this.$axios.post(uri,item);
-        this.$router.go(-1);
+       this.$axios.post(uri,item);
+        this.$nextTick(() => { 
+          this.$axios.put(uri2+this.pitem.id,this.pitem);
+      //  
+        });
+    //    this.$router.go(-1);
         evt.preventDefault();
       },
 
@@ -248,7 +254,8 @@
       const uri2 ='https://localhost:5001/api/ProductInfo/';
        var item = this;
         if(this.$route.params.id==null)//如果数据已经丢失退出编辑
-            this.$router.go(-1)
+         {//his.$router.go(-1)
+         }   
         else{
           this.$axios.get(uri2+this.$route.params.id).then(function(res){
           
