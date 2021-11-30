@@ -44,7 +44,7 @@ namespace webapidemo.Controllers
         [HttpGet]
         public async Task<List<ProductInfoVM>> GetProductInfos()
         {
-            var VM = await _service.GetBoVMCollectionAsyn(x=>x.PCategory,y=>y.Order);
+            var VM = await _service.GetBoVMCollectionAsyn(x=>x.PCategory);
             var PCategory = new List<PCategory>();
             PCategory = _service.EntityRepository.EntitiesContext.PCategory.ToList();
 
@@ -52,7 +52,6 @@ namespace webapidemo.Controllers
             Order = _service.EntityRepository.EntitiesContext.Order.ToList();
             foreach (var l in VM)
             {
-                l.OrderList = Order;
                 l.PCategoryList = PCategory;
             }
             return VM;
@@ -80,7 +79,7 @@ namespace webapidemo.Controllers
         [HttpGet("{id}")]  // 这里直接将方法的路由再做一次定义 api/ProductInfo/id
         public async Task<ActionResult<ProductInfoVM>> GetProductInfo(Guid id)
         {
-            var VM = _service.GetBoVMAsyn(id, x => x.PCategory, y => y.Order);
+            var VM = _service.GetBoVMAsyn(id, x => x.PCategory);
 
 
             if (VM == null)
@@ -95,7 +94,7 @@ namespace webapidemo.Controllers
         public async Task<IActionResult> GetProductInfo(Guid id, ProductInfoVM ProductInfoVM)
         {
 
-            var ProductInfo = await _service.GetBoVMAsyn(id, x => x.PCategory, y => y.Order);
+            var ProductInfo = await _service.GetBoVMAsyn(id, x => x.PCategory);
             if (ProductInfo != null)
             {
                 var item = await SubdataWithViewModelService.SaveProductInfoWithOrderAndPCategory(_service, ProductInfoVM);

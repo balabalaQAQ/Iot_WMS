@@ -26,9 +26,6 @@ namespace EntityModel.Product
 
         public double Price { get; set; }//单价
 
-        public virtual Order Order { get;set;}//所属订单
-
- 
         [StringLength(200)]
         public string SortCode { get; set; }
         public bool IsPseudoDelete { get; set; } = false;

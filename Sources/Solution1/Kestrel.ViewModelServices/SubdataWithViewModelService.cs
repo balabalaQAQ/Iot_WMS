@@ -22,29 +22,9 @@ namespace Kestrel.ViewModelServices
     public static class SubdataWithViewModelService
     {
         static IEntityRepository<ProductInfo> EntityRepository { get; set; }
+       
         /// <summary>
-        ///    原料信息，子数据：订单
-        /// </summary>
-
-        public static async Task<SaveStatusModel> SaveMaterialsWithOrder(this IWebAPIModelService<MaterialsInfo, MaterilsInfoVM> service, MaterilsInfoVM boVM)
-        {
-
-            SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
-            var bo = await service.EntityRepository.GetBoAsyn(boVM.Id);
-            if (bo == null) { bo = new MaterialsInfo(); }
-
-            boVM.MapToEntityModel(bo);
-            if (boVM.Id.ToString() != null)
-            {
-                var id = boVM.Order.Id;
-                var item = await service.EntityRepository.GetOtherBoAsyn<Order>(id);
-                bo.Order = item;
-            }
-            saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
-            return saveStatus;
-        }
-        /// <summary>
-        ///  产品信息，子数据：订单 、产品类型
+        ///  产品信息，子数据： 产品类型
         /// </summary>
 
         public static async Task<SaveStatusModel> SaveProductInfoWithOrderAndPCategory(this IWebAPIModelService<ProductInfo, ProductInfoVM> service, ProductInfoVM boVM)
@@ -57,9 +37,6 @@ namespace Kestrel.ViewModelServices
             boVM.MapToEntityModel(bo);
             if (boVM.Id.ToString() != null)
             {
-                var Orderid = boVM.Order.Id;
-                var Orderitem = await service.EntityRepository.GetOtherBoAsyn<Order>(Orderid);
-                bo.Order = Orderitem;
                 var PCategoryid = boVM.PCategory.Id;
                 var PCategoryitem = await service.EntityRepository.GetOtherBoAsyn<PCategory>(PCategoryid);
                 bo.PCategory = PCategoryitem;

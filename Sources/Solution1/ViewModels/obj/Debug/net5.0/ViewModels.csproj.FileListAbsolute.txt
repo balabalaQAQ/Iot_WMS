@@ -54,3 +54,7 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ViewModels.c
 D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ViewModels.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ref\ViewModels.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ViewModels.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\bin\Debug\net5.0\ViewModels.runtimeconfig.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\bin\Debug\net5.0\ViewModels.runtimeconfig.dev.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ViewModels.genruntimeconfig.cache
+D:\Program\bs\Iot_WMS\Sources\Solution1\ViewModels\obj\Debug\net5.0\ViewModels.csproj.CopyComplete

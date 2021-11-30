@@ -60,3 +60,7 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\ref\Kestrel.ViewModelServices.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\bin\Debug\net5.0\Kestrel.ViewModelServices.runtimeconfig.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\bin\Debug\net5.0\Kestrel.ViewModelServices.runtimeconfig.dev.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.genruntimeconfig.cache
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ViewModelServices\obj\Debug\net5.0\Kestrel.ViewModelServices.csproj.CopyComplete

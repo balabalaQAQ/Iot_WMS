@@ -17,15 +17,12 @@ namespace EntityModel.RawMaterials
 
         public string MaterialsID { get; set; } //原料编号
 
-        public string MCategory { get; set; } //原料类别
+        public MCategory MCategory { get; set; } //原料类别
 
         public string Description { get; set; }//描述
 
         public int Inventory { get; set; }//库存量
 
-        public virtual Orders.Order Order { get;set;}//所属订单
-
- 
         [StringLength(200)]
         public string SortCode { get; set; }
         public bool IsPseudoDelete { get; set; } = false;

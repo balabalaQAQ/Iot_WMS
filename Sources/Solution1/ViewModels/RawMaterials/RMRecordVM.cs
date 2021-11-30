@@ -1,4 +1,5 @@
 ﻿using EntityModel.OR;
+using EntityModel.Orders;
 using EntityModel.RawMaterials;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,20 @@ namespace ViewModels.RawMaterials
 {
     public class RMRecordVM : EntityViewModel
     {
-        [Display(Name = "操作时间简称")]
-        [Required(ErrorMessage = "操作时间是必须的")]
+   
         public string SetTime { get; set; }//操作时间
 
-        public virtual Guid UserId { get; set; }//操作人Id
+        public string SetUserName { get; set; }//操作人名称
 
-
-        [Display(Name = "操作类型简称")]
-        [Required(ErrorMessage = "操作类型是必须的")]
         public SetType setType { get; set; }//操作类型
 
-        [Display(Name = "操作数量简称")]
-        [Required(ErrorMessage = "操作数量是必须的")]
+        public virtual Order Order { get; set; }//所属订单
+
+        public List<Order> OrderList { get; set; }//所有审核状态为完成的订单
         public int SetNum { get; set; }//操作数量
 
-        public virtual MaterialsInfo MaterialsInfo { get; set; } //原料信息
+        public double TotalPrice { get; set; }//总价
 
-        public virtual Guid MaterialsInfoId { get; set; } //原料信息Id
+        public virtual MaterialsInfo MaterialsInfo { get; set; } //原料信息
     }
 }

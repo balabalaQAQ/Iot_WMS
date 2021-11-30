@@ -126,7 +126,7 @@ var flag=0; //查询状态
           { key: "description", label: "记录描述" },
           { key: "setTime", label: "操作时间" },
           { key: "setType", label: "操作类型" },
-       //   { key: "director", label: "操作人" },
+          { key: "setUserName", label: "操作人" },
           { key: "setNum", label: "数量" },
           { key: "productInfo.name", label: "产品名" },
           { key: "totalPrice", label: "总价" },
@@ -170,7 +170,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].setUserName.indexOf(searchTextbox) != -1  ) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }

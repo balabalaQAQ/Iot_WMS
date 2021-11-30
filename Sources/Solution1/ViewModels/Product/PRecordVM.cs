@@ -14,10 +14,10 @@ namespace ViewModels.Product
     {
         //[Display(Name = "操作时间")]
       //  [Required(ErrorMessage = "操作时间是必须的")]
-       public string SetTime { get; set; } = DateTime.Now.ToString();//操作时间
+       public string SetTime { get; set; }//操作时间
 
-        // public   Guid Userid { get; set; }//操作人ID
-        // public string SerUserName { get; set; }//操作人名称
+ 
+       public string SetUserName { get; set; }//操作人名称
 
         public SetType setType { get; set; }//操作类型
 

@@ -76,7 +76,18 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
+
+    
     for( var i=0;i< mumitems.length;i++){
+     var daynow = new Date();
+     daynow.setTime(daynow.getTime());
+     var dateBegin = new Date(mumitems[i].setTime); 
+      if( Math.floor(daynow.getTime()-dateBegin.getTime()) / (24 * 3600 * 1000)>=30){//间隔30以上则不为新产品
+        mumitems[i].isNew="否"
+      }
+      else{
+        mumitems[i].isNew="是"
+      }
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
@@ -136,7 +147,8 @@ var flag=0; //查询状态
           { key: "name", label: "产品名" },
           { key: "pCategory.name", label: "类别" },
           { key: "inventory", label: "库存量" },
-          { key: "order.orderNum", label: "所属订单号" },
+          { key: "price", label: "单价" },
+          { key: "isNew", label: "是否为新" },
           { key: "description", label: "产品描述" },
           { key: "operation", label: "操作" }
         ],
@@ -155,7 +167,7 @@ var flag=0; //查询状态
               if(flag==0)
                 item.mumitems=res.data;
               else//进入查询
-                item.mumitems=[...item.saveitems];//数组数据类型转化
+                item.mumitems=[...item.saveitems];//为数组的数据类型进行转化
        })
        return (item.mumitems)
       },
@@ -178,7 +190,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].order.orderNum.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].pCategory.Name.indexOf(searchTextbox) != -1  ) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }
@@ -190,14 +202,14 @@ var flag=0; //查询状态
       createData() {       console.log(this.mumitems[0]);
         this.$router.push({
            name: "ProductIns",
-           params: { order:this.mumitems[0].orderList,pcategory:this.mumitems[0].pCategoryList}
+           params: {pcategory:this.mumitems[0].pCategoryList}
          });
         
       },
       editData(id) {
         this.$router.push({
           name: "ProductEdit",
-          params: { id: id,order:this.mumitems[0].orderList,pcategory:this.mumitems[0].pCategoryList}
+          params: { id: id,pcategory:this.mumitems[0].pCategoryList}
         })
       },
       deleteData(id) {
@@ -215,7 +227,6 @@ var flag=0; //查询状态
        var item=this
        flag=0;
        this.$axios.get(uri).then(function(res){
-  
        item.mumitems = displayData(res.data)
        })
        

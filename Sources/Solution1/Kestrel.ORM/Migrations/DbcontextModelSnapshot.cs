@@ -28,8 +28,8 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DirectorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Director")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPseudoDelete")
                         .HasColumnType("bit");
@@ -37,14 +37,17 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<string>("OrderNum")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<Guid?>("ReviewerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Reviewer")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SetTime")
                         .HasColumnType("nvarchar(max)");
@@ -59,10 +62,6 @@ namespace Kestrel.ORM.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DirectorId");
-
-                    b.HasIndex("ReviewerId");
 
                     b.ToTable("Order");
                 });
@@ -94,6 +93,26 @@ namespace Kestrel.ORM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f838a08a-9012-4ff4-84b3-d14d0d2061ff"),
+                            CategoryNum = "ZNJJ-001",
+                            Description = "新一代智能家居系列",
+                            DisplayName = "Iot设备",
+                            IsPseudoDelete = false,
+                            Name = "智能家居系列-Iot设备"
+                        },
+                        new
+                        {
+                            Id = new Guid("77d79a4e-0f7f-4803-b57c-8bfdc553e2c9"),
+                            CategoryNum = "WL-001",
+                            Description = "新一代微量级系列",
+                            DisplayName = "Iot芯片",
+                            IsPseudoDelete = false,
+                            Name = "微量级系列-Iot芯片"
+                        });
                 });
 
             modelBuilder.Entity("EntityModel.Product.PRecord", b =>
@@ -123,6 +142,9 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("SetTime")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SetUserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SortCode")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -130,17 +152,12 @@ namespace Kestrel.ORM.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("setType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductInfoId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("PRecord");
                 });
@@ -163,9 +180,6 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("PCategoryId")
                         .HasColumnType("uniqueidentifier");
 
@@ -180,8 +194,6 @@ namespace Kestrel.ORM.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("PCategoryId");
 
@@ -215,6 +227,26 @@ namespace Kestrel.ORM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("51efd022-5180-4781-a7e8-c978cfdc31e1"),
+                            CategoryNum = "STM-32F",
+                            Description = "Stm32微型集成MCU",
+                            DisplayName = "STM32",
+                            IsPseudoDelete = false,
+                            Name = "Stm32微型集成MCU（附带WIFI模块）-STM32F3206"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbc0b462-dee1-42d7-8858-1a688527c31e"),
+                            CategoryNum = "TC01",
+                            Description = "映射模块-TC01",
+                            DisplayName = "映射模块",
+                            IsPseudoDelete = false,
+                            Name = "映射模块-TC01"
+                        });
                 });
 
             modelBuilder.Entity("EntityModel.RawMaterials.MaterialsInfo", b =>
@@ -232,8 +264,8 @@ namespace Kestrel.ORM.Migrations
                     b.Property<bool>("IsPseudoDelete")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MCategory")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("MCategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MaterialsID")
                         .HasColumnType("nvarchar(max)");
@@ -241,16 +273,13 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("SortCode")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("MCategoryId");
 
                     b.ToTable("MaterialsInfo");
                 });
@@ -273,18 +302,24 @@ namespace Kestrel.ORM.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("SetNum")
                         .HasColumnType("int");
 
                     b.Property<string>("SetTime")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SetUserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SortCode")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("setType")
                         .HasColumnType("int");
@@ -293,7 +328,7 @@ namespace Kestrel.ORM.Migrations
 
                     b.HasIndex("MaterialsInfoId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("RMRecord");
                 });
@@ -329,6 +364,44 @@ namespace Kestrel.ORM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8f95a79a-ba01-4c1c-9268-a73c79a9cd9d"),
+                            DepartmentName = "管理员",
+                            Description = "管理员：拥有用户管理、原料采购管理、产品出入库管理权限",
+                            DisplayName = "Adimn",
+                            IsPseudoDelete = false,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("c6ad9093-9c9c-4345-8a74-b48ab87020b6"),
+                            DepartmentName = "采购部门",
+                            Description = "采购部门：拥有个人信息管理、原料采购信息管理权限。",
+                            DisplayName = "Purchase",
+                            IsPseudoDelete = false,
+                            Name = "PurchasingDepartment"
+                        },
+                        new
+                        {
+                            Id = new Guid("d3137fb2-c30f-431b-88c0-3e59230a88b1"),
+                            DepartmentName = "生产部门",
+                            Description = "生产部门：拥有个人信息管理、原料领取管理、生产货物信息管理、产品入库管理权限",
+                            DisplayName = "Production",
+                            IsPseudoDelete = false,
+                            Name = "ProductionDepartment"
+                        },
+                        new
+                        {
+                            Id = new Guid("9d0387d5-795f-4d03-8582-95a82be78851"),
+                            DepartmentName = "销售部门",
+                            Description = "销售部门：拥有个人信息管理、产品入库管理权限",
+                            DisplayName = "Sale",
+                            IsPseudoDelete = false,
+                            Name = "SaleDepartment"
+                        });
                 });
 
             modelBuilder.Entity("EntityModel.Users.IUser", b =>
@@ -337,9 +410,30 @@ namespace Kestrel.ORM.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HeadPortrait")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityCardNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsLockoutEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPseudoDelete")
                         .HasColumnType("bit");
@@ -348,10 +442,19 @@ namespace Kestrel.ORM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("NativePlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
+
                     b.Property<string>("Post")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("RoleId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Sex")
@@ -366,287 +469,21 @@ namespace Kestrel.ORM.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("IUser");
-                });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole<Guid>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser<Guid>");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("EntityModel.Users.Role", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>");
-
-                    b.Property<string>("DepartmentName")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("DisplayName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("IsPseudoDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SortCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasDiscriminator().HasValue("Role");
-                });
-
-            modelBuilder.Entity("EntityModel.Users.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("IsPseudoDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Post")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Sex")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SortCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("EntityModel.Orders.Order", b =>
-                {
-                    b.HasOne("EntityModel.Users.User", "Director")
-                        .WithMany()
-                        .HasForeignKey("DirectorId");
-
-                    b.HasOne("EntityModel.Users.User", "Reviewer")
-                        .WithMany()
-                        .HasForeignKey("ReviewerId");
-
-                    b.Navigation("Director");
-
-                    b.Navigation("Reviewer");
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b3b145cd-cd37-4dff-b6bf-e141697ab342"),
+                            AccessFailedCount = 0,
+                            EmployeeNumber = "Admin",
+                            IsLockoutEnabled = false,
+                            IsPseudoDelete = false,
+                            Name = "Administrator",
+                            Password = "123456",
+                            Phone = 0,
+                            RoleId = new Guid("8f95a79a-ba01-4c1c-9268-a73c79a9cd9d"),
+                            Sex = false
+                        });
                 });
 
             modelBuilder.Entity("EntityModel.Product.PRecord", b =>
@@ -655,37 +492,25 @@ namespace Kestrel.ORM.Migrations
                         .WithMany()
                         .HasForeignKey("ProductInfoId");
 
-                    b.HasOne("EntityModel.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("ProductInfo");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityModel.Product.ProductInfo", b =>
                 {
-                    b.HasOne("EntityModel.Orders.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId");
-
                     b.HasOne("EntityModel.Product.PCategory", "PCategory")
                         .WithMany()
                         .HasForeignKey("PCategoryId");
-
-                    b.Navigation("Order");
 
                     b.Navigation("PCategory");
                 });
 
             modelBuilder.Entity("EntityModel.RawMaterials.MaterialsInfo", b =>
                 {
-                    b.HasOne("EntityModel.Orders.Order", "Order")
+                    b.HasOne("EntityModel.RawMaterials.MCategory", "MCategory")
                         .WithMany()
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("MCategoryId");
 
-                    b.Navigation("Order");
+                    b.Navigation("MCategory");
                 });
 
             modelBuilder.Entity("EntityModel.RawMaterials.RMRecord", b =>
@@ -694,80 +519,22 @@ namespace Kestrel.ORM.Migrations
                         .WithMany()
                         .HasForeignKey("MaterialsInfoId");
 
-                    b.HasOne("EntityModel.Users.User", "User")
+                    b.HasOne("EntityModel.Orders.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("MaterialsInfo");
 
-                    b.Navigation("User");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("EntityModel.Users.IUser", b =>
                 {
                     b.HasOne("EntityModel.Users.IRole", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
-                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityModel.Users.User", b =>
-                {
-                    b.HasOne("EntityModel.Users.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });

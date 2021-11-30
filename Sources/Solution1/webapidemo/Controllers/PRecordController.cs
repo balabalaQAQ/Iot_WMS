@@ -43,7 +43,7 @@ namespace webapidemo.Controllers
         [HttpGet]
         public async Task<List<PRecordVM>> GetPRecords()
         { 
-            var VM = await _servicePR.GetBoVMCollectionAsyn(x => x.User, y => y.ProductInfo);
+            var VM = await _servicePR.GetBoVMCollectionAsyn(y => y.ProductInfo);
             return VM;
         }
 
@@ -69,7 +69,7 @@ namespace webapidemo.Controllers
         [HttpGet("{id}")]  // 这里直接将方法的路由再做一次定义 api/PRecord/id
         public async Task<ActionResult<PRecordVM>> GetPRecord(Guid id)
         {
-            var VM = _servicePR.GetBoVMAsyn(id,x=>x.User.Id);
+            var VM =   _servicePR.GetBoVMAsyn(id ,y=> y.ProductInfo);
 
 
             if (VM == null)
@@ -85,7 +85,6 @@ namespace webapidemo.Controllers
         {
 
             var PRecord = await _servicePR.GetBoVMAsyn(id,x=>x.ProductInfo);
-            var VM = await _servicePR.GetBoVMAsyn(id, x => x.User.Id);
             if (PRecord != null)
             {
                 await _servicePR.SaveBoAsyn(PRecordVM);

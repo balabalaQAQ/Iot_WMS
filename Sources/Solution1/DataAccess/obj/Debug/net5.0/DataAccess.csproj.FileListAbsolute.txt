@@ -48,4 +48,7 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.c
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\bin\Debug\net5.0\DataAccess.runtimeconfig.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\bin\Debug\net5.0\DataAccess.runtimeconfig.dev.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.genruntimeconfig.cache
 D:\Program\bs\Iot_WMS\Sources\Solution1\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CopyComplete

@@ -19,9 +19,6 @@ namespace ViewModels.Product
         public int Inventory { get; set; }//库存量
 
         public string ProductID { get; set; } // 产品编号
-        public virtual Order Order { get; set; }//所属订单
-
-        public List<Order> OrderList { get; set; }
 
 
         public double Price { get; set; }//单价

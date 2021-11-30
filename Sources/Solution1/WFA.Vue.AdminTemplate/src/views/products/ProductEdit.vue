@@ -30,6 +30,11 @@
                   onkeyup="value=value.replace(/[^\d]/g,'')"   type="text" autocomplete="inventory" required placeholder=" "></b-form-input>
               </b-form-group>   </br>
               
+              <b-form-group description=" " label="单价" label-for="price" :label-cols="1">
+                <b-form-input id="price"  @input="anyprice"  v-model="ProductForm.price"    maxlength="9"
+                  @keyup="ProductForm.price=ProductForm.price.toString().replace().replace(/\.{2,}/g,'.').replace('.','$#$').replace(/\./g,'').replace('$#$','.')" 
+                  onkeyup="value=value.replace(/[^\d]/g,'')"   type="text" autocomplete="price" required placeholder=" "></b-form-input>
+              </b-form-group>   </br>
  
  
 
@@ -45,15 +50,7 @@
 
               </b-form-group>
               
-               <b-form-group description=" " label="所属订单号" label-for="order" :label-cols="1"> 
-                <b-form-select id="input-3"
-                               v-model="ProductForm.order"
-                               :options =" this.orderitem "
-                               value-field= id
-                               text-field= orderNum
-                               required>
-
-                </b-form-select>
+          
 
               </b-form-group>
         
@@ -113,14 +110,12 @@
           errors: [],
           productID:"",
           name: "",
+          price:0.0,
           pCategory:"",
           inventory:0,
-          orderNumber:"",
-          order:"",
           description: ""
         },
         pCategoryitem :[],
-        orderitem: [],
         
         show: true
       }
@@ -132,7 +127,25 @@
 
     // 方法
     methods: {
-     
+      anyprice(e){//监听单价格式 
+        if(e.length > 1 && e.substr(0,1) ==0 && e.substr(1,1) !='.'){//首位不能为0，会被后面输入的数直接覆盖
+            this.$nextTick(() => {
+                this.ProductForm.price= e.substr(1,1)
+                   console.log( e.substr(1,1));
+            });
+        }
+        if(e.substr(0,1)=="." && e!=''){//若首位为·则转换为0
+            this.$nextTick(() => {
+                  console.log(111);
+                  this.ProductForm.price= parseFloat(0)
+            });
+        }
+         if(e.length > 3){//长度大于3时开始检测，使其小数只能保留两位
+          this.$nextTick(() => {
+            this.ProductForm.price = (e.match(/^\d*(\.?\d{0,2})/g)[0]) || null
+          });
+         }
+      },
       // 提交数据
       onSubmit(evt) {
          
@@ -146,23 +159,15 @@
        
           } 
         }
-       for(var i in this.orderitem)
-        {  
-          if(this.orderitem[i].id==this.ProductForm.order)
-          {
-        
-           this.ProductForm.order=this.orderitem[i]
-       
-          } 
-        }
+      
         const item = {
           Id:this.ProductForm.id,
           ProductID:this.ProductForm.productID,
           Name: this.ProductForm.name,
           Description: this.ProductForm.description,
-          Order:this.ProductForm.order,
           PCategory:this.ProductForm.pCategory,
-          Inventory:this.ProductForm.inventory
+          Inventory:this.ProductForm.inventory,
+          Price:this.ProductForm.price
         };
          this.$axios.put(uri+this.$route.params.id,item)
         // 返回列表页
@@ -184,8 +189,6 @@
     created: function () {
            
         this.pCategoryitem = this.$route.params.pcategory;
-        this.orderitem = this.$route.params.order;
-   
  
         var item = this;
         if(this.$route.params.id==null)//如果数据已经丢失退出编辑
@@ -196,7 +199,6 @@
           item.ProductForm=res.data
               
           item.ProductForm.pCategory=res.data.pCategory.id;
-          item.ProductForm.order=res.data.order.id;
            console.log(item.ProductForm);
          // console.log(item);
           })   

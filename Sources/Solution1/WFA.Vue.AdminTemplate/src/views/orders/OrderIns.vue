@@ -61,18 +61,34 @@
               </b-form-group>
 
               <b-form-group validated
-                            description="请输入总价"
+                            description="请输入数量"
+                            label="数量："
+                            label-for="number">
+                            <b-form-input id="number" 
+                              onkeyup="value=value.replace(/[^\d]/g,'')" 
+                              v-model="Orderform.number"
+                              type="text"
+                              autocomplete="number"
+                              required
+                              placeholder="请输入数量"
+                              maxlength = "9"
+	                            ></b-form-input>
+              </b-form-group>
+
+              <b-form-group validated
+                            description="请输入实际总价"
                             label="总价："
                             label-for="totalprice">
                             <b-form-input id="totalprice"
+                              @input="anyprice" 
                               v-model="Orderform.totalprice"
                               type="text"
                               autocomplete="totalprice"
+                              maxlength = "9"
+                              @keyup="Orderform.price=Orderform.price.toString().replace().replace(/\.{2,}/g,'.').replace('.','$#$').replace(/\./g,'').replace('$#$','.')" 
                               required
                               placeholder="请输入总价"></b-form-input>
               </b-form-group>
- 
- 
  
               <b-form-group description label="订单说明" label-for="description">
                 <b-form-input id="description"
@@ -115,6 +131,7 @@
           errors: [],
           ordernum:"",
           name: "",
+          number:0,
           price:0.0,
           totalprice:0.0,
           description: ""
@@ -132,7 +149,7 @@
         return value ? decodeURIComponent(value[1]) : null;
         }
       },
-      anyprice(e){//监听单价格式 
+      anyprice(e){//监听单价、总价格式 
         if(e.length > 1 && e.substr(0,1) ==0 && e.substr(1,1) !='.'){//首位不能为0，会被后面输入的数直接覆盖
             this.$nextTick(() => {
                 this.Orderform.price= e.substr(1,1)
@@ -153,15 +170,15 @@
       },
       // 提交数据
       checkForm(evt) {
-       
-       
         this.Orderform.errors = [];
         const item = {
           OrderNum:this.Orderform.ordernum,
           Name: this.Orderform.name,
+          Number:this.Orderform.number,
           Description: this.Orderform.description,
           Price: this.Orderform.price,
           TotalPrice:this.Orderform.totalprice,
+          Director:"demo"
         };
        const uri = 'https://localhost:5001/api/Order/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)

@@ -7,7 +7,6 @@ namespace EntityModel.Users
 {
     public class User : IdentityUser<Guid>, IEntity
     {
-        public Guid Id { get; set; }
         [StringLength(100)]
         public string Name { get; set; }  // 昵称
         [StringLength(500)]

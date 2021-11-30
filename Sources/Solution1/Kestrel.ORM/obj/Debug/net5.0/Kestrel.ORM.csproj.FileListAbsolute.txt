@@ -40,3 +40,6 @@ D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\obj\Debug\net5.0\Kestrel.ORM
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\obj\Debug\net5.0\Kestrel.ORM.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\obj\Debug\net5.0\ref\Kestrel.ORM.dll
 D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\obj\Debug\net5.0\Kestrel.ORM.pdb
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\bin\Debug\net5.0\Kestrel.ORM.runtimeconfig.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\bin\Debug\net5.0\Kestrel.ORM.runtimeconfig.dev.json
+D:\Program\bs\Iot_WMS\Sources\Solution1\Kestrel.ORM\obj\Debug\net5.0\Kestrel.ORM.genruntimeconfig.cache

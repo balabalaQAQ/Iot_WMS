@@ -101,15 +101,12 @@ namespace webapidemo
             });
             //   ÃÌº” DI ≈‰÷√
             //”√ªß
-
-            //services.AddScoped<IWebAPIModelService<IUser, UserVM>, WebAPIModelService<IUser, UserVM>>();
             services.AddScoped<IEntityRepository<IUser>, EntityRepository<IUser>>();
             services.AddScoped<IWebAPIModelService<IUser, UserVM>, WebAPIModelService<IUser, UserVM>>();
 
 
             services.AddScoped<IEntityRepository<IRole>, EntityRepository<IRole>>();
             services.AddScoped<IWebAPIModelService<IRole, RoleVM>, WebAPIModelService<IRole, RoleVM>>();
-            //  services.AddScoped<IWebAPIModelService<Role, RoleVM>, WebAPIModelService<Role, RoleVM>>();
 
             services.AddScoped<IEntityRepository<User>, EntityRepository<User>>();
           //  services.AddScoped<IWebAPIModelService<User, UserVM>, WebAPIModelService<User, UserVM>>();

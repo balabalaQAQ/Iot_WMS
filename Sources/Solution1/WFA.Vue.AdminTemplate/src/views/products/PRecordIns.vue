@@ -218,7 +218,8 @@
           setType:Number(this.PRecordForm.setType),
           SetNum:Number(this.PRecordForm.setNum),
           TotalPrice:Number(this.PRecordForm.totalPrice),
-          ProductInfo: this.pitem
+          ProductInfo: this.pitem,
+          SetUserName:"PRdemo"
         };
        const uri2 = 'https://localhost:5001/api/ProductInfo/'; 
        const uri = 'https://localhost:5001/api/PRecord/'; 
@@ -263,16 +264,11 @@
          
           })   
         }
-
-     
           var setType=['入库',"出库"];
           item.setTypeitem=setType;
           item.PRecordForm=this.$route.params.item;
- 
           item.PRecordForm.setType=setType[0];
  
-    
-      
       this. PRecordForm.Id = newGuid();
       // 生成 guid
       function newGuid() {

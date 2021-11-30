@@ -138,6 +138,7 @@ var flag=0; //查询状态
           { key: "description", label: "订单描述" },
           { key: "setTime", label: "申请时间" },
           { key: "status", label: "订单状态" },
+          { key: "number", label: "数量" },
           { key: "director", label: "负责人" },
           { key: "reviewer", label: "审核人" },
           { key: "price", label: "单价" },

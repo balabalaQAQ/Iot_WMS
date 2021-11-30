@@ -8,14 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using System;
 namespace Kestrel.ORM
 {
-    public class Dbcontext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+    public class Dbcontext :DbContext
     {
         public Dbcontext(DbContextOptions<Dbcontext> options) : base(options) { }
-        #region 用户角色实体
-        public DbSet<User> User { get; set; }//用户
-        public DbSet<Role> Role { get; set; }//用户角色
 
-        public DbSet<IUser> IUser { get; set; }//用户
+        protected override void OnModelCreating(ModelBuilder builder)//重写并调用自定义种子类
+        {
+            builder.Seed();
+        }
+
+        #region 用户角色实体
+        public DbSet<IUser> IUser { get; set; }//用户 
         public DbSet<IRole> IRole { get; set; }//用户角色
 
         #endregion

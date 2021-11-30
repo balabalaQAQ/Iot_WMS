@@ -23,12 +23,12 @@ namespace EntityModel.Orders
         public Status Status { get; set; } = 0;//订单状态
         public float Price { get; set; } = 0;//单价
 
-      //  public int Number { get; set; }//数量
+        public int Number { get; set; }//数量
 
         public float TotalPrice { get; set; }//总价
 
-        public virtual User Director { get; set; }//负责人
-        public virtual User Reviewer { get; set; }//审核人
+        public string Director { get; set; }//负责人
+        public string Reviewer { get; set; }//审核人
         public string SortCode { get; set; }
         public bool IsPseudoDelete { get; set; } = false;//无需删除
 

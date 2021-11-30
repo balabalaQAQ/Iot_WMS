@@ -9,10 +9,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityModel.Orders;
 
 namespace EntityModel.RawMaterials
 {
-    public class RMRecord : IEntity//原料记录
+    public class RMRecord : IEntity//原料操作记录
     {
         public Guid Id { get; set; }
 
@@ -21,11 +22,14 @@ namespace EntityModel.RawMaterials
 
         public string SetTime { get; set; }//操作时间
 
-        public virtual User User { get; set; }//操作人
+        public string  SetUserName { get; set; }//操作人名称
 
         public SetType setType { get; set; }//操作类型
 
+        public virtual Order Order { get; set; }//所属订单
         public int SetNum { get; set; }//操作数量
+
+        public double TotalPrice { get; set; }//总价
 
         public virtual MaterialsInfo MaterialsInfo{get;set;} //原料信息
         [StringLength(200)]

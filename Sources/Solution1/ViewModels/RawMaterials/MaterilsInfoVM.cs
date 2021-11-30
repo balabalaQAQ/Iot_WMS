@@ -18,8 +18,6 @@ namespace ViewModels.RawMaterials
         [Required(ErrorMessage = "库存量是必须的")]
 
         public int Inventory { get; set; }//库存量
-
-        public virtual Order Order { get; set; }//所属订单
-        public   Guid OrderId { get; set; }//所属订单Id
+ 
     }
 }

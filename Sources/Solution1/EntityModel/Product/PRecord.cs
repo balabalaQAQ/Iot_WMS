@@ -21,7 +21,7 @@ namespace EntityModel.Product
 
         public string SetTime { get; set; }//操作时间
 
-        public virtual User User { get; set; }//操作人
+        public string SetUserName { get; set; }//操作人名称
 
         public string SerUserName { get; set; }//操作人名称
 
