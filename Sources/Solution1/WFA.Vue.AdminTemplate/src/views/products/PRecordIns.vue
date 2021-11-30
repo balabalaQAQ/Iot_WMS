@@ -39,10 +39,8 @@
                             <b-form-input
                               @input="anysetNum" 
                               id="setNum"
-                            
                               onkeyup="value=value.replace(/[^\d]/g,'')" 
                               v-model="PRecordForm.setNum"
-
                               type="text"
                               autocomplete="setNum"
                               required
@@ -115,12 +113,6 @@
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
 
-            <!-- 调试期间的数据呈现 -->
-         <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MallForm }}</pre>
-            </b-card>
-          </b-card>
-          -->
               </b-card>
         </transition>
       </b-col>
@@ -165,30 +157,38 @@
         }
       },
       anysetNum(e){//监听输入的操作数量，使其在合法范围内
-      if((this.PRecordForm.setNum>this.PRecordForm.inventory)&&this.PRecordForm.setType=="出库"){
-          this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
-          this.PRecordForm.setNum = this.PRecordForm.inventory
-          this.PRecordForm.totalPrice=this.PRecordForm.setNum*this.PRecordForm.price;
-          });
+      if(this.PRecordForm.setType=="出库"){
+         const setNumTextbox = document.getElementById('setNum')
+         const totalPriceTextbox = document.getElementById('totalPrice')
+         var setNum=Number(this.PRecordForm.setNum);
+          if(setNum>=this.PRecordForm.inventory){
+            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
+              setNum= this.PRecordForm.inventory
+              this.PRecordForm.totalPrice=setNum*this.PRecordForm.price;
+              setNumTextbox.value=setNum
+              totalPriceTextbox.value=this.PRecordForm.totalPrice
+            });
+            console.log(setNum,this.PRecordForm.totalPrice);
+          }
+          else{
+            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
+              this.PRecordForm.totalPrice=setNum*this.PRecordForm.price;
+              totalPriceTextbox.value=this.PRecordForm.totalPrice
+            });
+             console.log(22,setNum,this.PRecordForm.price);
+          }
+      
         }
       },
       anysetType(e){//监听出入库操作 对相关影响参数进行修改
+         const totalPriceTextbox = document.getElementById('totalPrice')
         if(e=="入库"){//入库不需要计算销售总价
-          this.PRecordForm.totalPrice=0;
-          this.PRecordForm.setNum ++;
-          this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
-          this.PRecordForm.setNum -= 1;
-           });
+          totalPriceTextbox.value=this.PRecordForm.totalPrice
           this.PRecordForm.totalPrice=0;
         }
         else{
-            this.PRecordForm.setNum ++;
-            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
-            this.PRecordForm.setNum -= 1;
-            if(this.PRecordForm.setNum>this.PRecordForm.inventory)
-                this.PRecordForm.setNum = this.PRecordForm.inventory//更新操作数量
             this.PRecordForm.totalPrice=this.PRecordForm.setNum*this.PRecordForm.price;//更新总价
-            });
+            totalPriceTextbox.value=this.PRecordForm.totalPrice;
         }
       },
       // 提交数据
@@ -200,19 +200,14 @@
            this. PRecordForm.setType=i
           } 
         }
-        if(this.PRecordForm.setType==1&&this.PRecordForm.setNum>this.PRecordForm.inventory){//出库量大于入库量
-             this.PRecordForm.setNum==this.PRecordForm.inventory;
-        }
         if(this. PRecordForm.setType==0){//入库
             this.pitem.inventory+=Number( this.PRecordForm.setNum);
             this.PRecordForm.totalPrice=0;
         }
-        else{
+        else{//出库
             this.pitem.inventory-=Number( this.PRecordForm.setNum);
         }
-        console.log(this.pitem)
         const item = {
-          Id: this. PRecordForm.Id ,
           Name: this.PRecordForm.rname,
           Description: this. PRecordForm.description,
           setType:Number(this.PRecordForm.setType),
@@ -225,13 +220,12 @@
        const uri = 'https://localhost:5001/api/PRecord/'; 
      
         // Web API 的访问服务地址
-       console.log(item);
        this.$axios.post(uri,item);
         this.$nextTick(() => { 
           this.$axios.put(uri2+this.pitem.id,this.pitem);
-      //  
+      
         });
-    //    this.$router.go(-1);
+         this.$router.go(-1);
         evt.preventDefault();
       },
 
@@ -255,31 +249,20 @@
       const uri2 ='https://localhost:5001/api/ProductInfo/';
        var item = this;
         if(this.$route.params.id==null)//如果数据已经丢失退出编辑
-         {//his.$router.go(-1)
+         {
+           this.$router.go(-1)
          }   
         else{
           this.$axios.get(uri2+this.$route.params.id).then(function(res){
-          
           item.pitem=res.data;
-         
           })   
         }
           var setType=['入库',"出库"];
           item.setTypeitem=setType;
           item.PRecordForm=this.$route.params.item;
           item.PRecordForm.setType=setType[0];
- 
-      this. PRecordForm.Id = newGuid();
-      // 生成 guid
-      function newGuid() {
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
-          c
-        ) {
-          var r = (Math.random() * 16) | 0,
-            v = c == "x" ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        });
-      }
+          item.PRecordForm.description="";
+          item.PRecordForm.setNum=0;
     }
   };
 </script>

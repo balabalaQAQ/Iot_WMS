@@ -24,7 +24,6 @@
                 <b-form-input id="productID" v-model="ProductForm.productID"   type="text" autocomplete="productID" required placeholder=" " maxlength="30"></b-form-input>
               </b-form-group>   </br>
  
-
               <b-form-group description=" " label="库存量" label-for="inventory" :label-cols="1">
                 <b-form-input id="inventory" v-model="ProductForm.inventory"    maxlength="5"
                   onkeyup="value=value.replace(/[^\d]/g,'')"   type="text" autocomplete="inventory" required placeholder=" "></b-form-input>
@@ -33,10 +32,8 @@
               <b-form-group description=" " label="单价" label-for="price" :label-cols="1">
                 <b-form-input id="price"  @input="anyprice"  v-model="ProductForm.price"    maxlength="9"
                   @keyup="ProductForm.price=ProductForm.price.toString().replace().replace(/\.{2,}/g,'.').replace('.','$#$').replace(/\./g,'').replace('$#$','.')" 
-                  onkeyup="value=value.replace(/[^\d]/g,'')"   type="text" autocomplete="price" required placeholder=" "></b-form-input>
-              </b-form-group>   </br>
- 
- 
+                 type="text" autocomplete="price" required placeholder=" "></b-form-input>
+              </b-form-group> </br>
 
               <b-form-group description=" " label="产品类别" label-for="pCategory":label-cols="1">
                 <b-form-select id="input-3"
@@ -45,15 +42,9 @@
                                value-field= id
                                text-field= name
                                required>
-
                 </b-form-select>
-
               </b-form-group>
-              
-          
 
-              </b-form-group>
-        
               <b-form-group description=" " label="产品说明" label-for="description" :label-cols="1">
                 <b-form-input id="description"
                               v-model="ProductForm.description"
@@ -71,13 +62,6 @@
               <b-button type="reset" variant="danger">重置表单</b-button>
             </b-row>
             </b-form>
-
-            <!-- 调试期间的数据呈现 -->
-            <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MalloFrm }}</pre>
-            </b-card>
-          </b-card>
-          -->
           </b-card>
 
         </transition>
@@ -96,10 +80,9 @@
     props: {
       caption: {
         type: String,
-        default: '审核订单信息'
+        default: '编辑产品信息'
       },
     },
-
     // 数据定义
     data: function () {
       return {
@@ -116,27 +99,22 @@
           description: ""
         },
         pCategoryitem :[],
-        
         show: true
       }
     },
-
     // 计算属性
     computed: {
     },
-
     // 方法
     methods: {
       anyprice(e){//监听单价格式 
         if(e.length > 1 && e.substr(0,1) ==0 && e.substr(1,1) !='.'){//首位不能为0，会被后面输入的数直接覆盖
             this.$nextTick(() => {
                 this.ProductForm.price= e.substr(1,1)
-                   console.log( e.substr(1,1));
             });
         }
         if(e.substr(0,1)=="." && e!=''){//若首位为·则转换为0
             this.$nextTick(() => {
-                  console.log(111);
                   this.ProductForm.price= parseFloat(0)
             });
         }
@@ -148,7 +126,6 @@
       },
       // 提交数据
       onSubmit(evt) {
-         
         this.ProductForm.errors = [];
          for(var i in this.pCategoryitem)
         {  
@@ -159,7 +136,6 @@
        
           } 
         }
-      
         const item = {
           Id:this.ProductForm.id,
           ProductID:this.ProductForm.productID,
@@ -170,7 +146,7 @@
           Price:this.ProductForm.price
         };
          this.$axios.put(uri+this.$route.params.id,item)
-        // 返回列表页
+         // 返回列表页
          this.$router.go(-1)
          evt.preventDefault();
        
@@ -178,6 +154,17 @@
       // 重置表单
       onReset(evt) {
         evt.preventDefault()
+        this.pCategoryitem = this.$route.params.pcategory;
+        var item = this;
+        if(this.$route.params.id==null)//如果数据已经丢失退出编辑
+            this.$router.go(-1)
+        else{
+          this.$axios.get(uri+this.$route.params.id).then(function(res){
+          item.ProductForm=res.data  
+          item.ProductForm.pCategory=res.data.pCategory.id;
+          })   
+  
+        }
       },
       // 关闭编辑
       closeEdit() {
@@ -187,20 +174,14 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-           
         this.pCategoryitem = this.$route.params.pcategory;
- 
         var item = this;
         if(this.$route.params.id==null)//如果数据已经丢失退出编辑
             this.$router.go(-1)
         else{
           this.$axios.get(uri+this.$route.params.id).then(function(res){
-  
-          item.ProductForm=res.data
-              
+          item.ProductForm=res.data  
           item.ProductForm.pCategory=res.data.pCategory.id;
-           console.log(item.ProductForm);
-         // console.log(item);
           })   
   
         }

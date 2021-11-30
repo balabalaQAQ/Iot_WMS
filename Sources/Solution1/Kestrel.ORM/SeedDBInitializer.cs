@@ -41,6 +41,11 @@ namespace Kestrel.ORM
 
             );
             #endregion
+            #region 产品信息
+            context.Entity<ProductInfo>().HasData(//添加一般产品类型
+              new ProductInfo { Id = Guid.NewGuid(), Name="demo",Inventory = 0 , Price =0.0,}
+            );
+            #endregion
 
             #region 原料类型
             context.Entity<MCategory>().HasData(//添加一般原料类型

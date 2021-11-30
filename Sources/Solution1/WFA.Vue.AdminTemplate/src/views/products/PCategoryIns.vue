@@ -16,10 +16,7 @@
             </div>
 
             <b-form @submit="checkForm" @reset="onReset" v-if="show" id="data">
-
-              <b-card class="mt-3" header="数据校验">
-                <pre class="m-0">{{PCategoryform.errors}}</pre>
-              </b-card>
+ 
               <b-form-group validated
                             description="请输入产品类型名称"
                             label="产品类型名称："
@@ -70,13 +67,7 @@
               <b-button type="submit" variant="primary">添加产品类型</b-button>
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
-
-            <!-- 调试期间的数据呈现 -->
-         <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MallForm }}</pre>
-            </b-card>
-          </b-card>
-          -->
+ 
               </b-card>
         </transition>
       </b-col>
@@ -131,12 +122,7 @@
       },
 
       onSubmit(evt) {
-
         evt.preventDefault();
-
-
-
-
       },
       // 重置表单
       onReset(evt) {
@@ -154,25 +140,7 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-
-        
       this.directoritem = this.$route.params.director;
-   
-       //console.log(this.$route)
-      this.PCategoryform.Id = newGuid();
-     // this.PCategoryform.PCategoryNumber = 1000; // 需要获取最大值后重新赋值
-    
-       
-      // 生成 guid
-      function newGuid() {
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
-          c
-        ) {
-          var r = (Math.random() * 16) | 0,
-            v = c == "x" ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        });
-      }
     }
   };
 </script>

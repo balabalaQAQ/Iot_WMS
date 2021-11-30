@@ -71,9 +71,7 @@
                 </b-form-select>
 
               </b-form-group>
-              
 
-             
               </b-form-group>
               <b-form-group validated
                             description="请输入库存量"
@@ -88,8 +86,6 @@
                               placeholder="请输入库存量"></b-form-input>
               </b-form-group>
  
- 
- 
               <b-form-group description label="产品说明" label-for="description">
                 <b-form-input id="description"
                               v-model="ProductForm.description"
@@ -102,13 +98,6 @@
               <b-button type="submit" variant="primary">添加产品</b-button>
               <b-button type="reset" variant="danger">重置</b-button>
             </b-form>
-
-            <!-- 调试期间的数据呈现 -->
-         <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MallForm }}</pre>
-            </b-card>
-          </b-card>
-          -->
               </b-card>
         </transition>
       </b-col>
@@ -154,12 +143,10 @@
         if(e.length > 1 && e.substr(0,1) ==0 && e.substr(1,1) !='.'){//首位不能为0，会被后面输入的数直接覆盖
             this.$nextTick(() => {
                 this.ProductForm.price= e.substr(1,1)
-                   console.log( e.substr(1,1));
             });
         }
         if(e.substr(0,1)=="." && e!=''){//若首位为·则转换为0
             this.$nextTick(() => {
-                  console.log(111);
                   this.ProductForm.price= parseFloat(0)
             });
         }
@@ -175,9 +162,7 @@
         {  
           if(this.pCategoryitem[i].id==this.ProductForm.pCategory)
           {
-        
            this.ProductForm.pCategory=this.pCategoryitem[i]
-       
           } 
         }
         this.ProductForm.errors = [];
@@ -189,7 +174,6 @@
           PCategory:this.ProductForm.pCategory,
           Inventory:this.ProductForm.inventory
         };
-        console.log(item);
         const uri = 'https://localhost:5001/api/ProductInfo/';  // Web API 的访问服务地址
         this.$axios.post(uri,item)
         this.$router.go(-1);
@@ -213,24 +197,7 @@
 
     // 代码加载后直接执行的方法
     created: function () {
-
-        
       this.pCategoryitem = this.$route.params.pcategory;
-       console.log(this.$route)
-      this.ProductForm.Id = newGuid();
-     // this.ProductForm.orderNumber = 1000; // 需要获取最大值后重新赋值
-    
-       
-      // 生成 guid
-      function newGuid() {
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
-          c
-        ) {
-          var r = (Math.random() * 16) | 0,
-            v = c == "x" ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        });
-      }
     }
   };
 </script>

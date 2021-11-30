@@ -65,12 +65,7 @@
             </b-row>
             </b-form>
 
-            <!-- 调试期间的数据呈现 -->
-            <!--   <b-card class="mt-3" header="数据结果">
-              <pre class="m-0">{{ MallForm }}</pre>
-            </b-card>
-          </b-card>
-          -->
+ 
           </b-card>
 
         </transition>
@@ -142,6 +137,8 @@
          SetTime: this.OrderForm.setTime,
          Price: this.OrderForm.price,
          TotalPrice:this.OrderForm.totalPrice,
+         Director:this.OrderForm.director,
+         Reviewer:"admin"
         };
          this.$axios.put(uri+this.$route.params.id,item)
         // 返回列表页

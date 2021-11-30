@@ -200,7 +200,6 @@ var flag=0; //查询状态
     created() {
        var item=this;
        item.$axios.get(uri).then(function(res){
-       console.log(res.data[0]);
        item.mumitems = displayData(res.data)
        })
        

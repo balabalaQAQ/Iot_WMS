@@ -76,23 +76,23 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
-
-    
     for( var i=0;i< mumitems.length;i++){
-     var daynow = new Date();
-     daynow.setTime(daynow.getTime());
-     var dateBegin = new Date(mumitems[i].setTime); 
-      if( Math.floor(daynow.getTime()-dateBegin.getTime()) / (24 * 3600 * 1000)>=30){//间隔30以上则不为新产品
-        mumitems[i].isNew="否"
+      var daynow = new Date();
+      daynow.setTime(daynow.getTime());
+      var dateBegin = new Date(mumitems[i].setTime); 
+      if( Math.floor(daynow.getTime()-dateBegin.getTime()) / (24 * 3600 * 1000)>=30){//间隔30天以上则不为新产品
+        //mumitems[i].isNew="否";
+       
       }
       else{
-        mumitems[i].isNew="是"
+       // mumitems[i].isNew="是";
       }
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
       if(mumitems[i].name.length>=10)
           mumitems[i].name=mumitems[i].name.substr(0,10)+"..."
+      
     }
     return mumitems;
   }
@@ -148,7 +148,7 @@ var flag=0; //查询状态
           { key: "pCategory.name", label: "类别" },
           { key: "inventory", label: "库存量" },
           { key: "price", label: "单价" },
-          { key: "isNew", label: "是否为新" },
+          //{ key: "isNew", label: "是否为新" },
           { key: "description", label: "产品描述" },
           { key: "operation", label: "操作" }
         ],
@@ -199,12 +199,11 @@ var flag=0; //查询状态
          }})
       },
     
-      createData() {       console.log(this.mumitems[0]);
+      createData() {
         this.$router.push({
            name: "ProductIns",
            params: {pcategory:this.mumitems[0].pCategoryList}
-         });
-        
+         });   
       },
       editData(id) {
         this.$router.push({
@@ -220,7 +219,6 @@ var flag=0; //查询状态
           name: "PRecordIns",
           params: { item:item,id: id,name:name}
         })
-      
      }
     },
     created() {

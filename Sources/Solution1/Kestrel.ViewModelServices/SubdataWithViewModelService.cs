@@ -71,7 +71,7 @@ namespace Kestrel.ViewModelServices
               bo.ProductInfo = ProductInfoitem;
                
             }
-          
+            bo.SetTime = DateTime.Now.ToString();
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }

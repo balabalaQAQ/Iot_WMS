@@ -52,18 +52,7 @@
               
               />
             </nav>
-              <!--
-            <nav>
-              <b-pagination size="sm"
-                            :per-page="perPage"
-                            v-model="currentPage"
-                            prev-text="前一页"
-                            next-text="下一页"
-                            hide-goto-end-buttons
-                            align="right"
-                            @input="gotoPage(currentPage)" />
-            </nav>
-            -->
+ 
           </b-card>
         </transition>
       </b-col>
@@ -85,8 +74,6 @@ function displayData(mumitems){//对显示的数据进行预处理
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
 const uri ='https://localhost:5001/api/PCategory/';
 var flag=0; //查询状态
-//import { shuffleArray } from "@/shared/utils";
- // import Oidc from "oidc-client" ;
 
   export default {
     name: "PCategoryIndex",
@@ -142,7 +129,6 @@ var flag=0; //查询状态
       };
     },
  
-
     computed: {
       getmumitems: function () {
        var item=this
