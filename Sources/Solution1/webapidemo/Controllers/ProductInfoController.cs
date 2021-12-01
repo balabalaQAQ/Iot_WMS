@@ -23,10 +23,6 @@ namespace webapidemo.Controllers
 
     {
         private readonly IWebAPIModelService<ProductInfo, ProductInfoVM> _service;
-        public IWebAPIModelService<ProductInfo, ProductInfoVM> _serviceP;//提供给派生类使用的服务
-        private readonly IWebAPIModelService<PRecord, PRecordVM> Service;
-
-
 
         /// <summary>
         /// 构造函数,一般负责通过注入相关变量初始化控制器的标量
@@ -35,7 +31,6 @@ namespace webapidemo.Controllers
         public ProductInfoController(IWebAPIModelService<ProductInfo, ProductInfoVM> service)
         {
             this._service = service;
-            this._serviceP = service;
         }
         /// <summary>
         /// 获取所有的 ProductInfo 对象，前端访问定义 GET: api/ProductInfo
@@ -67,7 +62,7 @@ namespace webapidemo.Controllers
         public async Task<ActionResult<ProductInfoVM>> PostProductInfo(ProductInfoVM ProductInfoVM)
         {
             var saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
-            var item = await SubdataWithViewModelService.SaveProductInfoWithOrderAndPCategory(_service, ProductInfoVM);
+            var item = await SubdataWithViewModelService.SaveProductInfoWithPCategory(_service, ProductInfoVM);
             return CreatedAtAction(nameof(GetProductInfo), new { id = ProductInfoVM.Id }, ProductInfoVM);
         }
 
@@ -97,7 +92,7 @@ namespace webapidemo.Controllers
             var ProductInfo = await _service.GetBoVMAsyn(id, x => x.PCategory);
             if (ProductInfo != null)
             {
-                var item = await SubdataWithViewModelService.SaveProductInfoWithOrderAndPCategory(_service, ProductInfoVM);
+                var item = await SubdataWithViewModelService.SaveProductInfoWithPCategory(_service, ProductInfoVM);
             }
             return NoContent(); // 返回 204
         }

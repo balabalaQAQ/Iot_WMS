@@ -26,11 +26,13 @@ namespace EntityModel.RawMaterials
 
         public SetType setType { get; set; }//操作类型
 
+        public Guid Orderid { get; set; } 
         public virtual Order Order { get; set; }//所属订单
         public int SetNum { get; set; }//操作数量
 
         public double TotalPrice { get; set; }//总价
 
+        public Guid MaterialsInfoid { get; set; }
         public virtual MaterialsInfo MaterialsInfo{get;set;} //原料信息
         [StringLength(200)]
         public string SortCode { get; set; }

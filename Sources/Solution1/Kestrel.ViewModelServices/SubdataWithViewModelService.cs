@@ -21,13 +21,13 @@ namespace Kestrel.ViewModelServices
     //所有子数据添加函数都通过这里添加
     public static class SubdataWithViewModelService
     {
-        static IEntityRepository<ProductInfo> EntityRepository { get; set; }
+ 
        
         /// <summary>
         ///  产品信息，子数据： 产品类型
         /// </summary>
 
-        public static async Task<SaveStatusModel> SaveProductInfoWithOrderAndPCategory(this IWebAPIModelService<ProductInfo, ProductInfoVM> service, ProductInfoVM boVM)
+        public static async Task<SaveStatusModel> SaveProductInfoWithPCategory(this IWebAPIModelService<ProductInfo, ProductInfoVM> service, ProductInfoVM boVM)
         {
 
             SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
@@ -45,6 +45,27 @@ namespace Kestrel.ViewModelServices
             return saveStatus;
         }
 
+        /// <summary>
+        ///  原料信息，子数据： 原料类型
+        /// </summary>
+        public static async Task<SaveStatusModel> SaveMaterialsInfoWithMCategory(this IWebAPIModelService<MaterialsInfo, MaterialsInfoVM> service, MaterialsInfoVM boVM)
+        {
+
+            SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            var bo = await service.EntityRepository.GetBoAsyn(boVM.Id);
+            if (bo == null) { bo = new MaterialsInfo(); }
+
+            boVM.MapToEntityModel(bo);
+            if (boVM.Id.ToString() != null)
+            {
+                var MCategoryid = boVM.MCategory.Id;
+                var MCategoryitem = await service.EntityRepository.GetOtherBoAsyn<MCategory>(MCategoryid);
+                bo.MCategory = MCategoryitem;
+            }
+            saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
+            return saveStatus;
+        }
+        
         /// <summary>
         ///  产品操作记录，子数据：用户 、所属产品信息,其中需更新产品的库存属性
         /// </summary>

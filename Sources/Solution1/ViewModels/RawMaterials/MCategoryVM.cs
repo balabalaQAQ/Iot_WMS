@@ -10,13 +10,10 @@ namespace ViewModels.RawMaterials
 {
     public class MCategoryVM : EntityViewModel
     {
-    
 
-        public string MaterialsID { get; set; } //原料编号
 
-        public MCategory MCategory { get; set; } //原料类别
-
-        public int Inventory { get; set; }//库存量
+        public string DisplayName { get; set; }  //原料类型简称
+        public string CategoryNum { get; set; } //类型编号
 
     }
 }

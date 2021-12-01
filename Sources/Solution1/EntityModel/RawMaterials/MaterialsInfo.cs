@@ -17,6 +17,7 @@ namespace EntityModel.RawMaterials
 
         public string MaterialsID { get; set; } //原料编号
 
+        public Guid MCategoryId { get; set; }  
         public MCategory MCategory { get; set; } //原料类别
 
         public string Description { get; set; }//描述

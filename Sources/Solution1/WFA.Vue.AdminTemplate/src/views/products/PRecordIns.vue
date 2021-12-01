@@ -162,22 +162,19 @@
          const totalPriceTextbox = document.getElementById('totalPrice')
          var setNum=Number(this.PRecordForm.setNum);
           if(setNum>=this.PRecordForm.inventory){
-            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
+            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染有时无法更新
               setNum= this.PRecordForm.inventory
               this.PRecordForm.totalPrice=setNum*this.PRecordForm.price;
               setNumTextbox.value=setNum
               totalPriceTextbox.value=this.PRecordForm.totalPrice
             });
-            console.log(setNum,this.PRecordForm.totalPrice);
           }
           else{
-            this.$nextTick(() => {//略微延时后 重置数据 ，若无延迟则数据渲染无法更新
+            this.$nextTick(() => {
               this.PRecordForm.totalPrice=setNum*this.PRecordForm.price;
               totalPriceTextbox.value=this.PRecordForm.totalPrice
             });
-             console.log(22,setNum,this.PRecordForm.price);
           }
-      
         }
       },
       anysetType(e){//监听出入库操作 对相关影响参数进行修改
@@ -195,9 +192,10 @@
       checkForm(evt) {
         for(var i in this.setTypeitem)
         {  
-          if(this.setTypeitem[i]==this. PRecordForm.setType)
+          if(this.setTypeitem[i]==this.PRecordForm.setType)
           {
-           this. PRecordForm.setType=i
+           this. PRecordForm.setType=i;
+           break;
           } 
         }
         if(this. PRecordForm.setType==0){//入库

@@ -23,8 +23,6 @@ namespace EntityModel.Product
 
         public string SetUserName { get; set; }//操作人名称
 
-        public string SerUserName { get; set; }//操作人名称
-
         public SetType setType { get; set; }//操作类型
 
         

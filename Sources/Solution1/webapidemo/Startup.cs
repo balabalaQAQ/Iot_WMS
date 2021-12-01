@@ -127,7 +127,7 @@ namespace webapidemo
 
             //‘≠¡œ
             services.AddScoped<IEntityRepository<MaterialsInfo>, EntityRepository<MaterialsInfo>>();
-            services.AddScoped<IWebAPIModelService<MaterialsInfo, MaterilsInfoVM>, WebAPIModelService<MaterialsInfo, MaterilsInfoVM>>();
+            services.AddScoped<IWebAPIModelService<MaterialsInfo, MaterialsInfoVM>, WebAPIModelService<MaterialsInfo, MaterialsInfoVM>>();
 
             services.AddScoped<IEntityRepository<MCategory>, EntityRepository<MCategory>>();
             services.AddScoped<IWebAPIModelService<MCategory, MCategoryVM>, WebAPIModelService<MCategory, MCategoryVM>>();
