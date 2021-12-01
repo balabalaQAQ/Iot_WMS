@@ -12,7 +12,7 @@ namespace DikaleWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AnyOrigin")]
-    public class MemberController : ControllerBase
+    public class MemberController : ControllerBase//原料信息
     {
 
         private readonly MemberIO _context;  // 用于处理 EF 数据属性的

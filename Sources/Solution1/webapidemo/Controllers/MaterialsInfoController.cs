@@ -17,7 +17,7 @@ namespace webapidemo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AnyOrigin")]
-    public class MaterialsInfoController : BaseTemplateController<MaterialsInfo, MaterialsInfoVM>
+    public class MaterialsInfoController : BaseTemplateController<MaterialsInfo, MaterialsInfoVM>//原料信息
 
     {
         private readonly IWebAPIModelService<MaterialsInfo, MaterialsInfoVM> _service;
