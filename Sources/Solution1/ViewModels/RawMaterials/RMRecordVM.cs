@@ -21,7 +21,7 @@ namespace ViewModels.RawMaterials
 
         public virtual Order Order { get; set; }//所属订单
 
-        public List<Order> OrderList { get; set; }//所有审核状态为完成的订单
+       // public List<Order> OrderListOK { get; set; }//所有审核状态为完成的订单
         public int SetNum { get; set; }//操作数量
 
         public double TotalPrice { get; set; }//总价

@@ -67,10 +67,10 @@ namespace Kestrel.ViewModelServices
         }
         
         /// <summary>
-        ///  产品操作记录，子数据：用户 、所属产品信息,其中需更新产品的库存属性
+        ///  产品操作记录，子数据：所属产品信息
         /// </summary>
 
-        public static async Task<SaveStatusModel> SavePRecordWithUserandProductInfo(this IWebAPIModelService<PRecord, PRecordVM> service, PRecordVM boVM)
+        public static async Task<SaveStatusModel> SavePRecordWithProductInfo(this IWebAPIModelService<PRecord, PRecordVM> service, PRecordVM boVM)
         {
 
             SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
@@ -83,9 +83,6 @@ namespace Kestrel.ViewModelServices
         
             if (boVM.Id.ToString() != null)
             {
-               // var Userid = boVM.Userid;
-              //  var Useritem = await service.EntityRepository.GetOtherBoAsyn<User>(Userid);
-              //  bo.User = Useritem;
               var ProductInfoid = boVM.ProductInfo.Id;
               var ProductInfoitem = await service.EntityRepository.GetOtherBoAsyn<ProductInfo>(ProductInfoid);
            
@@ -96,5 +93,36 @@ namespace Kestrel.ViewModelServices
             saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
             return saveStatus;
         }
+
+        /// <summary>
+        ///  原料操作记录，子数据： 所属原料信息, 所属订单
+        /// </summary>
+
+        public static async Task<SaveStatusModel> SaveRMRecordWithOrderandMaterialsInfo(this IWebAPIModelService<RMRecord, RMRecordVM> service, RMRecordVM boVM)
+        {
+
+            SaveStatusModel saveStatus = new SaveStatusModel() { SaveSatus = true, Message = "" };
+            var bo = await service.EntityRepository.GetBoAsyn(boVM.Id);
+
+            if (bo == null) { bo = new RMRecord(); }
+
+            boVM.MapToEntityModel(bo);
+
+
+            if (boVM.Id.ToString() != null)
+            {
+                var MaterialsInfoid = boVM.MaterialsInfo.Id;
+                var MaterialsInfoitem = await service.EntityRepository.GetOtherBoAsyn<MaterialsInfo>(MaterialsInfoid);
+                bo.MaterialsInfo = MaterialsInfoitem;
+
+                var Orderid = boVM.Order.Id;
+                var Orderitem = await service.EntityRepository.GetOtherBoAsyn<Order>(Orderid);
+                bo.Order = Orderitem;
+            }
+            bo.SetTime = DateTime.Now.ToString();
+            saveStatus = await service.EntityRepository.SaveBoAsyn(bo);
+            return saveStatus;
+        }
+        
     }
 }
