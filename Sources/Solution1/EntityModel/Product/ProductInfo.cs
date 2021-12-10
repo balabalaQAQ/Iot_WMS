@@ -18,6 +18,8 @@ namespace EntityModel.Product
         public string Name { get; set; } // 产品名
         public string ProductID { get; set; } // 产品编号
 
+        public Guid PCategoryId { get; set; } 
+
         public virtual PCategory PCategory { get; set; } //产品类别
 
         public string Description { get; set; }//产品描述

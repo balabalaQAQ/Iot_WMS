@@ -34,17 +34,26 @@ namespace Kestrel.ORM
              );
             #endregion
 
-            #region 产品类型  
+            #region 产品类型 
+            var PCategoryid = Guid.NewGuid();
             context.Entity<PCategory>().HasData(//添加一般产品类型
-              new PCategory { Id = Guid.NewGuid(), Name = "智能家居系列-Iot设备", DisplayName = "Iot设备", CategoryNum = "ZNJJ-001", Description = "新一代智能家居系列" },
+              new PCategory { Id = PCategoryid, Name = "智能家居系列-Iot设备", DisplayName = "Iot设备", CategoryNum = "ZNJJ-001", Description = "新一代智能家居系列" },
               new PCategory { Id = Guid.NewGuid(), Name = "微量级系列-Iot芯片", DisplayName = "Iot芯片", CategoryNum = "WL-001", Description = "新一代微量级系列" }
 
             );
             #endregion
             #region 产品信息
+           
             context.Entity<ProductInfo>().HasData(//添加一般产品类型
-              new ProductInfo { Id = Guid.NewGuid(), Name="demo",Inventory = 0 , Price =0.0,}
+              new ProductInfo { Id = Guid.NewGuid(), Name="demo",Inventory = 0 , Price =0.0 }
             );
+            #endregion
+
+            #region 原料信息
+            context.Entity<MaterialsInfo>().HasData(//添加原料信息demo
+              new MaterialsInfo { Id = Guid.NewGuid(), Name = "Stm32微型集成MCU（附带WIFI模块）-STM32F3206"  },
+              new MaterialsInfo { Id = Guid.NewGuid(), Name = "映射模块-TC01"}
+             );
             #endregion
 
             #region 原料类型

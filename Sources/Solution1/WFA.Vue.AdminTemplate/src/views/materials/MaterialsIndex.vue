@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按产品名称、类别"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="按原料名称、类别"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -77,16 +77,6 @@
 
 function displayData(mumitems){//对显示的数据进行预处理
     for( var i=0;i< mumitems.length;i++){
-      var daynow = new Date();
-      daynow.setTime(daynow.getTime());
-      var dateBegin = new Date(mumitems[i].setTime); 
-      if( Math.floor(daynow.getTime()-dateBegin.getTime()) / (24 * 3600 * 1000)>=30){//间隔30天以上则不为新产品
-        //mumitems[i].isNew="否";
-       
-      }
-      else{
-       // mumitems[i].isNew="是";
-      }
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
@@ -97,18 +87,18 @@ function displayData(mumitems){//对显示的数据进行预处理
     return mumitems;
   }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
-const uri ='https://localhost:5001/api/ProductInfo/';
+const uri ='https://localhost:5001/api/MaterialsInfo/';
 var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
 
   export default {
-    name: "ProductIndex",
+    name: "MaterialsIndex",
     props: {
       // 列表的表格标题
       caption: {
         type: String,
-        default: "产品列表"
+        default: "原料列表"
       },
       hover: {
         type: Boolean,
@@ -143,13 +133,12 @@ var flag=0; //查询状态
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "productID", label: "产品编号" },
+          { key: "materialsID", label: "原料编号" },
           { key: "name", label: "产品名" },
-          { key: "pCategory.name", label: "类别" },
+          { key: "mCategory.name", label: "类别" },
           { key: "inventory", label: "库存量" },
           { key: "price", label: "单价" },
-          //{ key: "isNew", label: "是否为新" },
-          { key: "description", label: "产品描述" },
+          { key: "description", label: "原料描述" },
           { key: "operation", label: "操作" }
         ],
      
@@ -190,7 +179,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].pCategory.name.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].mCategory.name.indexOf(searchTextbox) != -1  ) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }
@@ -201,13 +190,13 @@ var flag=0; //查询状态
     
       createData() {
         this.$router.push({
-           name: "ProductIns",
+           name: "MaterialsIns",
            params: {pcategory:this.mumitems[0].pCategoryList}
          });   
       },
       editData(id) {
         this.$router.push({
-          name: "ProductEdit",
+          name: "MaterialsEdit",
           params: { id: id,pcategory:this.mumitems[0].pCategoryList}
         })
       },
@@ -216,7 +205,7 @@ var flag=0; //查询状态
         },
       insPRecordData(item,id,name)  {
          this.$router.push({
-          name: "PRecordIns",
+          name: "RMRecordIns",
           params: { item:item,id: id,name:name}
         })
      }
@@ -226,6 +215,7 @@ var flag=0; //查询状态
        flag=0;
        this.$axios.get(uri).then(function(res){
        item.mumitems = displayData(res.data)
+       console.log(res.data)
        })
        
     },

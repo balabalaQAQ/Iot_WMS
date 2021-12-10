@@ -17,7 +17,7 @@ namespace webapidemo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AnyOrigin")]
-    public class RMRecordController : BaseTemplateController<RMRecord, RMRecordVM>
+    public class RMRecordController : BaseTemplateController<RMRecord, RMRecordVM>//原料操作记录
     {
         private readonly IWebAPIModelService<RMRecord, RMRecordVM> _servicePR;
 

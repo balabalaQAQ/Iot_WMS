@@ -17,7 +17,7 @@ namespace webapidemo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AnyOrigin")]
-    public class MCategoryController : BaseTemplateController<MCategory, MCategoryVM>
+    public class MCategoryController : BaseTemplateController<MCategory, MCategoryVM>//原料类型
 
     {
         private readonly IWebAPIModelService<MCategory, MCategoryVM> _service;

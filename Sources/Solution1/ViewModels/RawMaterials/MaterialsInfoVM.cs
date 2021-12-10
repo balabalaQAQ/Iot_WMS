@@ -11,7 +11,7 @@ namespace ViewModels.RawMaterials
 {
     public class MaterialsInfoVM : EntityViewModel
     {
-        public Guid MCategoryId { get; set; }
+        public string MaterialsID { get; set; } //原料编号
         public MCategory MCategory { get; set; } //原料类别
 
         [Display(Name = "库存量")]

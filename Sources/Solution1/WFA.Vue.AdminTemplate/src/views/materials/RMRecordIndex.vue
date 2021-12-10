@@ -9,7 +9,7 @@
               <span style="font-size:20px">{{caption}}</span>
               <div class="card-header-actions">
                 <b-input-group>
-                  <b-form-input id="searchText" type="text" placeholder="按产品名称、类别"></b-form-input>
+                  <b-form-input id="searchText" type="text" placeholder="按订单名称、订单号"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="primary" size="sm"  @click="searchData(mumitems)">查询</b-button>
                   </b-input-group-append>&nbsp;
@@ -32,8 +32,7 @@
                      :per-page="perPage">
               <!-- 数据操作 -->
               <template slot="operation" slot-scope="data">
-                <b-button variant="primary" size="sm" @click="editData(data.item.id)">编辑</b-button>&nbsp;&nbsp;&nbsp;
-                <b-button variant="primary" size="sm" @click="insPRecordData(data.item,data.item.id,data.item.name)">(出)入库</b-button>&nbsp;&nbsp;&nbsp;
+                <b-button variant="primary" size="sm" @click="editData(data.item.id)">详情</b-button>&nbsp;&nbsp;&nbsp;
                 <b-button variant="danger" size="sm" @click="deleteData(data.item.id)">删除</b-button>
               </template>
             </b-table>
@@ -53,18 +52,6 @@
               
               />
             </nav>
-              <!--
-            <nav>
-              <b-pagination size="sm"
-                            :per-page="perPage"
-                            v-model="currentPage"
-                            prev-text="前一页"
-                            next-text="下一页"
-                            hide-goto-end-buttons
-                            align="right"
-                            @input="gotoPage(currentPage)" />
-            </nav>
-            -->
           </b-card>
         </transition>
       </b-col>
@@ -76,39 +63,30 @@
 <script>
 
 function displayData(mumitems){//对显示的数据进行预处理
+      var setTypeitem=['入库',"出库"];
     for( var i=0;i< mumitems.length;i++){
-      var daynow = new Date();
-      daynow.setTime(daynow.getTime());
-      var dateBegin = new Date(mumitems[i].setTime); 
-      if( Math.floor(daynow.getTime()-dateBegin.getTime()) / (24 * 3600 * 1000)>=30){//间隔30天以上则不为新产品
-        //mumitems[i].isNew="否";
-       
-      }
-      else{
-       // mumitems[i].isNew="是";
-      }
+      mumitems[i].setType=setTypeitem[mumitems[i].setType];
       //避免一些数据太长的影响
       if(mumitems[i].description.length>=10)
           mumitems[i].description=mumitems[i].description.substr(0,20)+"..."
       if(mumitems[i].name.length>=10)
           mumitems[i].name=mumitems[i].name.substr(0,10)+"..."
-      
     }
     return mumitems;
   }
   // const uri = '/WeatherForecast';   // Web API 的访问服务地址
-const uri ='https://localhost:5001/api/ProductInfo/';
+const uri ='https://localhost:5001/api/PRecord/';
 var flag=0; //查询状态
 //import { shuffleArray } from "@/shared/utils";
  // import Oidc from "oidc-client" ;
 
   export default {
-    name: "ProductIndex",
+    name: "RMRecordIndex",
     props: {
       // 列表的表格标题
       caption: {
         type: String,
-        default: "产品列表"
+        default: "产品操作记录"
       },
       hover: {
         type: Boolean,
@@ -143,13 +121,15 @@ var flag=0; //查询状态
         searchitems:[],//查询后的数据集
         fields: [
           { key: "orderNumber", label: "序号" },
-          { key: "productID", label: "产品编号" },
-          { key: "name", label: "产品名" },
-          { key: "pCategory.name", label: "类别" },
-          { key: "inventory", label: "库存量" },
-          { key: "price", label: "单价" },
-          //{ key: "isNew", label: "是否为新" },
-          { key: "description", label: "产品描述" },
+      
+          { key: "name", label: "记录名称" },
+          { key: "description", label: "记录描述" },
+          { key: "setTime", label: "操作时间" },
+          { key: "setType", label: "操作类型" },
+          { key: "setUserName", label: "操作人" },
+          { key: "setNum", label: "数量" },
+          { key: "productInfo.name", label: "产品名" },
+          { key: "totalPrice", label: "总价" },
           { key: "operation", label: "操作" }
         ],
      
@@ -167,9 +147,9 @@ var flag=0; //查询状态
               if(flag==0)
                 item.mumitems=res.data;
               else//进入查询
-                item.mumitems=[...item.saveitems];//为数组的数据类型进行转化
+                item.mumitems=[...item.saveitems];//数组数据类型转化
        })
-       return (item.mumitems)
+       return displayData(item.mumitems)
       },
     },
     methods: {    
@@ -190,7 +170,7 @@ var flag=0; //查询状态
         else{
            var count=0;
            for(var i=0;i<res.data.length;i++){        
-           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].pCategory.name.indexOf(searchTextbox) != -1  ) { //检索条件
+           if (res.data[i].name.indexOf(searchTextbox) != -1||res.data[i].setUserName.indexOf(searchTextbox) != -1  ) { //检索条件
             item.searchitems[count]=(res.data[i]);//将检索的数据添加到查询集
             count++;
            }
@@ -201,30 +181,25 @@ var flag=0; //查询状态
     
       createData() {
         this.$router.push({
-           name: "ProductIns",
-           params: {pcategory:this.mumitems[0].pCategoryList}
-         });   
+           name: "PRecordIns",
+          // params: { director:this.mumitems[0].director}
+         });
+        
       },
       editData(id) {
         this.$router.push({
-          name: "ProductEdit",
-          params: { id: id,pcategory:this.mumitems[0].pCategoryList}
+          name: "PRecordEdit",
+          params: { id: id}
         })
       },
       deleteData(id) {
         this.$axios.delete(uri+id)
-        },
-      insPRecordData(item,id,name)  {
-         this.$router.push({
-          name: "PRecordIns",
-          params: { item:item,id: id,name:name}
-        })
-     }
+        }
+     
     },
     created() {
-       var item=this
-       flag=0;
-       this.$axios.get(uri).then(function(res){
+       var item=this;
+       item.$axios.get(uri).then(function(res){
        item.mumitems = displayData(res.data)
        })
        

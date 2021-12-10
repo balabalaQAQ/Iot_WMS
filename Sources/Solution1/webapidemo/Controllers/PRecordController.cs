@@ -19,7 +19,7 @@ namespace webapidemo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("AnyOrigin")]
-    ////产品操作记录
+    //产品操作记录
     public class PRecordController : BaseTemplateController<PRecord, PRecordVM>
     {
         private readonly IWebAPIModelService<PRecord, PRecordVM> _servicePR;

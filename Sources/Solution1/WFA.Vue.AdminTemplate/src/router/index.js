@@ -22,6 +22,7 @@ const Widgets = () => import('@/views/Widgets')
 const OrderIndex = () => import('@/views/orders/OrderIndex')
 const OrderIns = () => import('@/views/orders/OrderIns')
 const OrderEdit = () => import('@/views/orders/OrderEdit')
+
 //产品管理
 const ProductIndex = () => import('@/views/products/ProductIndex')
 const ProductIns = () => import('@/views/products/ProductIns')
@@ -35,6 +36,18 @@ const PCategoryIndex = () => import('@/views/products/PCategoryIndex')
 const PCategoryIns = () => import('@/views/products/PCategoryIns')
 const PCategoryEdit = () => import('@/views/products/PCategoryEdit')
 
+//原料管理
+const MaterialsIndex = () => import('@/views/materials/MaterialsIndex')
+const MaterialsIns = () => import('@/views/materials/MaterialsIns')
+const MaterialsEdit = () => import('@/views/materials/MaterialsEdit')
+//原料记录管理
+const MCategoryIndex = () => import('@/views/materials/MCategoryIndex')
+const MCategoryIns = () => import('@/views/materials/MCategoryIns')
+const MCategoryEdit = () => import('@/views/materials/MCategoryEdit')
+//原料类型管理
+const RMRecordIndex = () => import('@/views/materials/RMRecordIndex')
+const RMRecordIns = () => import('@/views/materials/RMRecordIns')
+const RMRecordEdit = () => import('@/views/materials/RMRecordEdit')
 
 // Views - Buttons
 const StandardButtons = () => import('@/views/buttons/StandardButtons')
@@ -218,6 +231,61 @@ export default new Router({
               path: 'PCategoryEdit',
               name: 'PCategoryEdit',
               component: PCategoryEdit
+            },
+          ]
+        },
+        {
+          path: 'materials',
+          redirect: '/materials/MaterialsIndex',
+          name: 'materials',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'MaterialsIndex',
+              name: 'MaterialsIndex',
+              component: MaterialsIndex
+            },
+            {
+              path: 'MaterialsIns',
+              name: 'MaterialsIns',
+              component: MCategoryIns
+            },
+            {
+              path: 'MaterialsEdit',
+              name: 'MaterialsEdit',
+              component: MCategoryEdit
+            },
+            {
+              path: 'RMRecordIndex',
+              name: 'RMRecordIndex',
+              component: RMRecordIndex
+            },
+            {
+              path: 'RMRecordIns',
+              name: 'RMRecordIns',
+              component: RMRecordIns
+            },
+            {
+              path: 'RMRecordEdit',
+              name: 'RMRecordEdit',
+              component: RMRecordEdit
+            },
+            {
+              path: 'MCategoryIndex',
+              name: 'MCategoryIndex',
+              component: MCategoryIndex
+            },
+            {
+              path: 'MCategoryIns',
+              name: 'MCategoryIns',
+              component: MCategoryIns
+            },
+            {
+              path: 'MCategoryEdit',
+              name: 'MCategoryEdit',
+              component: MCategoryEdit
             },
           ]
         },

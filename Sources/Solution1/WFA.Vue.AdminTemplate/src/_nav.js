@@ -33,7 +33,7 @@ export default {
     },
     {
       title: true,
-      name: '功能',
+      name: '功能模块',
       class: '',
       wrapper: {
         element: '',
@@ -43,35 +43,38 @@ export default {
     {
       name: '订单管理',
       url: '/orders',
-      icon: 'icon-puzzle',
+      icon: 'icon-cursor',
       children: [
         {
           name: '订单记录',
           url: '/orders/OrderIndex',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: '个人购卡',
-          url: '/base/carousels',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: '团体购卡',
-          url: '/base/carousels',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: '会员信息',
-          url: '/base/collapses',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: '会员充值',
-          url: '/base/forms',
-          icon: 'icon-puzzle'
+          icon: 'icon-info'
         },
       ]
     },
+    {
+      name: '原料管理',
+      url: '/materials',
+      icon: 'icon-cursor',
+      children: [
+        {
+          name: '原料信息',
+          url: '/materials/MaterialsIndex',
+          icon: 'icon-info'
+        },
+        {
+          name: '原料记录',
+          url: '/materials/RMRecordIndex',
+          icon: 'icon-info'
+        },
+        {
+          name: '原料类型',
+          url: '/materials/MCategoryIndex',
+          icon: 'icon-info'
+        },
+      ]
+    },
+
     {
       name: '产品管理',
       url: '/products',
@@ -80,20 +83,21 @@ export default {
         {
           name: '产品信息',
           url: '/products/ProductIndex',
-          icon: 'icon-cursor'
+          icon: 'icon-info'
         },
         {
           name: '产品记录',
           url: '/products/PRecordIndex',
-          icon: 'icon-cursor'
+          icon: 'icon-info'
         },
         {
           name: '产品类型',
           url: '/products/PCategoryIndex',
-          icon: 'icon-cursor'
+          icon: 'icon-info'
         },
       ]
     },
+ 
     {
       name: '超市管理',
       url: '/icons',
